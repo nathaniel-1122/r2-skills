@@ -101,7 +101,17 @@ It should now say **🎉 ALL SET**.
 
 ## How to use it
 
-Open Claude Code in any project and just ask in plain English, e.g.:
+**Which folder to open first.** The skill works in *any* folder (it's installed
+globally), but it **saves the finished CSV into whatever folder you have open** —
+so pick where you want the file to land:
+
+- **Don't** run it inside the **`field-reporter-crm`** folder — that's the Cockpit
+  app's code; story files shouldn't go there.
+- **Do** use a neutral, non-code folder. Your **home folder** is fine, or make a
+  dedicated one (e.g. a folder called `source-lists`) so every story's CSV
+  collects in one place. Use the folder picker (bottom-left in Claude) to switch.
+
+Then just ask in plain English, e.g.:
 
 > "Cast sources for this story: *[paste your pitch or brief]*"
 
