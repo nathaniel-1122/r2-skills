@@ -38,6 +38,13 @@ if [ "$L" = "$HOME/r2-skills/.claude/skills/source-casting" ]; then echo "✅ sk
 elif [ -n "$L" ]; then echo "⚠️  linked, but to the wrong place ($L)  → message Nathaniel"
 elif [ -e ~/.claude/skills/source-casting ]; then echo "⚠️  it's a copy, not a link  → message Nathaniel"
 else echo "❌ skill is not linked  → do Step 3"; fi
+[ -f ~/.claude/commands/source-casting.md ] && echo "⚠️  an old 'source-casting' slash-command exists and may shadow the skill  → message Nathaniel"
+for d in ~/.claude/skills/*/; do
+  f="${d}SKILL.md"; [ -f "$f" ] || continue
+  fold=$(basename "$d")
+  nm=$(grep -m1 '^name:' "$f" | sed 's/^name:[[:space:]]*//;s/[[:space:]]*$//;s/"//g')
+  [ -n "$nm" ] && [ "$nm" != "$fold" ] && echo "⚠️  folder '$fold' actually holds a skill named '$nm' — mixed-up file, could confuse Claude  → message Nathaniel"
+done
 echo
 if [ -f "$(readlink ~/.claude/skills/source-casting 2>/dev/null)/SKILL.md" ]; then
   echo "🎉 ALL SET — the skill is installed. Nothing to do. (To get the newest version, run 'cd ~/r2-skills && git pull'.)"
