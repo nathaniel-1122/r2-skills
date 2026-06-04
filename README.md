@@ -22,10 +22,40 @@ the skill is there. You'll need three things first:
 3. **Access to this GitHub repo.** Ask Nathaniel to add your GitHub account to
    `nathaniel-1122/r2-skills` so you can clone it.
 
+### Check first — am I already set up?
+
+Before doing anything, open the **Terminal** app and paste this **whole block** in
+at once, then press Return. It only *looks* at your machine — it changes nothing —
+and tells you what's already in place and what's missing:
+
+```
+echo "Checking your source-casting setup…"; echo
+command -v git >/dev/null 2>&1 && echo "✅ git is installed" || echo "❌ git is NOT installed  → do Step 1's note about git"
+[ -d ~/r2-skills/.git ] && echo "✅ repo is cloned at ~/r2-skills" || echo "❌ repo not cloned  → do Step 1"
+[ -d ~/.claude/skills ] && echo "✅ Claude skills folder exists" || echo "❌ skills folder missing  → do Step 2"
+L=$(readlink ~/.claude/skills/source-casting 2>/dev/null)
+if [ "$L" = "$HOME/r2-skills/.claude/skills/source-casting" ]; then echo "✅ skill is linked into Claude"
+elif [ -n "$L" ]; then echo "⚠️  linked, but to the wrong place ($L)  → message Nathaniel"
+elif [ -e ~/.claude/skills/source-casting ]; then echo "⚠️  it's a copy, not a link  → message Nathaniel"
+else echo "❌ skill is not linked  → do Step 3"; fi
+echo
+if [ -f "$(readlink ~/.claude/skills/source-casting 2>/dev/null)/SKILL.md" ]; then
+  echo "🎉 ALL SET — the skill is installed. Nothing to do. (To get the newest version, run 'cd ~/r2-skills && git pull'.)"
+else
+  echo "➡️  NOT fully set up — do the steps below for anything marked ❌, then run this check again."
+fi
+```
+
+- If it says **🎉 ALL SET**, stop — you're done. Don't re-run the setup steps.
+- If it says **➡️ NOT fully set up**, do only the steps marked **❌** below, then
+  paste this check again to confirm.
+- Any **⚠️** line means something's half-there — don't try to fix it yourself,
+  just message Nathaniel.
+
 ### One-time setup (copy/paste, one block at a time)
 
-Open the **Terminal** app. Copy each block below, paste it in, press Return, let
-it finish before doing the next one.
+Only do the steps the check flagged with **❌**. Copy each block below, paste it
+in, press Return, let it finish before doing the next one.
 
 **Step 1 — download the repo to your home folder:**
 
@@ -54,14 +84,8 @@ source-casting skill lives inside the r2-skills folder." Because it's a shortcut
 and not a copy, whenever you update the repo (see below) Claude instantly uses
 the new version — you never re-install.
 
-**Step 4 — check it worked:**
-
-```
-ls -l ~/.claude/skills/source-casting
-```
-
-You should see a line with an arrow `->` pointing at the r2-skills folder. If you
-see that arrow, you're done.
+**Step 4 — confirm it worked:** paste the **"Check first"** block from above again.
+It should now say **🎉 ALL SET**.
 
 > If Step 3 says "File exists," you may already have an old copy. Stop and message
 > Nathaniel rather than deleting anything — we don't want to wipe a real skill.
@@ -139,8 +163,8 @@ Two ways:
 
 ## If something looks wrong
 
-- **Claude doesn't seem to know the skill:** confirm Step 4 above shows the arrow.
-  If not, re-run Step 3.
+- **Claude doesn't seem to know the skill:** run the **"Check first"** block. Do
+  whatever it marks ❌ (usually re-run Step 3).
 - **You're not getting recent improvements:** run `git pull` in `~/r2-skills`.
 - **Anything destructive or confusing:** stop and message Nathaniel. Never delete
   the `~/.claude/skills/source-casting` link or the `~/r2-skills` folder on a
