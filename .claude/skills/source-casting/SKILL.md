@@ -1,6 +1,6 @@
 ---
 name: source-casting
-description: "Use this skill when casting interview sources for a news story. Runs in two phases with checkpoints: first identifies source archetypes and waits for approval, then researches real people, proposes a per-archetype Nathaniel/Johnny assignment split (whole bucket to one owner, decided once contact counts are known) for approval, and compiles a ranked CSV that imports directly into the Cockpit (Field Reporter CRM) Import Sources feature."
+description: "Use this skill when casting interview sources for a news story. Runs in two phases with checkpoints: first identifies source archetypes and waits for approval, then researches real people and organizations, proposes a per-archetype Nathaniel/Johnny assignment split (whole bucket to one owner, decided once contact counts are known) for approval, and compiles a ranked CSV that imports directly into the Cockpit (Field Reporter CRM) Import Sources feature."
 allowed-tools:
   - Bash(nimble:*)
   - Bash(python3:*)
@@ -32,11 +32,13 @@ The number one priority is topical alignment: can this person speak **on the rec
 
 Do not hunt for one-to-one title matches. An archetype is a **lane of expertise**, not a job posting. "Former Under Secretary of Defense for Acquisition & Sustainment" is too narrow; "Authority who can speak to munitions production and stockpile depth" is the right altitude — it captures former officials, industry leaders, analysts, and academics who all command that subject. Cast the lane wide, then rank the people inside it.
 
+**A source does not have to be a person.** For some stories the right source is an organization itself — a company, agency, or institution speaking on the record through its press or communications office. Treat the organization as a first-class source: cast it into an archetype and rank it on alignment exactly like an individual. *Organizations as sources* in Phase 2 covers how to represent it in the CSV.
+
 ---
 
 ## PHASE 1 — ARCHETYPE IDENTIFICATION
 
-Read the story pitch or brief in $ARGUMENTS. Based on the story's focus, generate a comprehensive list of source archetypes — each defined by **what a person can authoritatively speak to on the record**, not by a specific job title. An archetype is a lane of knowledge, and it can be filled by anyone who genuinely commands it: former officials, industry figures, analysts, academics, practitioners — **and laypeople whose lived or firsthand experience makes them an authority on the subject without holding a title for it.** Someone who lived through the events, did the work, or knows the topic deeply from the inside belongs in a lane right alongside the credentialed experts. Think like a producer: which areas of knowledge and which perspectives — insider, expert, critic, affected party, firsthand witness, institutional, contrarian — make this story complete and defensible?
+Read the story pitch or brief in $ARGUMENTS. Based on the story's focus, generate a comprehensive list of source archetypes — each defined by **what a person or organization can authoritatively speak to on the record**, not by a specific job title. An archetype is a lane of knowledge, and it can be filled by anyone who genuinely commands it: former officials, industry figures, analysts, academics, practitioners — **and laypeople whose lived or firsthand experience makes them an authority on the subject without holding a title for it.** An archetype can also be filled by **an organization speaking on the record** — a company, agency, or institution whose official position is itself the story (see *Organizations as sources* in Phase 2); for some stories these org sources are the primary targets, not an afterthought. Someone who lived through the events, did the work, or knows the topic deeply from the inside belongs in a lane right alongside the credentialed experts. Think like a producer: which areas of knowledge and which perspectives — insider, expert, critic, affected party, firsthand witness, institutional, contrarian — make this story complete and defensible?
 
 For each archetype, provide:
 - A label describing the **topic area / expertise lane** (e.g., "Authority on missile-defense interceptor inventories and replacement timelines"), broad enough to capture a range of credible backgrounds. This label becomes the `suggested_bucket` value in the output CSV.
@@ -54,6 +56,18 @@ Present the archetype list and wait. The journalist will review, add, remove, an
 ## PHASE 2 — RESEARCH, ASSIGNMENT REVIEW, AND COMPILATION
 
 Once archetypes are approved, research real, named individuals and organizations that fit each archetype. Volume matters: journalism response rates run around 10%, so the goal is to surface as many qualified sources as possible. Do not cap the list artificially. Quality first, but do not stop early.
+
+### Organizations as sources
+
+Not every source is a person. When the right source for an archetype is an **organization itself** — a company, agency, or institution whose official position is the story (a launch provider, a regulator, a manufacturer) — represent the organization as the source. You often won't know *which* human will speak before you reach out; that's expected. Cast the company now, and a real contact attaches to it later in the workflow once outreach connects.
+
+- `name` → the organization's name (e.g. `SpaceX`, `NASA`, `Rocket Lab`).
+- `role_title` → a **placeholder for the entry point** you'll actually reach: `Press Office` (or `Media Relations` / `Communications`). It's a stand-in — once a real person at the org picks up the story, their name and title replace the placeholder.
+- `organization` → the same organization (or its parent/division if that differs).
+- Contact path follows the normal rules: press email in `notes`, media-inquiry **web form URL** in `source_url` (fold-in rule), org website in `source_url` only if nothing more direct exists.
+- `is_press` → `y` (you're entering through the comms desk). But an org-as-source is still **ranked on alignment** like any other source — it can be Priority A. Do **not** auto-demote it just because it routes through a press office; `is_press` here marks the *contact path*, not the source's value.
+
+Rule of thumb: if you'd reach out to "the company" before you know which human will speak, cast the company. The placeholder gets a face later.
 
 ### Research Tools — Nimble vs. built-in fetch
 
@@ -86,8 +100,8 @@ The first sixteen columns are read by Cockpit's importer. `notes` and `links` ar
 |---|--------|-------------|
 | 1 | `priority` | **A**, **B**, or **C** — see Priority Rules. (A = highest.) |
 | 2 | `suggested_bucket` | The approved archetype label from Phase 1. The importer groups and files sources by this. |
-| 3 | `name` | Full name. |
-| 4 | `role_title` | Current or most recent relevant position. |
+| 3 | `name` | Full name. **Use one canonical spelling per person across every bucket they appear in** — the same individual must have an identical `name` string in all rows (never "Tom" in one bucket and "Thomas" in another, or "Wilson" vs "Wilson C."). Pick their fullest real name and reuse it verbatim. Cockpit's importer dedupes on **exact** name, so variant spellings land as duplicate contacts. A canonicalizer pass enforces this at the end (see Output Format). **When the source is an organization itself, put the org's name here — e.g. `SpaceX` — per *Organizations as sources*.** |
+| 4 | `role_title` | Current or most recent relevant position. **For an organization-as-source, use a placeholder entry point — `Press Office` / `Media Relations` — to be replaced by a real contact's name and title later in the workflow.** |
 | 5 | `organization` | Primary employer or affiliation. |
 | 6 | `email` | Direct email if findable. If unavailable, leave blank. Do not construct from naming patterns unless the org format is confirmed on their website. |
 | 7 | `phone` | Only if publicly listed on a professional profile. Do not attempt to find personal phones. |
@@ -95,7 +109,7 @@ The first sixteen columns are read by Cockpit's importer. `notes` and `links` ar
 | 9 | `source_url` | Where you found this person / their best single direct link. **Fold-in rules:** if there is no direct personal URL, put the org media-inquiry **Online Form URL** here. If there is no personal/direct URL at all, you may put the **Organization Website** here; otherwise drop the org website. (Reference links and social profiles do NOT go here — they go in `links`.) |
 | 10 | `confidence` | A float **0.0–1.0** reflecting how much source evidence was found for this contact. See Confidence Rubric. |
 | 11 | `why_relevant` | 1–2 sentences on their specific relevance to this story. (The importer surfaces this as the contact's context note.) |
-| 12 | `is_press` | Truthy (`y` / `yes` / `true` / `1`) if this is a press / media-relations contact rather than an individual source; blank or `n` otherwise. |
+| 12 | `is_press` | Truthy (`y` / `yes` / `true` / `1`) if this is a press / media-relations contact rather than an individual source — **also `y` for an organization-as-source reached via its comms desk.** Blank or `n` otherwise. This flags the **contact path, not the source's value**: an `is_press = y` row can still be Priority A. |
 | 13 | `story` | **Leave blank.** The CRM assigns the story at import time. |
 | 14 | `location` | City and State/Country. |
 | 15 | `political_leaning` | One of: **Left / Center-Left / Non-Partisan / Center-Right / Right / Unknown** — inferred from research. (Cockpit collapses Center-Left→Left, Center-Right→Right, Unknown→Non-Partisan on import; emit the precise value anyway.) |
@@ -124,6 +138,7 @@ You propose a starting lean for them to react to, not a final answer:
 - **Nathaniel** — institutional sources, officials, think-tank voices, on-record named experts.
 - **Johnny** — press contacts, spokespeople, connectors, background sources.
 - (`is_press = y` archetypes almost always go to Johnny.)
+- **Organization-as-source** buckets (a company/agency reached through its press office) can go to **either** owner — assign by whose outreach they resemble, not automatically to Johnny.
 
 The journalists make the final call.
 
@@ -179,6 +194,7 @@ Priority ranks sources who have **already cleared the alignment bar** — everyo
 - A recognized authority — academic, analyst, former official, or industry figure — whose expertise is directly central to the story
 - A journalist or author who has done significant original work on this exact topic
 - A layperson whose unique firsthand knowledge is more central to the story than any credentialed expert's
+- An organization whose **official, on-record position** is itself central to the story (represented per *Organizations as sources*) — ranked on the centrality of that position, not demoted for being institutional
 
 **Priority B** — Strong, relevant knowledge, but a step removed from the core of the story.
 - Solid topical command, but their experience sits adjacent to the central events (advised on it, studied it, worked near it) rather than at the center
@@ -217,7 +233,43 @@ Deliver as a **CSV file** (RFC-4180 quoting) written with Python's `csv` module.
 
 Filename: `[Story Title] — Source List — [YYYY-MM-DD].csv`
 
-After writing the file, tell the journalist they can paste its contents (or upload the file) into Cockpit → a story's **Import Sources** modal, where they pick the keepers and file them into buckets.
+### Canonicalize names before handing off
+
+The same person frequently anchors several buckets, and their `name` can drift across rows ("Tom" vs "Thomas Karako"). Cockpit dedupes on **exact** name, so drift creates duplicate contacts. After writing the CSV, run the canonicalizer to force one spelling per person:
+
+```
+python3 ~/.claude/skills/source-casting/canonicalize_names.py "[Story Title] — Source List — [YYYY-MM-DD].csv"
+```
+
+It rewrites same-person name variants to a single spelling **in place** (it does not merge or drop rows — cross-listed people still get one row per bucket) and prints a report. **Read the report before handing off:**
+- Unified spellings are safe — that's the point.
+- Any **"same person key under DIFFERENT orgs"** warnings are judgment calls: usually one person who changed jobs (correctly left as separate rows), occasionally two different people. Confirm each, and fix the CSV by hand if a warning is actually wrong.
+
+Add `--dry-run` to preview the report without writing. (The nickname/normalization logic mirrors Cockpit's importer guard, so the two agree.)
+
+**Organization-as-source rows** are handled too: an org name in `name` is deduped like any other and isn't nickname-expanded in the normal case (`SpaceX` stays `SpaceX`). Skim the report for any org name that got unexpectedly rewritten (rare — e.g. an org whose first word is a common nickname) and fix it by hand.
+
+After writing and canonicalizing the file, tell the journalist they can paste its contents (or upload the file) into Cockpit → a story's **Import Sources** modal, where they pick the keepers and file them into buckets.
+
+---
+
+## NIMBLE USAGE LOGGING (after handoff)
+
+Nimble bills by credit, and this skill is where almost all Nimble usage happens. After the CSV is handed off, log the run's credit spend to Cockpit so its **API Spend** card (Dashboard) and **Nimble** card (Admin) stay current.
+
+The Nimble CLI doesn't report a running balance, so don't guess credits. Instead:
+
+1. **Report the run's Nimble footprint** to the journalist — roughly how many Nimble operations you ran, broken down by kind. E.g. *"This run used Nimble for ~18 searches and 4 extracts."* (Count your actual `nimble search` / `nimble extract` / `nimble map` calls; built-in WebFetch/WebSearch don't cost Nimble credits.)
+2. **Ask for the credits spent** — the authoritative number is in the journalist's Nimble dashboard (Usage). Ask them to read it off, or to give the delta since the last run. If they'd rather skip, that's fine — they can log it later via Cockpit's in-app **"+ Log"** button on the Admin → Nimble card.
+3. **Log it** with the helper (uses `COCKPIT_URL` + `NIMBLE_LOG_SECRET` from the shell env; it's best-effort and never breaks the run):
+
+```
+python3 ~/.claude/skills/source-casting/log_nimble_usage.py <credits> "<story> — N searches, M extracts"
+```
+
+Example: `python3 ~/.claude/skills/source-casting/log_nimble_usage.py 120 "Munitions stockpile — 18 searches, 4 extracts"`
+
+If `COCKPIT_URL` / `NIMBLE_LOG_SECRET` aren't set, the helper says so and exits cleanly — tell the journalist to set them (or use the in-app form) and move on.
 
 ---
 
