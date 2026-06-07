@@ -1,0 +1,1023 @@
+<!-- ============================================================================
+  R² LIVE-SHOW-PREP TEMPLATE  ·  DO NOT SHIP THIS CONTENT.
+  The <style> block below IS the house design system — keep it VERBATIM.
+  The body is a WORKED EXAMPLE from a past show (Ukraine / Iran, June 2026).
+  When you build a new show: keep the <style>, DELETE every bit of example
+  body content, and rebuild it from THIS show's live research.
+  Fonts load from Google Fonts at render time — render with assets/render.sh.
+============================================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>R² Media — Live Show Research Brief — June 3, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#14161b; --paper:#faf7f0; --paper2:#f1ece0;
+    --rule:#dcd5c5; --muted:#56534a; --muted2:#7c786c;
+    --red:#9f2012; --navy:#1d2c4d; --amber:#a96a14; --green:#2c6a3b;
+    --blue-soft:#eef1f7; --amber-soft:#faf1df; --red-soft:#fbeae6; --green-soft:#e9f1ea;
+    --serif-display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --serif-body:"Newsreader","Charter","Iowan Old Style",Georgia,serif;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--serif-body);
+    font-size:13.5pt; line-height:1.5; font-weight:400;
+    text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+    font-feature-settings:"kern" 1, "liga" 1, "onum" 1;
+  }
+  .sans{font-family:var(--sans);}
+  @page{ size:Letter; margin:17mm 18mm 18mm 18mm;
+    @bottom-center{ content:counter(page) "  /  " counter(pages);
+      font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif; font-size:7.6pt;
+      letter-spacing:.12em; color:#9a958a; }
+    @bottom-left{ content:"R\00B2 MEDIA \00B7 LIVE SHOW FIELD GUIDE";
+      font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif; font-size:6.8pt;
+      letter-spacing:.14em; text-transform:uppercase; color:#bdb6a8; }
+  }
+  @page:first{ @bottom-center{ content:""; } @bottom-left{ content:""; } }
+
+  .wrap{max-width:6.55in; margin:0 auto; padding:0;}
+  p{margin:0 0 10px 0;}
+  strong{font-weight:600;}
+  em{font-style:italic;}
+  a{color:var(--navy); text-decoration:none;}
+  h1,h2,h3,h4{font-family:var(--serif-display); font-weight:600; line-height:1.1; font-feature-settings:"kern" 1,"liga" 1;}
+
+  /* ---------- Masthead / cover ---------- */
+  .cover{ padding:0 0 10px; border-bottom:3px double var(--ink); margin-bottom:16px; }
+  .kicker{ font-family:var(--sans); font-size:8pt; letter-spacing:.3em;
+    text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:12px;}
+  .logo{ font-family:var(--serif-display); font-weight:700; font-size:12pt; color:var(--ink); letter-spacing:.04em;}
+  .logo sup{ color:var(--red); font-size:.62em; }
+  .cover h1{ font-size:38pt; font-weight:600; letter-spacing:-.6px; line-height:.98; margin:6px 0 10px; }
+  .cover .sub{ font-family:var(--serif-body); font-size:13pt; color:var(--muted); font-style:italic; max-width:5.9in; line-height:1.42; }
+  .cover .meta{ font-family:var(--sans); font-size:8pt; letter-spacing:.03em;
+    color:var(--muted2); text-transform:uppercase; margin-top:15px; line-height:1.7;}
+
+  /* ---------- Section dividers ---------- */
+  .partbreak{ break-before:page; }
+  .part-head{ margin:6px 0 18px; padding:16px 18px; background:var(--ink); color:var(--paper); border-radius:3px;}
+  .part-head .eyebrow{ font-family:var(--sans); font-size:7.8pt; letter-spacing:.34em;
+    text-transform:uppercase; color:#cBa14a; font-weight:600; }
+  .part-head h2{ color:var(--paper); font-size:27pt; font-weight:600; margin:6px 0 6px; letter-spacing:-.3px;}
+  .part-head .dek{ font-family:var(--serif-body); font-size:11pt; color:#dad5c8; font-style:italic; line-height:1.4;}
+
+  h3.chap{ font-size:20pt; font-weight:600; margin:30px 0 8px; padding-top:10px; border-top:1.5px solid var(--rule); break-after:avoid;}
+  h3.chap .num{ color:var(--red); font-family:var(--sans); font-weight:700; font-size:11pt; margin-right:9px; letter-spacing:.02em;}
+  .chap-intro{ color:var(--muted); font-style:italic; font-size:13pt; margin:2px 0 12px; line-height:1.44;}
+
+  /* ---------- Callout boxes ---------- */
+  .box{ border:1px solid var(--rule); border-radius:5px; padding:11px 15px; margin:13px 0; break-inside:avoid;
+    background:#fff;}
+  .box .label{ font-family:var(--sans); font-size:7.6pt; letter-spacing:.16em;
+    text-transform:uppercase; font-weight:700; display:block; margin-bottom:7px;}
+  .box ul{ margin:5px 0 0; padding-left:18px;} .box li{ margin:4px 0; line-height:1.5;}
+  .box p:last-child{margin-bottom:0;}
+  .box p{ line-height:1.55;}
+
+  .learn{ background:var(--blue-soft); border-color:#c4cee0;} .learn .label{color:var(--navy);}
+  .terms{ background:#fff; border-color:var(--rule); border-left:3px solid var(--navy);} .terms .label{color:var(--navy);}
+  .terms b{color:var(--navy);}
+  .gotcha{ background:var(--red-soft); border-color:#e6c3bb; border-left:3px solid var(--red);} .gotcha .label{color:var(--red);}
+  .take{ background:var(--green-soft); border-color:#c2d8c7; border-left:3px solid var(--green);} .take .label{color:var(--green);}
+  .lines{ background:#fbf6ee; border:1px dashed var(--amber); } .lines .label{color:var(--amber);}
+  .lines p{ font-family:var(--serif-body); font-style:italic; font-size:14pt; line-height:1.38; margin:9px 0; padding-left:17px; position:relative;}
+  .lines p:before{ content:"\201C"; position:absolute; left:-1px; top:1px; font-size:19pt; color:var(--amber); font-style:normal;}
+  .aq{ background:var(--paper2); border:1px solid var(--rule); border-top:3px solid var(--ink);}
+  .aq .label{color:var(--ink);} .aq .q{ font-weight:600; font-style:italic; font-family:var(--serif-body); font-size:13.5pt; margin-bottom:7px; color:var(--ink);}
+
+  /* ---------- Confidence chips ---------- */
+  .chip{ display:inline-block; font-family:var(--sans); font-size:6.6pt; font-weight:700;
+    letter-spacing:.07em; padding:1px 5px; border-radius:3px; vertical-align:middle; transform:translateY(-1px);}
+  .c-high{ background:var(--green); color:#fff;} .c-med{ background:var(--amber); color:#fff;} .c-low{ background:#8a8578; color:#fff;}
+
+  /* ---------- Stat cards ---------- */
+  .stats{ display:flex; flex-wrap:wrap; gap:9px; margin:14px 0; break-inside:avoid;}
+  .stat{ flex:1 1 22%; min-width:1.3in; border:1px solid var(--rule); border-radius:5px; padding:10px 11px; background:#fff;}
+  .stat .big{ font-family:var(--serif-display); font-weight:600; font-size:25pt; color:var(--red); line-height:1; letter-spacing:-.5px;}
+  .stat .cap{ font-family:var(--sans); font-size:8.7pt; color:var(--muted); margin-top:6px; line-height:1.4; text-transform:uppercase; letter-spacing:.02em;}
+
+  /* ---------- Data-viz bars ---------- */
+  .viz{ border:1px solid var(--rule); border-radius:5px; padding:13px 16px; margin:15px 0; background:#fff; break-inside:avoid;}
+  .viz .vtitle{ font-family:var(--sans); font-weight:700; font-size:10.4pt; text-transform:uppercase; letter-spacing:.05em; margin-bottom:12px;}
+  .bar{ display:flex; align-items:center; gap:11px; margin:9px 0; font-family:var(--sans); font-size:9.8pt;}
+  .bar .bl{ width:2.25in; text-align:right; color:var(--muted); flex:none;}
+  .bar .bt{ flex:1; }
+  .bar .fill{ height:16px; border-radius:2px; display:inline-block; vertical-align:middle;}
+  .bar .bv{ font-weight:700; color:var(--ink); margin-left:8px;}
+  .src{ font-size:8.8pt; color:var(--muted2); font-family:var(--sans); margin-top:11px; line-height:1.44;}
+
+  /* ---------- Tables ---------- */
+  table{ border-collapse:collapse; width:100%; margin:14px 0; font-size:10.6pt; break-inside:avoid;
+    font-family:var(--sans);}
+  th{ background:var(--ink); color:var(--paper); text-align:left; padding:7px 9px; font-size:8.6pt; font-weight:600; letter-spacing:.04em; text-transform:uppercase;}
+  td{ padding:6px 9px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.4;}
+  tr:nth-child(even) td{ background:#faf7f0;}
+
+  .lead{ font-size:14.5pt; line-height:1.46;}
+  .dropcap:first-letter{ float:left; font-family:var(--serif-display); font-weight:600; font-size:62pt; line-height:48px; padding:6px 11px 0 0; color:var(--red);}
+  .note{ font-size:11.5pt; color:var(--muted); border-left:2px solid var(--rule); padding-left:12px; margin:12px 0; font-style:italic; line-height:1.48;}
+  hr.soft{ border:0; border-top:1px solid var(--rule); margin:18px 0;}
+  .small{font-size:10.3pt;}
+  .srcgrid{ font-family:var(--sans); font-size:9.9pt; line-height:1.54; color:var(--muted);}
+  .srcgrid b{color:var(--ink);}
+  .srcgrid p{ margin-bottom:7px;}
+  .toc{ background:var(--paper2); border:1px solid var(--rule); border-radius:5px; padding:14px 18px; margin:16px 0; font-family:var(--sans); font-size:10.6pt;}
+  .toc .label{ font-size:7.6pt; letter-spacing:.16em; text-transform:uppercase; font-weight:700; color:var(--red); display:block; margin-bottom:8px;}
+  .toc ol{ margin:0; padding-left:18px; columns:2; column-gap:26px;}
+  .toc li{ margin:3px 0; break-inside:avoid; line-height:1.4;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ====================== COVER ====================== -->
+<header class="cover">
+  <div class="kicker">R² Media · Live Show Field Guide · Host Eyes Only</div>
+  <div class="logo">R<sup>2</sup> MEDIA</div>
+  <h1>Two Wars,<br>One Magazine.</h1>
+  <div class="sub">A host's read-through behind tonight's lineup — Russia's air war on Ukraine and the
+  Iran–Hormuz crisis — and the single thread that ties them together: the world is running low on the
+  missiles that stop other missiles.</div>
+  <div class="meta">Compiled June 3, 2026 &nbsp;·&nbsp; Researched live, current through June 2–3 &nbsp;·&nbsp;
+  Every load-bearing number is sourced &amp; confidence-flagged &nbsp;·&nbsp; <span class="chip c-high">HIGH</span>
+  <span class="chip c-med">MED</span> <span class="chip c-low">LOW</span></div>
+</header>
+
+<!-- ====================== ONE PARAGRAPH ====================== -->
+<p class="lead dropcap">Two wars are running at once, and they are drinking from the same well. Russia is trying to make
+Ukraine's cities run out of protection by firing more drones and missiles than the West can replace the
+interceptors to stop them. This spring's Iran war did the same thing to the U.S. global stockpile in a
+matter of weeks. The decisive resource of this era is no longer troops or tanks — it is the finite
+inventory of high-end interceptor missiles, which take <em>years</em> to build and <em>minutes</em> to
+spend. Every Patriot fired over Kyiv, Doha, or Tel Aviv is one that cannot defend Taipei, Tokyo, or a
+U.S. base. Meanwhile the cheap, fast side of war — FPV drones, sabotage deep behind the lines, ship
+seizures, and even buying soldiers' phone-location data off the open market — is letting smaller players
+impose enormous costs on far richer ones. That asymmetry, and the production race to fix it, is the story
+under both of tonight's segments.</p>
+
+<!-- ====================== HOW TO USE ====================== -->
+<div class="box learn">
+  <span class="label">How to use this guide</span>
+  <p><strong>What this is.</strong> Prep for the desk, not a script. It explains the <em>why</em> and
+  <em>how</em> behind the headlines in your two segments so you can talk for thirty minutes, field a
+  caller's question without flinching, and smell a bad number when a guest reaches for one. The companion
+  <strong>Cheat Sheet</strong> is the one-glance version for during the show; this is the read-through
+  beforehand.</p>
+  <p><strong>How it's built.</strong> Two parts — Ukraine's air war, then the Iran–Hormuz crisis — each a
+  short course. Every chapter opens with a <em>What you'll learn</em> box and closes with
+  <em>Takeaways</em>, <em>Host lines you can say on air</em>, and — woven in where they fit — an
+  <em>Audience question, answered</em> box drawn from the real viewer questions in your prep file.
+  <em>Key terms</em> boxes define the jargon; <em>Gotcha</em> boxes flag the numbers most likely to get
+  you corrected on air.</p>
+  <p><strong>The one discipline that protects you:</strong> attribute every big number to its source and
+  period, and never state a contested figure flat. Several of the most dramatic stats around both stories —
+  a per-drone cost ratio, "40-plus bombers destroyed," "Russia builds 60–70 Iskanders a month," a
+  "$100-billion Hormuz toll" — do not survive checking, or survive only as someone's <em>claim</em>.
+  They're flagged in Gotcha boxes and gathered in the Cheat Sheet's "Do-Not-Say" panel.</p>
+</div>
+
+<div class="box terms">
+  <span class="label">A note on confidence</span>
+  <p>Findings were gathered through live web search on June 2–3, 2026 and cross-checked across independent
+  sources. <span class="chip c-high">HIGH</span> = well-corroborated across primary and independent
+  reporting. <span class="chip c-med">MED</span> = rests on a single strong source or carries a real range.
+  <span class="chip c-low">LOW</span> = circulating but thin; use only with heavy attribution, or not at
+  all. A recurring theme you should internalize: <b>almost every interceptor <em>expenditure</em> figure in
+  this story is an open-source estimate (mostly CSIS), not a Pentagon-confirmed count.</b> Say "estimated,"
+  prefer ranges, and you cannot be caught out.</p>
+</div>
+
+<div class="toc">
+  <span class="label">Tonight's road map</span>
+  <ol>
+    <li><b>Part I — Ukraine.</b> Why it's about inventory, not willpower</li>
+    <li>The Patriot math — enough to be dangerous</li>
+    <li>Russia's side — making every city the front</li>
+    <li>Ukraine's answer — make the rear unsafe</li>
+    <li>The production race — can the West build enough?</li>
+    <li><b>Part II — Iran.</b> What actually happened at Hormuz</li>
+    <li>Why Hormuz is leverage — geography as a weapon</li>
+    <li>Coercion without closure — Iran's real toolkit</li>
+    <li>The new battlefield — phone data, an AI war room, drug boats</li>
+    <li>Viewer questions · Glossary · Sources</li>
+  </ol>
+</div>
+
+<!-- ====================================================================== -->
+<!-- PART I — UKRAINE -->
+<!-- ====================================================================== -->
+<section class="partbreak">
+<div class="part-head">
+  <div class="eyebrow">Part I · Segment: Ukraine</div>
+  <h2>The Air War and the Missile Math</h2>
+  <div class="dek">Russia is firing volume. Ukraine is improvising. And the West is discovering the
+  bottleneck isn't courage or even airframes — it's the interceptors, and the factories that make them.</div>
+</div>
+
+<h3 class="chap"><span class="num">1</span>Why this story matters</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>Why this phase of the war is about <em>inventory</em>, not willpower — and why that frame is what makes it matter to an American audience.</li>
+<li>The two-sided shape of the fight: Russia trying to exhaust Ukraine's defenses; Ukraine trying to make Russia's rear unsafe.</li>
+<li>Why "the same missile" connects Kyiv, Tel Aviv, Doha, Tokyo, and Taipei.</li>
+</ul></div>
+
+<p>Start with the reframe, because the framing is the whole segment. The footage shows burning apartment
+blocks in Kyiv and drone wreckage in a field, and it's tempting to make the story about Russian cruelty or
+Ukrainian grit. Both are real. Neither is the point. The reason this belongs at the top of a U.S. news show
+is colder: <strong>the war has become a contest over who runs out of a scarce, slow-to-build resource
+first</strong> — and the resource is air-defense interceptors, the same ones the United States needs for
+its own allies and its own forces.</p>
+
+<p>Ukraine's air defenders are good; on a typical night they shoot down most of what Russia throws at them.
+The problem is arithmetic. The hardest weapons to stop — ballistic missiles like Russia's Iskander, which
+fall out of the sky at several times the speed of sound — can realistically only be intercepted by a
+top-tier system, and in practice that means the U.S.-made <strong>Patriot</strong> firing its
+<strong>PAC-3</strong> interceptor. Those interceptors cost millions of dollars each and are built in the
+low hundreds per year. Russia's incoming missiles and Iranian-designed Shahed drones are far cheaper and
+built in the thousands. When the cheap side fires faster than the expensive side can reload, cities get
+exposed — not because Ukraine lost its nerve, but because the magazine ran dry.</p>
+
+<p>That is why the smartest framing for the desk is: <strong>"Russia is trying to make Ukrainian cities run
+out of protection."</strong> It's accurate, it's vivid, and it sets up the second half of the story —
+Ukraine's attempt to attack the threat at its source — and the third half, the one that reaches into
+American wallets: whether the West can build enough.</p>
+
+<p><strong>Why it lands with a U.S. audience.</strong> The bridge to the viewer is the shared magazine. The
+Patriot, THAAD, and SM-3 interceptors protecting Ukrainian cities are the exact systems the U.S. used to
+defend Israel and Gulf bases during this spring's Iran war (Part II), the ones Japan and Taiwan are counting
+on to deter China, and the ones guarding U.S. troops abroad. <strong>There is one global production base and
+many simultaneous customers.</strong> So a missile spent over Kyiv is, in a real budgetary and strategic
+sense, a missile not available somewhere the U.S. cares about. Tell a viewer "this is why your government is
+arguing about Patriot factories," and you've made a war 5,000 miles away a domestic story.</p>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p><strong>"Ukraine is losing because it's running out of will."</strong> Wrong frame — a guest will correct
+you. The constraint is inventory and industrial capacity, not morale. Say: "Ukraine's problem isn't
+willpower, it's the interceptor count."</p>
+<p><strong>"It's all about the drones."</strong> Drones are the visible, cheap layer. But what decides
+whether a Ukrainian city survives a given night is the supply of high-end interceptors for
+<em>ballistic</em> missiles — and cheap drones cannot substitute for them. Keep the two layers distinct.</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>This phase of the war is about inventory: who exhausts whom. That's the frame.</li>
+<li>Ballistic missiles are the hard problem; only top-tier interceptors (Patriot/PAC-3) reliably stop them, and they're built in the hundreds while the threat comes in the thousands.</li>
+<li>The U.S. hook: one global interceptor base, many simultaneous wars. A missile spent over Kyiv is one not available for Tel Aviv, Taipei, or a U.S. base.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>Russia is trying to make Ukrainian cities run out of protection. Ukraine is trying to make Russia's rear areas run out of safety.</p>
+<p>This isn't a story about courage anymore. It's a story about arithmetic — and the arithmetic of missiles is brutal.</p>
+<p>Every Patriot fired over Ukraine is also a missile Washington can't send somewhere else. That's why this is a Tokyo and a Taipei story, not just a Kyiv story.</p>
+</div>
+
+<h3 class="chap"><span class="num">2</span>The Patriot math — enough to be dangerous</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>What a "Patriot" actually is, and why the <em>interceptor</em> — not the launcher — is the scarce thing.</li>
+<li>The core numbers: how many Ukraine needs, how many the world builds, and why the gap is structural.</li>
+<li>Why a $4-million interceptor chasing a $50,000 drone is a losing trade even when it works.</li>
+</ul></div>
+
+<div class="box terms"><span class="label">Key terms</span>
+<p><b>Patriot.</b> The U.S.-built air-defense system. A "battery" is the whole package: radar, control
+station, launchers. The system is reusable but the interceptors it fires are one-shot and expensive. When
+people say Ukraine is "running out of Patriots," they almost always mean it's running out of <em>interceptor
+missiles</em>, not launchers.</p>
+<p><b>PAC-3 MSE.</b> The specific high-end Patriot interceptor (made by Lockheed Martin) used against
+ballistic missiles — hit-to-kill, it physically slams into the warhead. This is the scarce item in the
+whole story. Roughly <strong>$4 million</strong> each.</p>
+<p><b>Ballistic vs. cruise vs. drone.</b> A <em>ballistic</em> missile (e.g., Russia's Iskander) arcs up and
+plunges down at hypersonic speed; very hard to stop, needs a PAC-3. A <em>cruise</em> missile flies like a
+small jet; easier. A <em>Shahed</em> drone is a cheap, slow, propeller "loitering munition" — easy to shoot
+down one at a time, dangerous in swarms because it forces you to spend.</p>
+<p><b>THAAD / SM-3.</b> Two other high-end U.S. interceptors (Army and Navy) for longer-range, higher-altitude
+ballistic threats. They matter here because the Iran war burned through them too — draining the same shared pool.</p>
+</div>
+
+<p>Here is the number that organizes the whole segment. According to Ukrainian Air Force Command data (via
+Defense Express, Feb 2026), Ukraine's <strong>minimum requirement is more than 60 PAC-3 MSE interceptors per
+month</strong> just to hold the line <span class="chip c-high">HIGH</span>. In a heavy week — one of Russia's
+big combined strikes — actual consumption runs far higher, the equivalent of <strong>150–180 a month</strong>
+<span class="chip c-med">MED</span>.</p>
+
+<p>Now the supply side. Lockheed Martin delivered roughly <strong>620 PAC-3 MSEs in all of 2025</strong> — a
+record, up about 20% — which works out to <strong>about 50–55 a month</strong> <span class="chip c-high">HIGH</span>.
+That's already below Ukraine's bare minimum of 60. And that entire global output is split among the U.S. Army
+and <strong>17 allied buyers</strong> — Germany, Japan, the Netherlands, Saudi Arabia, Poland, South Korea and
+more — not handed to Ukraine. In fact one major 2026 contract was about <strong>94% foreign military sales</strong>,
+and Japan has exported PAC-3s to <em>backfill U.S. stocks</em> while Ukraine was blocked from direct supply.
+So even in the best production year ever, the math doesn't close for a single country, let alone the queue
+behind it.</p>
+
+<div class="viz">
+  <div class="vtitle">The interceptor gap, in one picture — PAC-3 MSE, per month</div>
+  <div class="bar"><span class="bl">World output, 2025 (record)</span><span class="bt"><span class="fill" style="width:24%;background:#2c6a3b;"></span><span class="bv">~52 built</span></span></div>
+  <div class="bar"><span class="bl">Ukraine's bare-minimum need</span><span class="bt"><span class="fill" style="width:28%;background:var(--amber);"></span><span class="bv">60+</span></span></div>
+  <div class="bar"><span class="bl">Russia's ballistic output (est.)</span><span class="bt"><span class="fill" style="width:33%;background:#7c786c;"></span><span class="bv">~70/mo</span></span></div>
+  <div class="bar"><span class="bl">A heavy month actually burns</span><span class="bt"><span class="fill" style="width:78%;background:var(--red);"></span><span class="bv">150–180</span></span></div>
+  <div class="src">Sources: Lockheed Martin (Jan 2026, production); Ukrainian Air Force Command via Defense Express
+  (need &amp; salvo math); Ukrainian military-intelligence estimate via CEPA/Euromaidan (Russian output —
+  treat as a <em>claim</em>). The point isn't a single clean ratio — it's that supply sits below need even
+  before you split it 17 ways.</div>
+</div>
+
+<p><strong>Why this is a structurally losing trade.</strong> Set aside whether the interceptor works — it
+usually does. The deeper problem is the <strong>cost-exchange ratio</strong>. A PAC-3 runs around $4 million.
+The Iskander it kills costs Russia a fraction of that; a Shahed drone is cheaper still — tens of thousands of
+dollars. Russia can build attackers far faster and cheaper than the West can build defenders. So even a
+<em>successful</em> intercept is, economically, a trade the defender loses every single time. Multiply that
+across hundreds of incoming objects a month and you see why "just send more Patriots" isn't a strategy — it's
+a treadmill the West is losing on cost and tying on volume.</p>
+
+<p>This is also why the U.S. Army quietly did something dramatic: in April 2025 it raised its own PAC-3 MSE
+stockpile goal <strong>from 3,376 to 13,773 missiles — almost a fourfold increase</strong>
+<span class="chip c-high">HIGH</span>. At the old build rate that target would take decades to fill. Hold that
+number; it's the clearest single proof that the Pentagon now sees interceptors, not platforms, as the binding
+constraint of modern war — and that the U.S. wants to hoard far more for itself, which directly competes with
+Ukraine's need.</p>
+
+<div class="stats">
+  <div class="stat"><div class="big">~$4M</div><div class="cap">Cost of one PAC-3 MSE interceptor (the scarce item)</div></div>
+  <div class="stat"><div class="big">~620</div><div class="cap">Built worldwide in 2025 — a record — shared 18 ways</div></div>
+  <div class="stat"><div class="big">60+</div><div class="cap">Ukraine's bare-minimum monthly need</div></div>
+  <div class="stat"><div class="big">3,376→13,773</div><div class="cap">U.S. Army's own stockpile goal, quadrupled (Apr 2025)</div></div>
+</div>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p><strong>"Russia builds 60–70 Iskanders a month."</strong> Say it as a <em>claim</em>, not a fact. It traces
+to Ukrainian military intelligence relayed through media — the best available estimate, internally consistent,
+but not independently verifiable and from a party to the war. Safe phrasing: "Ukrainian intelligence estimates
+Russia produces roughly 60–70 Iskander and 10–15 Kinzhal ballistic missiles a month."</p>
+<p><strong>A precise Ukrainian Patriot inventory.</strong> Don't cite one — it's classified. Speak to the
+<em>flow</em> (~600 interceptors received over three years; 60+/month needed), never a stockpile.</p>
+<p><strong>"An Iskander costs $3 million."</strong> Disputed. That figure derives from an old export contract;
+Russia's internal production cost is estimated far lower (~$400–500k). The honest point is the
+<em>exchange ratio</em>, not a precise price.</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>The scarce item is the PAC-3 MSE interceptor (~$4M each), not the launcher.</li>
+<li>Ukraine needs 60+/month minimum, 150–180 in heavy months; the whole world built ~620 in 2025 (~52/mo), split 18 ways.</li>
+<li>Even a successful intercept loses on cost — millions spent to kill weapons that cost a fraction.</li>
+<li>The U.S. Army quadrupled its own stockpile goal (3,376 → 13,773) — an admission that interceptors are <em>the</em> binding constraint.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>When we say Ukraine is "running out of Patriots," we don't mean the launchers — we mean the missiles they fire. And those cost about four million dollars each.</p>
+<p>Think about the trade: a four-million-dollar interceptor to shoot down a drone that might cost fifty thousand. Even when you win, you're losing on cost.</p>
+<p>The whole planet built about 620 of these interceptors last year. Ukraine alone wants sixty a month. You can see the problem before I finish the sentence.</p>
+</div>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"Doesn't Europe have Patriots? Why haven't they sent more?"</p>
+<p>Yes — Germany, the Netherlands, Spain, Greece, Poland, Romania and Sweden all operate Patriots, and several
+have donated batteries and interceptors to Ukraine. But three things blunt that. <strong>(1)</strong> Europe's
+own stocks are thin — most countries bought just enough to defend themselves and are now nervously eyeing
+Russia, so giving Ukraine more means leaving their own skies barer; Poland borders the war, and Romania already
+gave one battery up. <strong>(2)</strong> The interceptors are the same scarce PAC-3 rounds everyone is short of,
+so "Europe has Patriots" doesn't solve the missile shortage. <strong>(3)</strong> Donating a launcher is fast;
+refilling its magazine depends on that same U.S. production line and a U.S. export license, with a refill lag
+of three years or more. So Europe is helping, but it's redistributing scarcity, not ending it.</p>
+</div>
+
+<h3 class="chap"><span class="num">3</span>Russia's side — making every city the front</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>What Russia's air campaign is actually trying to achieve — it's not random terror; it has a logic.</li>
+<li>The "combined strike" tactic, and why it's engineered to bankrupt the defender.</li>
+<li>Why Russian factories sit inside residential neighborhoods — and how to explain it without sounding like you're excusing the bombing.</li>
+</ul></div>
+
+<p>Russia's air war has shifted from hitting the front line to hitting everywhere at once: Kyiv, Dnipro,
+Kharkiv, Zaporizhzhia, the power grid, apartment blocks, and — pointedly — Ukraine's air-defense batteries
+themselves. The aim is to make every Ukrainian city <em>feel</em> like the front, exhausting both morale and,
+more concretely, the defenders' interceptor supply.</p>
+
+<p>The signature tactic is the <strong>combined strike</strong>: launch a swarm of cheap Shahed drones first —
+roughly half of them warhead-less <em>decoys</em> — to force Ukraine to light up its radars and start spending,
+then send the expensive ballistic and cruise missiles into the gaps. It's a deliberate magazine-depletion play.
+The drones aren't really meant to get through; they're meant to make you spend, so the thing behind them does.
+Understanding this turns a confusing barrage into a legible strategy you can narrate.</p>
+
+<p>This is not abstract. On the night of <strong>May 23–24, 2026</strong>, Russia launched roughly 90 missiles
+(36 of them ballistic) alongside some 600 drones — and Ukrainian intercept rates tell the whole story:
+<strong>91.5% of the drones were stopped, but only 36.7% of the ballistic missiles</strong>
+<span class="chip c-high">HIGH</span>. Then on the night of <strong>June 1–2, 2026</strong>, a massive attack on
+Kyiv collapsed a nine-story residential block and <strong>killed at least 22 people</strong> — the kind of night
+that puts this segment at the top of your show <span class="chip c-high">HIGH</span>.</p>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"Tell me why these factories are in neighborhoods?!" <span class="small">(re: Russia warning Kyiv to evacuate)</span></p>
+<p>It's a Soviet-inheritance problem. The USSR built industry and housing as a single unit: a factory was a
+"city-shaping element," and workers were housed right next to the plant in standardized estates to cut the walk
+to work — the enterprise itself often built the apartments. Hundreds of Soviet "monotowns" were literally
+designed as residential extensions of one factory; the main Iskander plant in Votkinsk is a textbook case. World
+War II pushed this further: whole industries were relocated eastward and rebuilt fast, with workers settled
+beside them in closed company towns. After the USSR collapsed, nobody had the money to move the plants, so the
+geography froze in place. Layer on the modern war — both sides now deliberately disperse drone and weapons work
+into ordinary buildings, because a single hardened factory is an easy target. None of that makes a strike on an
+apartment block lawful; it explains why the front line of arms production runs straight through where people
+live, and why Russia's "we warned you, we were hitting a factory" line is both partly true and a convenient
+information play.</p>
+</div>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p>Don't quote a precise count of "missiles fired last month." Specific monthly tallies circulate but vary by
+source and often fail verification. Speak to the <em>pattern</em> — combined strikes designed to deplete
+defenses — and to dated, sourced single nights (May 23–24; June 1–2), not a hard monthly count you'd have to
+defend.</p></div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Russia's goal is depletion: make every city the front, exhaust morale and the interceptor magazine.</li>
+<li>The "combined strike" sends cheap (often decoy) drones first to make Ukraine spend, then ballistic/cruise missiles into the gaps. Ballistic intercept rates fall hard under saturation (36.7% on May 24).</li>
+<li>Factories sit in neighborhoods because of Soviet monotown planning plus deliberate modern dispersal — a genuine dual-use reality Russia also uses for cover.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>The cheap drones aren't really trying to hit you. They're trying to make you spend — so the expensive missile behind them gets through.</p>
+<p>On May 24th, Ukraine stopped ninety percent of the drones — and barely a third of the ballistic missiles. That gap is the whole war right now.</p>
+<p>Russia has mass. Ukraine has improvisation. The question is whether improvisation can survive a missile shortage.</p>
+</div>
+
+<h3 class="chap"><span class="num">4</span>Ukraine's answer — make the rear unsafe</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>The strategic logic: if you can't intercept every missile, destroy the launchers and the planes that carry them.</li>
+<li>Operation Spiderweb — the truck-smuggled drone raid that hit Russian bombers thousands of miles inside Russia — told accurately, with the confirmed numbers separated from the claims.</li>
+<li>Fiber-optic drones, the deep-strike campaign on refineries, and what HIMARS is actually doing now.</li>
+</ul></div>
+
+<p>Ukraine can't win the interceptor math, so it's changing the game: instead of catching every arrow, go after
+the archers. That means drones, sabotage, and long-range strikes aimed at the <em>sources</em> of the threat —
+the bombers, the airbases, the refineries that fuel the war, and the air-defense systems that protect them. The
+slogan for the desk: <strong>Russia is trying to make Ukraine's cities run out of protection; Ukraine is trying
+to make Russia's rear run out of safety.</strong></p>
+
+<p><strong>Operation Spiderweb — get this one exactly right.</strong> On <strong>June 1, 2025</strong>, Ukraine's
+security service ran what may be the most audacious special operation of the war. It had smuggled
+<strong>117 small FPV quadcopter drones</strong> deep into Russia, hidden inside the roofs of wooden cabins
+loaded onto ordinary cargo trucks. On command the roof panels opened and the drones flew out to strike
+<strong>five Russian air bases across five time zones simultaneously</strong> — the farthest, Belaya in Irkutsk,
+about <strong>4,300 km (≈2,700 miles)</strong> from Ukraine, deeper into Russia than New York is from Las Vegas
+<span class="chip c-high">HIGH</span>. The targets were Russia's strategic bombers — the Tu-95 and Tu-22M3 — the
+aircraft that launch cruise missiles at Ukrainian cities.</p>
+
+<p>Here is the discipline that protects you. <strong>Independently confirmed by satellite imagery (Maxar, Planet,
+Airbus): roughly 11–13 aircraft destroyed.</strong> A senior NATO official assessed about 40 aircraft
+<em>damaged</em>, of which 10–13 fully <em>destroyed</em> <span class="chip c-high">HIGH</span>. Ukraine's own
+<em>claim</em> is 41 aircraft "hit" and "34% of Russia's cruise-missile carriers" — those are claims, and even
+Ukraine's disinformation chief effectively conceded ~13 destroyed with 40+ damaged. So the safe on-air line is:
+"Ukraine says more than 40; independent imagery confirms a dozen-plus destroyed, with more damaged."</p>
+
+<p>And lean on the part that is bulletproof: <strong>these bombers cannot be replaced.</strong> Tu-95 and
+Tu-22M3 production ended with the Soviet Union; Russia's only "new" strategic bombers are assembled from
+leftover Soviet airframes. Every one destroyed is a permanent subtraction. That — not a disputed dollar figure —
+is the most important fact in the story.</p>
+
+<div class="box terms"><span class="label">Key terms</span>
+<p><b>FPV drone.</b> "First-person-view": a cheap racing-style quadcopter flown by a pilot in a video headset
+who steers it into the target. The signature cheap weapon of this war.</p>
+<p><b>Fiber-optic drone.</b> An FPV that trails a hair-thin glass fiber (typically 5–20 km, up to 30–50 km) instead
+of using radio. Because there's no radio signal, there's nothing to jam — an "unjammable" drone bought with a
+spool of cable.</p>
+<p><b>Deep strike.</b> Long-range one-way attack drones and missiles Ukraine sends hundreds of miles into Russia to
+hit refineries, airbases, and arms plants — attacking the war's fuel and supply, not the front line.</p>
+</div>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"What do they do with the fiber-optic cable after the drone delivers the surprise — reel it back in, I imagine?"</p>
+<p>Good instinct, but no — the fiber is one-way and disposable. The drone is a flying bomb; it's destroyed on
+impact, and the cable goes with it. The spool simply unwinds and pays out behind the drone as it flies, like a
+fishing line off a reel, and is abandoned. Nobody reels it back. It's cheap glass fiber — pennies against what
+the drone destroys — so it's treated as expendable. One real side effect: after months of fighting, sections of
+the front are now littered with thin glass thread tangled across trees and fields, a genuine plastic-pollution
+problem (NPR reported on it in August 2025). The reason these drones exist at all is electronic warfare: by
+mid-2024, Russian jamming was downing so many radio-controlled FPVs that Ukraine switched to fiber, which
+jammers simply cannot touch.</p>
+</div>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"I don't get the math — you can destroy these for a fraction of the cost of a Patriot… with interceptor drones."</p>
+<p>You're half right, and the half you're right about matters. Against <em>slow</em> targets — Shahed attack
+drones, which lumber along around 180 km/h — cheap interceptor drones (roughly $2,500–$5,000) are exactly the
+fix: a few-thousand-dollar drone rams a drone, instead of burning a multi-million-dollar Patriot. That's smart,
+real, and spreading. But it <strong>does not work on ballistic missiles.</strong> An Iskander comes down from the
+edge of space on a steep arc at several times the speed of sound; a little prop drone can't climb fast enough,
+can't catch it, and can't survive near it. Stopping a ballistic missile still takes a Patriot/PAC-3 hit-to-kill
+interceptor. So the honest answer: cheap drones are solving the cheap half of the threat — real progress — but
+the expensive half, the ballistic missiles that level apartment buildings, still demands the scarce, expensive
+interceptor. The future is <em>layered, cost-tiered</em> defense: cheap tools for cheap threats, Patriots reserved
+for the ballistic ones. The trap is that Russia mixes the tiers on purpose, forcing Ukraine to pay for both at
+once.</p>
+</div>
+
+<p><strong>The deep-strike campaign.</strong> Beyond the one spectacular raid, Ukraine is running a sustained
+long-range campaign, and the premier targets are Russian oil refineries — hitting them squeezes both Russia's
+fuel supply and the export revenue that pays for the war. The tempo is now record-setting:
+<strong>16 refinery strikes in May 2026 alone</strong>, with the General Staff reporting 10 refineries hit that
+month and six forced to suspend operations <span class="chip c-high">HIGH</span>. Reuters reported the campaign
+knocked Russian refinery throughput to its <strong>lowest level since 2009</strong>, taking out plants that make
+30%+ of Russia's gasoline; fuel rationing reached the Moscow region. <strong>Crucial nuance that protects you:</strong>
+even as <em>refining</em> was hammered, Russia's <em>crude</em> exports hit a wartime high by diverting unrefined
+oil to ports — so say "Ukraine is crippling Russia's fuel supply and refining," not "collapsing Russia's oil
+exports."</p>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"What happened to HIMARS in Ukraine?"</p>
+<p>It's still there and still firing — but it got countered, and that's the interesting part. HIMARS was the
+celebrity weapon of 2022: a truck-mounted launcher whose GPS-guided rockets (~80 km range) let Ukraine blow up
+Russian ammo dumps far behind the line. Then Russia adapted twice over: it learned to <strong>jam the GPS
+guidance</strong> so the rockets miss, and it <strong>moved its juicy targets out beyond 80 km.</strong> So HIMARS
+faded from "wonder weapon" to one useful tool among many. The story moved to longer reach — <strong>ATACMS</strong>
+(300 km) for deep strikes, and its successor the <strong>PrSM</strong> (400+ km, two per launcher pod), whose
+production Lockheed quadrupled in March 2026. It's the perfect example of this war's central rhythm: every
+breakthrough invites a counter, and the edge belongs to whoever iterates fastest — not whoever has the cleverest
+single gadget. <em>(One caution: ATACMS is what Ukraine fires; PrSM combat use so far is reported with U.S.
+forces, not confirmed in Ukrainian hands.)</em></p>
+</div>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha — the Spiderweb traps</span>
+<p>Don't say "destroyed 40+ bombers" or "34% of Russia's carriers" as fact — those are Ukraine's claims. Say
+"Ukraine says 40+; imagery confirms a dozen-plus destroyed, with more damaged."</p>
+<p>Don't quote the "$600 drone destroyed a $350-million plane" cost ratio. The destroyed aircraft were decades-old
+Tu-95/Tu-22M3 with no clean market price; the $350M tag loosely refers to a new Tu-160 that wasn't the main
+target. Say "cheap drones, irreplaceable bombers."</p>
+<p>Don't say HIMARS is "useless" or "withdrawn." Say "still used, but Russian jamming blunted its rockets, so the
+focus shifted to longer-range ATACMS and PrSM."</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Ukraine's strategy: can't win the interceptor math, so attack the source — bombers, airbases, refineries, air defenses.</li>
+<li>Spiderweb (June 1, 2025): 117 truck-smuggled FPV drones, 5 airbases, 5 time zones, ~4,300 km in. Confirmed ~11–13 aircraft destroyed (~40 damaged); the durable point is the bombers are out of production and can't be replaced.</li>
+<li>Fiber-optic drones are unjammable and single-use; cheap interceptor drones kill slow Shaheds but can't touch ballistic missiles.</li>
+<li>The refinery deep-strike campaign hit a record in May 2026 — crippling Russian fuel/refining (though crude exports stayed high).</li>
+<li>HIMARS was countered by jamming and range; the story moved to ATACMS and PrSM.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>Ukraine smuggled 117 drones thousands of miles into Russia — hidden in the roofs of trucks — and popped them open next to bombers Russia hasn't been able to build since the Soviet Union fell.</p>
+<p>A cheap drone can catch a moped. It cannot catch a bullet falling from space. That's why Ukraine still begs for Patriots.</p>
+<p>No weapon stays decisive for long in this war. HIMARS was a wonder weapon for a year — then Russia learned to jam it. The edge belongs to whoever adapts fastest.</p>
+</div>
+
+<h3 class="chap"><span class="num">5</span>The production race — can the West build enough?</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>The global stockpile crisis — why this isn't just Ukraine's problem.</li>
+<li>The two simultaneous drains — Ukraine and the Iran war — on one shared magazine.</li>
+<li>What Washington is actually doing, and the honest answer to "where do these statistics come from?"</li>
+</ul></div>
+
+<p>This is where the segment becomes an American story. This spring's Iran war (your other segment) did to the
+U.S. global interceptor stockpile in <em>weeks</em> what Ukraine has been doing over <em>years</em>. Defending
+Israel and Gulf bases, the U.S. burned interceptors at a staggering rate. The most-cited public accounting —
+from CSIS — estimates that during the 2026 war the U.S. fired on the order of <strong>1,000–1,400 Patriot
+interceptors and roughly half its THAAD stock</strong>, and here's the part that should make a viewer sit up:
+<strong>THAAD has received no new deliveries since August 2023, with the next batch not due until about April
+2027</strong> — a multi-year hole in the pipeline, precisely when the magazine was being drained
+<span class="chip c-med">MED</span>.</p>
+
+<div class="box terms"><span class="label">Key terms — and a vital one</span>
+<p><b>The two Iran wars.</b> Don't conflate them. There was a <em>12-day</em> Israel–Iran war in <strong>June
+2025</strong> (smaller interceptor draw). The big one — the subject of the headline draw-down figures — is the
+roughly six-week <strong>U.S.–Israel war on Iran in spring 2026 ("Operation Epic Fury")</strong>. When anyone
+says "the recent Iran war drained our missiles," they mean the 2026 war. Keep the two straight or a guest will
+catch you.</p>
+</div>
+
+<p><strong>So who can keep up?</strong> The honest answer: not yet, but they're trying hard. The PAC-3 line is set
+to roughly triple to ~2,000 a year and THAAD to go from 96 to 400 a year — but those ramps run to the
+<strong>early 2030s.</strong> Meanwhile the strain ripples to every U.S. ally on the same systems: <strong>Japan</strong>
+(which co-produces PAC-3 components and just made its first-ever PAC-3 export — to <em>backfill</em> the U.S.),
+<strong>Taiwan</strong> (whose deterrence assumes interceptors will be there, but faces a 4–5-year delivery lag),
+and <strong>Israel</strong> (which just demonstrated how fast a real war drains them). The Pentagon's
+strategic nightmare, now openly war-gamed: a near-simultaneous crisis in Europe, the Middle East, and the Pacific
+would demand more interceptors than exist. That scarcity — not any single battle — is arguably the West's central
+military vulnerability right now.</p>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"Why haven't any bills, laws, grants, or tax breaks been passed to get U.S. companies to fix this?"</p>
+<p>They actually have — this is a great moment to sound informed. The FY2026 defense bill (signed December 2025,
+huge bipartisan margins) granted <strong>multiyear procurement authority for eight munitions</strong> including
+PAC-3 and THAAD — the single most important structural fix, because it gives contractors the stable demand signal
+they need to invest in tooling. It added hundreds of millions specifically for Patriot and THAAD and half a
+billion for the solid-rocket-motor industrial base. In January 2026 Lockheed and the Pentagon signed a seven-year
+framework to roughly triple PAC-3 output, followed by a $4.76-billion contract. <strong>The honest catch — and the
+better on-air point — is that you can't appropriate your way past physics.</strong> A PAC-3 has a 24-month build
+time and a 30-month lead time just for its solid rocket motor (the propellant has to cure, and only a handful of
+sites are certified). Standing up a new motor line takes three to five years to qualify. Even the Pentagon's
+emergency April 2026 Patriot contract won't deliver interceptors until mid-2028 at the earliest. The bottleneck
+isn't political will or funding anymore — it's tooling, skilled welders, and specialty components.</p>
+</div>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"Where did you get your info and statistics from?" <span class="small">(re: the Pentagon missile-crisis segment)</span></p>
+<p>Lead with this confidently, because the sourcing <em>is</em> the credibility. The interceptor and production
+numbers come from: <strong>Lockheed Martin's own production announcements</strong> (the builder); the
+<strong>Center for Strategic and International Studies (CSIS)</strong>, a nonpartisan think tank whose "Depleting
+Missile Defense Interceptor Inventory" and "Last Rounds" analyses are the most-cited public accounting; plus
+<strong>Defense News, Breaking Defense, the Foreign Policy Research Institute, and U.S. Army budget documents.</strong>
+Ukraine's need figures come from <strong>Ukrainian Air Force Command via Defense Express.</strong> And we
+deliberately use <em>ranges</em> where the data is uncertain — the exact interceptor counts are classified, so we'd
+rather give an honest range than false precision. That discipline — named institutions, primary documents where
+possible, ranges where the truth is genuinely uncertain — is the answer.</p>
+</div>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p>Don't state any single interceptor-expenditure number as hard fact ("290 THAAD fired," "250 SM-3"). These are
+CSIS open-source <em>estimates</em> presented as ranges, and the prewar baselines themselves vary by source. Say
+"CSIS estimates roughly…" and prefer the range.</p>
+<p>Don't say "the U.S. is out of interceptors." CSIS judged the U.S. had <em>enough to finish this war</em>; the
+warning is about a multi-year window of vulnerability for the <em>next</em> one.</p>
+<p>Don't say "534 THAAD were fired." 534 is the <em>total ever delivered</em> over the program's life; the
+available prewar pool was smaller (~360–400 by CSIS estimate).</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Two drains, one magazine: the 2026 Iran war spent in weeks what Ukraine spends in years.</li>
+<li>CSIS estimates ~1,000–1,400 Patriots and ~half the THAAD stock fired in the 2026 war; THAAD can't be resupplied until ~April 2027.</li>
+<li>Production is ramping (PAC-3 → ~2,000/yr; THAAD → 400/yr) but not until the early 2030s. Money's flowing; the physics is the constraint.</li>
+<li>Exposure is global: Japan, Taiwan, and Israel draw from the same pool. A three-theater crisis would outstrip supply.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>In one short war against Iran, the United States spent missiles it won't be able to replace until 2027. Ukraine has been doing that to the stockpile for years.</p>
+<p>There's one production base and three potential wars — Europe, the Middle East, and the Pacific. The math does not currently close.</p>
+<p>We're not guessing. These numbers come from Lockheed's own filings and from CSIS. Where the truth is classified, we give you a range — not a fake-precise number.</p>
+</div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- PART II — IRAN -->
+<!-- ====================================================================== -->
+<section class="partbreak">
+<div class="part-head">
+  <div class="eyebrow">Part II · Segment: Iran</div>
+  <h2>Hormuz — Geography as a Weapon</h2>
+  <div class="dek">The strait was never really "reopened." It's a fragile ceasefire, an Iranian toll booth, and
+  a U.S. Navy escort — and the modern battlefield now includes your phone's location data and an AI war room.</div>
+</div>
+
+<h3 class="chap"><span class="num">6</span>What actually happened — the 2026 Iran war and the strait</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>The timeline of the 2026 Iran war and the Hormuz closure — so you're never vague on dates.</li>
+<li>Why "the ceasefire" hasn't reopened the strait, and what "open" really means right now.</li>
+<li>The hard numbers: oil prices, stranded ships, insurance, and the Iranian toll system.</li>
+</ul></div>
+
+<p>Your anchor video — "U.S. Still Can't Reopen Iran's Hormuz Strait" — sits on a genuinely dramatic backdrop,
+so get the spine right. On <strong>February 28, 2026</strong>, the U.S. and Israel launched a major air campaign
+against Iran (the U.S. operation was called <strong>Epic Fury</strong>) that, according to multiple accounts,
+<strong>killed Iran's Supreme Leader, Ali Khamenei</strong>, along with senior commanders. Iran's response was to
+do the one thing it had threatened for decades: it moved to <strong>close the Strait of Hormuz</strong>, attacking
+and seizing ships and shutting the world's most important oil chokepoint. By early March the IRGC declared the
+strait closed.</p>
+
+<p>A fragile <strong>ceasefire</strong> followed — a two-week truce brokered by Pakistan in early April — but when
+talks faltered, President Trump announced a <strong>U.S. naval blockade of Iran</strong> on April 13, and Iran
+re-closed the strait to foreign-flagged vessels. The blockade ran until Trump lifted it on <strong>May 29</strong>
+amid renewed negotiations. <strong>And here is the entire point of the story: lifting the blockade did not reopen
+the strait.</strong> As of today, June 3, the strait is moving roughly <strong>ten ships a day against a normal
+ninety-five</strong> — under one-tenth of normal traffic — with hundreds of tankers still stranded inside the Gulf
+and the big carriers refusing to return. What exists is a controlled, partial trickle, not a reopening.</p>
+
+<div class="stats">
+  <div class="stat"><div class="big">~20%</div><div class="cap">Of the world's oil — and ~20% of its LNG — normally transits Hormuz</div></div>
+  <div class="stat"><div class="big">~10 / 95</div><div class="cap">Ships transiting per day now vs. normal (under 10%)</div></div>
+  <div class="stat"><div class="big">~$126</div><div class="cap">Brent peak (intraday, March 2026); ~$95–97 now</div></div>
+  <div class="stat"><div class="big">~4,000×</div><div class="cap">Jump in tanker war-risk insurance vs. pre-crisis</div></div>
+</div>
+
+<p>Translate those numbers for the viewer. <strong>War-risk insurance</strong> went from essentially nothing —
+about 0.125% of a ship's value — to as much as <strong>1–5% for a single week's coverage</strong>; on a $100
+million tanker that's a jump from roughly $125,000 to as much as $5 million per transit, and major insurers
+simply cancelled coverage for a time. That is the cleanest proof that the people who actually move the world's
+oil do not believe the route is safe, ceasefire or not. <strong>Tanker freight</strong> tells the same story:
+VLCC day-rates hit an all-time high above <strong>$423,000/day</strong>, and ships rerouting around the Cape of
+Good Hope add 10–15 days and $1–2 million a voyage — the part that quietly reaches American store shelves.</p>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p><strong>Don't call the strait "reopened."</strong> The accurate phrase is a <em>controlled partial flow</em> — a
+trickle under escort and Iranian permission, while hundreds of ships remain stuck. The <em>blockade</em> ended
+May 29; the <em>strait</em> did not reopen. Don't conflate the two.</p>
+<p><strong>The Khamenei-killed claim:</strong> it's reported across multiple outlets, but if you state it, attribute
+it ("according to multiple reports / U.S. and Israeli accounts") rather than asserting it flat. Decapitation
+claims warrant attribution.</p>
+<p><strong>Casualty figures</strong> come from Iran's own Health Ministry (~3,468 killed) — one government source.
+Say "according to Iran's government," and do <em>not</em> repeat any "Lebanon" death toll (a likely data-entry
+duplication).</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Feb 28, 2026: U.S./Israel air war on Iran (Operation Epic Fury); Khamenei killed; Iran moved to close Hormuz.</li>
+<li>U.S. naval blockade ran Apr 13 – May 29; lifting it did <em>not</em> reopen the strait.</li>
+<li>Now: ~10 ships/day vs. ~95 normal; hundreds stranded; war-risk insurance up roughly 4,000×; oil hit a record monthly jump in March (~$126 Brent peak), ~$95–97 today.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>Calling Hormuz "open" doesn't mean shipping companies believe it's safe. The insurance market is screaming that it isn't.</p>
+<p>This isn't a reopened strait. It's a fragile ceasefire, an Iranian toll booth, and a U.S. Navy escort. Hundreds of ships are still sitting in the Gulf, waiting.</p>
+<p>War-risk insurance went up roughly four-thousand-fold. That's not a headline — that's the market telling you the truth.</p>
+</div>
+
+<h3 class="chap"><span class="num">7</span>Why Hormuz is leverage — geography and economics</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>Why this one stretch of water gives a mid-size country leverage over the whole world economy.</li>
+<li>The "Iran's leverage is geography, not just missiles" frame.</li>
+<li>Why Iran would hurt itself by fully closing it — and why that paradoxically makes <em>partial</em> disruption the smart play.</li>
+</ul></div>
+
+<p>The Strait of Hormuz is the narrow mouth of the Persian Gulf — about <strong>21 miles wide</strong> at its
+tightest, with the actual shipping lanes narrower still, roughly two miles in each direction. Through that
+needle's eye passes about <strong>a fifth of all the oil and LNG the world consumes</strong> (and about a quarter
+of all seaborne oil) <span class="chip c-high">HIGH</span>. There is no real overland substitute at anything like
+that scale — a few pipelines bypass it but can carry only a fraction. That is the entire source of Iran's power
+here: <strong>its leverage is not primarily its missiles — it's the map.</strong> It happens to sit on the north
+shore of the one waterway the global economy cannot route around. A country with a navy a fraction of America's
+and an economy smaller than Florida's can move the price of gasoline in Ohio, because it doesn't need to defeat
+the U.S. Navy — it just needs to make 21 miles of water frightening.</p>
+
+<p><strong>The paradox that keeps Iran from going all the way.</strong> Fully closing Hormuz would hurt Iran badly
+too. Iran's own oil exports — its economic lifeline — go out through the same strait, overwhelmingly to China,
+its most important customer and protector. Choke the strait completely and Iran strangles its own revenue and
+infuriates Beijing. (Tellingly, even mid-crisis China <em>increased</em> its Iranian crude purchases.) So Iran
+almost never wants a total, permanent closure. What it wants is <strong>calibrated disruption</strong>: enough
+fear to spike prices, punish its enemies, and extract concessions — without cutting its own throat or triggering
+an overwhelming U.S. response. The selective-access toll system, letting Chinese and other "friendly" ships
+through while squeezing the rest, is exactly this calibration in action.</p>
+
+<div class="box terms"><span class="label">Key terms</span>
+<p><b>Chokepoint.</b> A narrow passage a huge volume of trade must funnel through, giving whoever controls its
+shores outsized leverage. Hormuz is the most important oil chokepoint on earth.</p>
+<p><b>War-risk premium.</b> The extra insurance shipowners pay to sail a dangerous area — a real-time,
+money-on-the-line gauge of how unsafe the professionals think a route is. Far more honest than any government
+statement. As one underwriter put it, you can insure volatility, but not <em>uncertainty</em>.</p>
+</div>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p><strong>"Iran will close the strait"</strong> is usually the wrong prediction. Full closure is the option Iran
+<em>least</em> wants, because it's also Iran's export route to China. The realistic threat is harassment and
+partial disruption — which is scarier in a way, because it can simmer for months. Frame it as "raising the cost,"
+not "shutting it down."</p>
+<p><strong>"The strait is only two miles wide."</strong> Imprecise. It's ~21 miles shore-to-shore; the navigable
+<em>lanes</em> are about two miles each way. Say "the lanes are just two miles wide."</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Hormuz is ~21 miles wide at its narrowest; ~20% of global oil and LNG passes through, with no scalable overland alternative.</li>
+<li>Iran's real leverage is geography — it sits on the chokepoint — not its military strength.</li>
+<li>Full closure would also choke Iran's own exports to China, so Iran prefers calibrated disruption (tolls, selective passage) over total shutdown.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>Iran's leverage isn't its missiles. It's the map. It sits on the one stretch of water the global economy can't route around.</p>
+<p>A country with an economy smaller than Florida's can move the price of gas in Ohio — because of 21 miles of water.</p>
+<p>Iran doesn't actually want to close it. Its own oil goes out the same door — straight to China. It wants to make it scary, not shut it.</p>
+</div>
+
+<h3 class="chap"><span class="num">8</span>Coercion without closure — how Iran raises the cost</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>The actual toolkit Iran uses to make the route expensive and unpredictable.</li>
+<li>Why <em>seizing</em> ships is smarter leverage than sinking them.</li>
+<li>The "you don't have to sink half the tankers" logic.</li>
+</ul></div>
+
+<p>Iran has a graduated menu of pressure, and almost none of it requires a shooting war it would lose. Working up
+the ladder: <strong>GPS jamming and "spoofing"</strong> (feeding ships false navigation data so they wander toward
+Iranian waters); swarms of <strong>small fast attack boats</strong> that harass tankers; <strong>naval mines</strong>
+(cheap, slow to clear, and terrifying to insurers — even the <em>threat</em> of mining spikes premiums);
+<strong>coastal drones and anti-ship missiles</strong>; and the cleverest tool of all — <strong>seizing ships
+rather than sinking them.</strong></p>
+
+<p><strong>Why seizing beats sinking.</strong> In April 2026 Iran's Revolutionary Guard captured container ships
+in the strait — including the <em>Epaminondas</em> and the <em>MSC Francesca</em> — and over the following weeks
+seized others, citing vessels entering "without coordination." Seizing rather than sinking is deliberately clever:
+it creates a hostage crisis and an insurance panic <em>without</em> the mass civilian death toll that would force
+an overwhelming U.S. military response. It's leverage you can negotiate over, and reverse if Iran gets what it
+wants. Sinking a tanker kills sailors and burns bridges; seizing one creates a bargaining chip. The strategic
+logic for the desk: <strong>Iran doesn't have to sink half the world's tankers. It just has to make the route
+expensive, unpredictable, and politically dangerous</strong> — and let the insurance market price that fear across
+thousands of voyages.</p>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p>Don't conflate "jamming" with "attacking." GPS spoofing — quietly feeding ships false positions — is a distinct,
+deniable tool; it's how a vessel can end up in Iranian waters "by accident."</p>
+<p>Mines don't have to be <em>laid</em> to work. The credible threat, plus a few confirmed ones, is enough to freeze
+traffic, because clearing mines is slow and insurers won't gamble. Distinguish confirmed mines from the threat —
+don't state a mine <em>count</em>.</p>
+<p><strong>The "$100-billion toll" myth.</strong> Hormuz is a natural strait under the international "transit
+passage" regime — you can't legally charge for passage the way Suez does. Any toll Iran extracts is informal
+coercion measured in <em>low single-digit billions a year at most</em>, not tens of billions. Reports of ~$2M
+per ship, paid in yuan or crypto, are real but vary — say "reportedly around two million," not a fixed fee.</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Iran's toolkit: GPS jamming/spoofing, fast-boat swarms, mines (and mine threats), coastal drones/missiles, and ship seizures.</li>
+<li>Spring 2026: the IRGC seized multiple vessels — seizing, not sinking, to create leverage without mass casualties.</li>
+<li>The core logic: make the route expensive, unpredictable, and politically dangerous — and let the insurance market amplify the fear.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>Iran doesn't have to sink half the world's tankers. It has to make the route expensive, unpredictable, and politically dangerous — and it has.</p>
+<p>They're not sinking ships, they're seizing them. That's not weakness — that's strategy. A hostage is a bargaining chip; a wreck is a war.</p>
+<p>You don't even have to lay the mines. You just have to make insurers believe you might.</p>
+</div>
+
+<h3 class="chap"><span class="num">9</span>The new battlefield — phone data, an AI war room, and the drug-boat war</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>How adversaries are buying U.S. troops' locations off the open commercial market — your "new vulnerability" pivot.</li>
+<li>What the Pentagon's "AI war command" actually is — your "how the Pentagon is responding" pivot.</li>
+<li>The drug-boat strikes as the wider story of a militarizing maritime world.</li>
+</ul></div>
+
+<p><strong>The phone-data vulnerability (your "new vulnerability" pivot).</strong> This is the segment's most
+unsettling — and most relatable — story, because it runs on the same data-broker economy that targets <em>you</em>
+with ads. In a bipartisan letter revealed in late May 2026, <strong>U.S. Central Command confirmed it had received
+"multiple threat reports concerning adversary exploitation of commercial location data to target or surveil U.S.
+personnel" in the war zone</strong> <span class="chip c-high">HIGH</span> — the first official confirmation that
+American troops have been targeted this way in an active theater. In plain English: foreign adversaries have been
+<strong>buying the location data shed by U.S. soldiers' phones on the open market</strong> — the same advertising
+data any company can buy from data brokers. No hacking. No malware. A purchase order.</p>
+
+<p>Why it's dangerous: aggregated location data reveals a base's perimeter, the "pattern of life" (when troops
+eat, sleep, patrol), and where personnel cluster — exactly what you need to aim a missile, a drone, or a roadside
+bomb. The gut-punch detail you can deliver on air: <strong>the advertising ID still isn't disabled on
+government-issued phones by default</strong>, even though the NSA and CISA both recommend turning it off, and
+there's no enforced requirement that troops kill location tracking in a war zone. The modern soldier can be hunted
+not by a spy, but by a spreadsheet bought from an ad-tech vendor. <em>(One discipline: CENTCOM did not name a
+country. Say "in CENTCOM's theater, where Iran is the chief adversary," not "Iran was confirmed as the buyer.")</em></p>
+
+<div class="box terms"><span class="label">Key terms</span>
+<p><b>Data broker.</b> A company that buys, packages, and resells personal data — including phone-location histories
+harvested from ordinary apps (weather, games, maps) — with few restrictions on who buys it, including foreign buyers.</p>
+<p><b>Pattern of life.</b> The predictable daily rhythm of a person or a base, reconstructed from location data over
+time. It's what turns a dot on a map into a targeting solution.</p>
+</div>
+
+<p><strong>The Pentagon's AI war command (your "how the Pentagon is responding" pivot).</strong> On the other side
+of the ledger, the U.S. is racing to wire its own forces together with AI. The Pentagon's sensor-to-shooter
+program is <strong>CJADC2</strong> — Combined Joint All-Domain Command and Control — and its centerpiece is
+<strong>Palantir's "Maven Smart System,"</strong> which the Pentagon moved in 2026 to elevate to a formal program
+of record, calling AI-enabled decision-making the "cornerstone" of the effort. Commercial AI is in the mix too:
+in 2025 the Pentagon awarded contracts of up to $200 million each to Anthropic, OpenAI, Google, and xAI, and
+CENTCOM's commander has publicly credited AI tools with helping U.S. forces "sift vast amounts of data in seconds"
+during the Iran war.</p>
+
+<p>The honest framing — and the right tone for the desk — is two-sided. The capability is real and is genuinely
+speeding up U.S. decision-making. But it's <strong>decision support, not autonomous killing</strong> — the system
+is built to <em>recommend</em> targets and turn them over to humans, not to pull the trigger, and a former senior
+official has publicly flagged the risk of drift from "recommend" toward "decide." There's also a live dependency
+question, dramatized this year: <strong>Anthropic refused to allow its AI to be used for lethal autonomous weapons
+and mass surveillance, the Pentagon moved to brand the company a "supply-chain risk," and a federal judge blocked
+that as likely unconstitutional retaliation.</strong> That fight is the whole tension in miniature — how much of
+the kill chain should sit inside a handful of private tech companies?</p>
+
+<p><strong>The drug-boat war (the wider maritime-militarization frame).</strong> Tie it together: the world's
+navies are increasingly using lethal force at sea against non-traditional targets. Since autumn 2025, under
+<strong>Operation Southern Spear</strong>, the U.S. military has been blowing up boats it alleges are
+drug-smuggling vessels in the Caribbean and Eastern Pacific. By early June 2026 these strikes had
+<strong>killed more than 200 people across roughly 60 strikes</strong> <span class="chip c-high">HIGH</span>. The
+administration calls the targets "narco-terrorists"; critics question both the <em>legality</em> (the UN human-rights
+chief called them "extrajudicial executions," and a <em>Guardian</em> investigation found no trafficking evidence
+for identified victims) and the <em>effectiveness</em> — because, per the DEA's own assessment, U.S.-bound fentanyl
+comes overland through Mexico, while these boats mostly move cocaine, much of it bound for Europe. It's a striking
+parallel to Hormuz: in both cases military force is being applied to commercial maritime traffic, and the line
+between law enforcement, deterrence, and war is blurring.</p>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p><strong>Phone data:</strong> say "commercial location data bought from brokers," not "Iran hacked our phones."
+The chilling part is no hacking was needed — and CENTCOM didn't name Iran.</p>
+<p><strong>AI command:</strong> don't say "AI is running the war" or "killer robots." The accurate claim is AI
+<em>accelerating human decisions</em> — decision support, not autonomous killing. Don't cite viral "Claude powered
+11,000 strikes" figures; those are unverified blog claims.</p>
+<p><strong>Drug boats:</strong> the 200+ figure is well-reported but moving — say "more than 200, as of early June."
+The targets are <em>alleged</em> traffickers; attribute the "narco-terrorist" label to the administration. And the
+boats are not the U.S. fentanyl supply chain.</p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>Phone data: CENTCOM confirmed adversaries are buying U.S. troops' commercial location data to target/surveil them — no hacking, and the advertising ID still isn't disabled on issued phones.</li>
+<li>AI command: the Pentagon is elevating Palantir's Maven inside CJADC2 and uses commercial AI (incl. during the Iran war). Real capability, real "who's in the kill chain" dependency questions — dramatized by the Anthropic–DoD court fight.</li>
+<li>Drug boats: Operation Southern Spear has killed 200+ since fall 2025; legality and effectiveness both contested, and the boats mostly carry cocaine, not U.S.-bound fentanyl.</li>
+</ul></div>
+
+<div class="box lines"><span class="label">Host lines you can say on air</span>
+<p>Nobody hacked these soldiers' phones. Our enemies just bought their location — off the same ad-data market that sells your shopping habits.</p>
+<p>The modern battlefield isn't only missiles. It's ship insurance, phone-location data, drone swarms, and whether U.S. forces can even move without being watched.</p>
+<p>The Pentagon's answer is an AI war room. The capability is real — but so is the question of how much we now hand to a few private tech companies inside the kill chain.</p>
+</div>
+
+<div class="box aq"><span class="label">Audience question, answered</span>
+<p class="q">"Occupied territory? Explain how." <span class="small">(belongs to the Ukraine segment, but keep it ready)</span></p>
+<p>"Occupied territory" means land one country's military physically holds even though it isn't legally recognized
+as theirs. In September 2022, after staged "referendums" the world dismissed as shams, Russia declared it was
+annexing four Ukrainian regions — <strong>Donetsk, Luhansk, Zaporizhzhia, and Kherson</strong> — on top of Crimea,
+seized in 2014. The UN General Assembly condemned it <strong>143 to 5</strong>; the only countries voting with
+Russia were Belarus, North Korea, Nicaragua, and Syria. Here's the gap the viewer is sensing: legally, the world
+says these are Ukraine; militarily, Russia holds <strong>roughly a fifth of Ukraine</strong> — but it doesn't even
+control all the land it claims, having never captured the cities of Zaporizhzhia or Kherson. An estimated few
+million Ukrainians live under that occupation. So: held by force, claimed on paper, recognized by almost no one —
+and that gap is one of the central walls in any peace negotiation.</p>
+</div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- BACK MATTER -->
+<!-- ====================================================================== -->
+<section class="partbreak">
+<div class="part-head">
+  <div class="eyebrow">Reference</div>
+  <h2>Glossary &amp; Sources</h2>
+  <div class="dek">The jargon, defined once — and where every number came from.</div>
+</div>
+
+<h3 class="chap" style="border-top:none;"><span class="num">A</span>A quick glossary</h3>
+<div class="srcgrid">
+<p><b>PAC-3 MSE</b> — the high-end Patriot interceptor used against ballistic missiles; hit-to-kill; ~$4M each; the single scarcest item in the Ukraine story. The whole world built ~620 in 2025.</p>
+<p><b>THAAD / SM-3</b> — other top-tier U.S. interceptors (Army / Navy) for higher and longer-range ballistic threats; drained heavily in the 2026 Iran war and slow to resupply.</p>
+<p><b>Shahed</b> — cheap Iranian-designed attack ("kamikaze") drone Russia launches in swarms — many warhead-less decoys — to exhaust Ukrainian defenses.</p>
+<p><b>Iskander</b> — Russia's fast, hard-to-stop short-range ballistic missile; the threat that forces Ukraine to spend Patriots.</p>
+<p><b>FPV / fiber-optic drone</b> — cheap, manually-flown attack drone; the fiber-optic version trails an unjammable glass cable (one-way, disposable).</p>
+<p><b>HIMARS</b> — U.S. truck-mounted precision rocket launcher (~80 km range); the 2022 wonder weapon, since countered by Russian jamming and partly eclipsed by longer-range ATACMS (300 km) and the new PrSM (400+ km).</p>
+<p><b>Operation Spiderweb</b> — Ukraine's June 1, 2025 raid: 117 truck-smuggled FPV drones hit 5 Russian airbases across 5 time zones, destroying ~11–13 (claimed 40+ damaged) irreplaceable Soviet-era bombers.</p>
+<p><b>Strait of Hormuz</b> — ~21-mile-wide chokepoint at the mouth of the Persian Gulf; ~20% of the world's oil and LNG passes through it.</p>
+<p><b>War-risk premium</b> — extra insurance to sail a dangerous route; a money-on-the-line gauge of real danger. Jumped roughly 4,000× for Hormuz.</p>
+<p><b>Operation Epic Fury</b> — the U.S. air campaign against Iran beginning Feb 28, 2026. (Distinct from the smaller June 2025 "12-day" Israel–Iran war.)</p>
+<p><b>Operation Southern Spear</b> — U.S. military strikes on alleged drug-smuggling boats in the Caribbean / E. Pacific since fall 2025; 200+ killed.</p>
+<p><b>CJADC2 / Maven</b> — the Pentagon's push to link every sensor to every shooter on one AI-assisted map; Palantir's "Maven Smart System" is the centerpiece; commercial AI (Anthropic, OpenAI, Google, xAI) is contracted in.</p>
+<p><b>Data broker / pattern of life</b> — firms that resell phone-location data; "pattern of life" is the daily routine reconstructed from it, which turns a soldier into a target.</p>
+</div>
+
+<h3 class="chap"><span class="num">B</span>Sources &amp; where the numbers come from</h3>
+<p class="small" style="color:var(--muted);">Researched via live web search, June 2–3, 2026, and cross-checked across
+independent sources. Use the named institutions on air — they're your credibility. Where the truth is classified or
+contested, we use ranges, not false precision.</p>
+
+<div class="srcgrid">
+<p><b>Ukraine air war, Patriot math &amp; production.</b> Lockheed Martin (PAC-3 production &amp; the Jan 2026
+seven-year framework); CSIS, <em>Depleting Missile Defense Interceptor Inventory</em> (Dec 2025) &amp;
+<em>Last Rounds: Status of Key Munitions After the Iran-War Ceasefire</em> (Apr 2026) &amp; <em>Rebuilding U.S.
+Missile Inventory</em> (May 2026); Defense Express / Ukrainian Air Force Command (Ukraine's 60+/month need; per-salvo
+math; interceptors-per-Iskander); Army Recognition &amp; CSIS (U.S. Army objective 3,376→13,773); FPRI,
+<em>Scaling Patriot Production</em> (May 2026, lead times); Breaking Defense (FY27 missile procurement); ISW /
+Critical Threats &amp; Kyiv Independent (May 23–24 strike); PBS/CBS/Euronews (June 1–2 Kyiv strike, 22 killed);
+RBC-Ukraine (Zelensky "60–65/month is nothing," May 31, 2026).</p>
+<p><b>Ukraine's deep strike.</b> TWZ &amp; Maxar/Planet imagery and a senior NATO official via Reuters/Meduza
+(Spiderweb confirmed ~11–13 destroyed / ~40 damaged); 19FortyFive &amp; Wikipedia (bombers out of production);
+Atlantic Council &amp; NPR (fiber-optic drones; cable litter); National Defense Magazine (interceptor-drone cost);
+Kyiv Post / Moscow Times / Reuters via Militarnyi (May 2026 refinery campaign; throughput lowest since 2009; crude
+exports nonetheless at wartime high); Washington Post &amp; The Defense Post (HIMARS jamming, ATACMS); Lockheed
+Martin (PrSM); CNN &amp; the New York Times (Hezbollah fiber-optic drones vs. Israeli EW).</p>
+<p><b>Global interceptor shortage.</b> CSIS (shared-magazine thesis; THAAD/SM-3/Patriot draw-down ranges; "enough for
+this war, not the next"); Lockheed Martin &amp; RTX/Raytheon (PAC-3, THAAD, GEM-T ramps); Holland &amp; Knight /
+CRS / War on the Rocks (FY2026 NDAA, multiyear procurement for 8 munitions); Japan Times &amp; Reuters (Japan's
+first PAC-3 export to backfill the U.S.; the shared Boeing-seeker bottleneck); Defense News (Taiwan's 4–5-year
+delivery lag); Defense Express (Europe's Patriot operators).</p>
+<p><b>Iran / Hormuz.</b> U.S. Energy Information Administration (Hormuz oil &amp; LNG share; ~20% of world oil, ~25% of
+seaborne, ~one-fifth of LNG); Strauss Center (width &amp; lane geometry); Al Jazeera, CNBC, Reuters, Kpler/Lloyd's
+List (oil price arc; war-risk insurance 0.125%→1–5%; record VLCC rates; ship seizures); Energy Aspects /
+straits.live (current ~10 ships/day vs ~95; stranded tankers); Iran International (the "$100-billion toll" is a myth —
+realistic figure low single-digit billions); Bloomberg/NBC/Fortune (the ~$2M "Tehran toll," paid in yuan/crypto —
+amounts vary).</p>
+<p><b>The new battlefield.</b> Reuters, Military Times, TechCrunch, Nextgov (CENTCOM's confirmation that adversaries
+bought troops' commercial location data; the advertising-ID policy gap; Wyden–Harrigan letter); DefenseScoop
+(Maven/CJADC2 as program of record; "cornerstone" language; decision-support-not-autonomy); Reuters/Axios/CNN
+(Anthropic–DoD "supply-chain risk" dispute and the federal injunction); USNI News, CFR, NBC, PolitiFact/PBS, The
+Guardian, UN/HRW (Operation Southern Spear toll; fentanyl-comes-overland; legality debate).</p>
+<p><b>Viewer-question specifics.</b> UN Press / UN News (Resolution ES-11/4, 143–5; the five no-votes); Wikipedia /
+Ukraine War trackers (Russia controls ~18–20%; doesn't hold all it claims; ~3–3.5M under occupation, 2024 est.);
+Wikipedia "Monotown" &amp; GlobalSecurity (Soviet plant-plus-housing planning; Votkinsk); FPRI &amp; Modern War
+Institute (production lead times; cost-exchange logic); Al Jazeera, Army Recognition, Cato, VOA (Taiwan's HIMARS /
+ATACMS / Harpoon / Patriot deliveries; Ukraine treated as a live lesson).</p>
+</div>
+
+<hr class="soft">
+<p class="small" style="text-align:center;color:var(--muted2);font-family:'Helvetica Neue',Arial,sans-serif;letter-spacing:.08em;">
+END OF RESEARCH BRIEF &nbsp;·&nbsp; R² MEDIA &nbsp;·&nbsp; COMPILED JUNE 3, 2026 &nbsp;·&nbsp; PAIR WITH THE HOST CHEAT SHEET FOR AIR</p>
+
+</section>
+</div>
+</body>
+</html>

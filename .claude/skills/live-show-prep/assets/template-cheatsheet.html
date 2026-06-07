@@ -1,0 +1,305 @@
+<!-- ============================================================================
+  R² LIVE-SHOW-PREP TEMPLATE  ·  DO NOT SHIP THIS CONTENT.
+  The <style> block below IS the house design system — keep it VERBATIM.
+  The body is a WORKED EXAMPLE from a past show (Ukraine / Iran, June 2026).
+  When you build a new show: keep the <style>, DELETE every bit of example
+  body content, and rebuild it from THIS show's live research.
+  Fonts load from Google Fonts at render time — render with assets/render.sh.
+============================================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>R² Media — Host Cheat Sheet — June 3, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#14161b; --paper:#fbf9f3; --rule:#d4cdbd; --muted:#56534a; --muted2:#7e7a6e;
+    --red:#9f2012; --navy:#1d2c4d; --amber:#946011; --green:#2c6a3b;
+    --red-soft:#fbeae6; --amber-soft:#faf2e2; --green-soft:#e9f1ea; --navy-soft:#eef1f7; --gray-soft:#f0ece2;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+    --display:"Fraunces","Iowan Old Style",Georgia,serif;
+    --read:"Newsreader","Iowan Old Style",Georgia,serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{ margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); font-size:9.5pt; line-height:1.38;
+    text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;}
+  @page{ size:Letter; margin:9mm 9mm 9mm 9mm; }
+  .serif{font-family:var(--display);}
+  p{margin:0 0 5px;} strong{font-weight:600;} b{font-weight:600;}
+  h1,h2,h3{margin:0; font-weight:600;}
+
+  /* masthead */
+  .mast{ display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--ink); padding-bottom:7px; margin-bottom:9px;}
+  .mast .l .logo{ font-family:var(--display); font-weight:700; font-size:11pt; letter-spacing:.02em;}
+  .mast .l .logo sup{color:var(--red); font-size:.6em;}
+  .mast .l h1{ font-family:var(--display); font-weight:600; font-size:17.5pt; letter-spacing:-.3px; margin-top:2px;}
+  .mast .r{ text-align:right; font-size:6.8pt; letter-spacing:.05em; text-transform:uppercase; color:var(--muted2); line-height:1.55;}
+  .mast .r b{color:var(--ink); font-weight:600;}
+
+  /* columns */
+  .cols{ column-count:3; column-gap:8px; }
+  .cols2{ column-count:2; column-gap:8px; }
+
+  .card{ break-inside:avoid; border:1px solid var(--rule); border-radius:4px; padding:6px 7px; margin:0 0 5px; background:#fff;}
+  .card h3{ font-family:var(--sans); font-size:8.2pt; font-weight:700; letter-spacing:.06em; text-transform:uppercase; margin-bottom:5px; padding-bottom:3px; border-bottom:1px solid var(--rule); color:var(--navy);}
+  .card.red h3{color:var(--red);} .card.green h3{color:var(--green);} .card.amber h3{color:var(--amber);}
+  .card.k-red{ background:var(--red-soft); border-color:#e6c3bb;}
+  .card.k-amber{ background:var(--amber-soft); border-color:#e7d3ab;}
+  .card.k-green{ background:var(--green-soft); border-color:#c2d8c7;}
+  .card.k-navy{ background:var(--navy-soft); border-color:#c4cee0;}
+  .card.k-gray{ background:var(--gray-soft);}
+
+  .num{ display:flex; justify-content:space-between; gap:6px; padding:2px 0; border-bottom:1px dotted #d9d2c2; align-items:baseline;}
+  .num:last-child{border-bottom:none;}
+  .num .v{ font-family:var(--display); font-weight:700; color:var(--red); white-space:nowrap; font-size:10.5pt; letter-spacing:-.2px;}
+  .num .l{ color:var(--muted); flex:1; padding-right:4px; line-height:1.3;}
+
+  .chip{ display:inline-block; font-family:var(--sans); font-size:5.6pt; font-weight:700; letter-spacing:.03em; padding:0 3px; border-radius:2px; vertical-align:middle; color:#fff; transform:translateY(-.5px);}
+  .h{background:var(--green);} .m{background:var(--amber);} .lo{background:#8a8578;}
+
+  .line{ font-family:var(--read); font-style:italic; font-size:9.9pt; line-height:1.34; padding:4px 0 4px 12px; position:relative; border-bottom:1px solid #ece6d8;}
+  .line:last-child{border-bottom:none;}
+  .line:before{ content:"\25B8"; position:absolute; left:0; top:4px; color:var(--amber); font-style:normal; font-size:6pt;}
+
+  .xy{ padding:3px 0; border-bottom:1px solid #ece6d8; line-height:1.3;} .xy:last-child{border-bottom:none;}
+  .xy .x{ color:var(--red); font-weight:600;} .xy .x:before{content:"\201C";} .xy .x:after{content:"\201D";}
+  .xy .y{ color:var(--ink);} .xy .y:before{content:"\2192 "; color:var(--green); font-weight:700;}
+
+  .qa{ padding:3px 0; border-bottom:1px solid #ece6d8; line-height:1.3;} .qa:last-child{border-bottom:none;}
+  .qa .q{ font-weight:600;} .qa .a{ color:var(--muted);}
+
+  .dns{ padding:2px 0; border-bottom:1px solid #f0d9d3; line-height:1.3;} .dns:last-child{border-bottom:none;}
+  .dns .no{ color:var(--red); font-weight:600;} .dns .no:before{content:"\26D4 ";}
+  .dns .ok{ color:var(--green); } .dns .ok:before{content:"\2713 say: "; font-weight:700;}
+
+  .tl{ padding:2.5px 0; display:flex; gap:7px; border-bottom:1px dotted #d9d2c2; line-height:1.3;} .tl:last-child{border-bottom:none;}
+  .tl .d{ font-family:var(--sans); font-weight:700; color:var(--navy); white-space:nowrap; width:52px; flex:none; font-size:7.4pt;}
+  .tl .e{ color:var(--ink);}
+
+  .players{font-size:9.2pt; line-height:1.44;} .players b{color:var(--navy); font-weight:600;}
+  .through{ background:var(--ink); color:var(--paper); border-radius:4px; padding:8px 11px; margin-bottom:8px;}
+  .through h3{ font-family:var(--sans); color:#cBa14a; font-size:7pt; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:5px;}
+  .through p{ font-family:var(--read); font-size:10.1pt; margin-bottom:5px; line-height:1.38;}
+  .through p:last-child{margin-bottom:0;} .through .hl{color:#ecc97a; font-style:italic;}
+  .foot{ font-family:var(--sans); text-align:center; font-size:6.4pt; letter-spacing:.1em; text-transform:uppercase; color:var(--muted2); margin-top:5px; padding-top:6px; border-top:1px solid var(--rule);}
+  .seg{ font-family:var(--display); font-weight:700; font-size:11.5pt; color:var(--red); margin:6px 0 7px; padding:5px 11px; background:#fff; border-left:3px solid var(--red); break-inside:avoid; letter-spacing:.01em;}
+</style>
+</head>
+<body>
+
+<div class="mast">
+  <div class="l">
+    <div class="logo">R<sup>2</sup> MEDIA &nbsp;·&nbsp; HOST DESK NOTES</div>
+    <h1>Cheat Sheet — Ukraine Air War &amp; the Iran–Hormuz Crisis</h1>
+  </div>
+  <div class="r">
+    Compiled <b>June 3, 2026</b><br>
+    <span class="chip h">HIGH</span> well-sourced &nbsp; <span class="chip m">MED</span> single-source/range<br>
+    <b>Attribute every number out loud.</b>
+  </div>
+</div>
+
+<div class="through">
+  <h3>The through-line — say this once, up top</h3>
+  <p><b>Two wars, one magazine.</b> Russia–Ukraine and the 2026 Iran war are draining the same finite pool of high-end Western interceptors. A missile fired over Kyiv, Doha, or Tel Aviv is one not available for Taipei, Tokyo, or a U.S. base.</p>
+  <p>The scarce resource of this era isn't troops or tanks — it's <span class="hl">interceptor missiles: years to build, minutes to spend.</span> &nbsp;|&nbsp; <b>Ukraine:</b> "Russia is making the cities run out of protection; Ukraine is making Russia's rear run out of safety." &nbsp;|&nbsp; <b>Iran:</b> Hormuz was never reopened — it's a fragile ceasefire, an Iranian toll booth, and a U.S. Navy escort.</p>
+</div>
+
+<div class="seg">SEGMENT 1 · UKRAINE &amp; THE PATRIOT SHORTAGE</div>
+<div class="cols">
+
+  <div class="card red">
+    <h3>Key numbers — the missile math</h3>
+    <div class="num"><span class="l">PAC-3 built worldwide 2025 (record) <span class="chip h">H</span></span><span class="v">~620</span></div>
+    <div class="num"><span class="l">…that's per month</span><span class="v">~52</span></div>
+    <div class="num"><span class="l">Ukraine bare-minimum monthly need <span class="chip h">H</span></span><span class="v">60+</span></div>
+    <div class="num"><span class="l">…a heavy month actually burns <span class="chip m">M</span></span><span class="v">150–180</span></div>
+    <div class="num"><span class="l">Allied buyers sharing that output</span><span class="v">18</span></div>
+    <div class="num"><span class="l">Cost per PAC-3 interceptor</span><span class="v">~$4M</span></div>
+    <div class="num"><span class="l">U.S. Army stockpile goal, quadrupled <span class="chip h">H</span></span><span class="v">3,376→13,773</span></div>
+    <div class="num"><span class="l">Production plan by ~2030</span><span class="v">~600→2,000</span></div>
+    <div class="num"><span class="l">Russia ballistic output, est. <span class="chip m">M</span></span><span class="v">~70/mo</span></div>
+    <div class="num"><span class="l">Interceptors needed per Iskander</span><span class="v">2–3</span></div>
+    <div class="num"><span class="l">Shahed drone unit cost</span><span class="v">$20–50k</span></div>
+    <p style="font-size:6.4pt;color:var(--muted2);margin-top:3px;">Lockheed Martin (Jan '26); CSIS; Ukrainian Air Force Cmd via Defense Express.</p>
+  </div>
+
+  <div class="card red">
+    <h3>The Iran-war drain (CSIS est.)</h3>
+    <div class="num"><span class="l">Patriots fired, 2026 war <span class="chip m">M</span></span><span class="v">~1,000–1,400</span></div>
+    <div class="num"><span class="l">THAAD fired (≈half of stock) <span class="chip m">M</span></span><span class="v">~190–290</span></div>
+    <div class="num"><span class="l">THAAD total ever delivered</span><span class="v">534</span></div>
+    <div class="num"><span class="l">THAAD last delivery / next due</span><span class="v">Aug'23 / Apr'27</span></div>
+    <div class="num"><span class="l">SM-3 deliveries per year</span><span class="v">~39–66</span></div>
+    <p style="font-size:6.4pt;color:var(--muted2);margin-top:3px;"><b>Two Iran wars — don't mix them:</b> June 2025 "12-day" (small draw) vs. spring 2026 "Epic Fury" (the big one). CSIS "Last Rounds." All expenditure figures are <b>estimates</b> — say "estimated."</p>
+  </div>
+
+  <div class="card amber">
+    <h3>Operation Spiderweb — get it exact</h3>
+    <div class="num"><span class="l">Date</span><span class="v">Jun 1 '25</span></div>
+    <div class="num"><span class="l">FPV drones (truck-smuggled) <span class="chip h">H</span></span><span class="v">117</span></div>
+    <div class="num"><span class="l">Airbases hit, simultaneously</span><span class="v">5 / 5 zones</span></div>
+    <div class="num"><span class="l">Farthest (Belaya, Siberia)</span><span class="v">~4,300 km</span></div>
+    <div class="num"><span class="l">Aircraft DESTROYED (imagery) <span class="chip h">H</span></span><span class="v">~11–13</span></div>
+    <div class="num"><span class="l">Damaged (NATO est.)</span><span class="v">~40</span></div>
+    <div class="num"><span class="l">Ukraine's CLAIM ("hit")</span><span class="v">41</span></div>
+    <p style="font-size:6.8pt;margin-top:3px;"><b>Best line:</b> "Cheap drones, irreplaceable bombers — Tu-95s &amp; Tu-22M3s, out of production since the USSR. Russia literally can't make more."</p>
+  </div>
+
+  <div class="card">
+    <h3>Fiber-optic &amp; interceptor drones</h3>
+    <p><b>Fiber-optic drone:</b> thin glass cable trails behind — no radio, nothing to jam. 5–20 km (up to 50). <b>Cable NOT reeled in</b> — single-use, abandoned on impact. Answer to Russian jamming.</p>
+    <p><b>Interceptor drones:</b> $2.5–5k; kill slow Shaheds by ramming. <b>Cannot</b> touch a ballistic missile (Mach 5–12, steep arc) — that still needs a $4M Patriot. Future = layered, cost-tiered defense.</p>
+  </div>
+
+  <div class="card">
+    <h3>Russia's air war &amp; recent strikes</h3>
+    <p><b>"Combined strike":</b> cheap drones first (≈half are warhead-less decoys) to make Ukraine spend → ballistic/cruise missiles into the gaps. Magazine-depletion by design.</p>
+    <p><b>May 23–24 '26:</b> ~90 missiles/600 drones — Ukraine stopped 91.5% of drones but only <b>36.7% of ballistics</b>. <span class="chip h">H</span></p>
+    <p><b>Jun 1–2 '26:</b> massive Kyiv strike, 9-story block collapsed, <b>22+ killed</b>. <span class="chip h">H</span></p>
+  </div>
+
+  <div class="card">
+    <h3>Deep strike + HIMARS</h3>
+    <p><b>Refineries:</b> record <b>16 strikes in May '26</b>; Russian refining at lowest since 2009; Moscow-region fuel rationing. <i>But crude exports hit a wartime high</i> — say "crippling fuel/refining," not "oil exports."</p>
+    <p><b>HIMARS:</b> still firing, but Russia <b>jammed the GPS</b> &amp; moved targets past ~80 km. Story moved to ATACMS (300 km) &amp; new PrSM (400+ km, 2x per pod).</p>
+  </div>
+
+</div>
+
+<div class="seg">SEGMENT 2 · IRAN &amp; THE STRAIT OF HORMUZ</div>
+<div class="cols">
+
+  <div class="card red">
+    <h3>Key numbers — Hormuz</h3>
+    <div class="num"><span class="l">World oil &amp; LNG via Hormuz <span class="chip h">H</span></span><span class="v">~20%</span></div>
+    <div class="num"><span class="l">Share of all seaborne oil</span><span class="v">~25%</span></div>
+    <div class="num"><span class="l">Strait width at narrowest</span><span class="v">~21 mi</span></div>
+    <div class="num"><span class="l">Shipping lanes wide</span><span class="v">~2 mi each</span></div>
+    <div class="num"><span class="l">Ships/day NOW vs normal <span class="chip h">H</span></span><span class="v">~10 / 95</span></div>
+    <div class="num"><span class="l">War-risk insurance vs normal</span><span class="v">~4,000×</span></div>
+    <div class="num"><span class="l">…in dollars, $100M tanker</span><span class="v">$125k→$5M</span></div>
+    <div class="num"><span class="l">Brent peak (Mar) / now</span><span class="v">~$126 / ~$96</span></div>
+    <div class="num"><span class="l">VLCC day-rate record</span><span class="v">~$424k/day</span></div>
+    <div class="num"><span class="l">Reported "toll" per ship <span class="chip m">M</span></span><span class="v">~$2M</span></div>
+    <p style="font-size:6.4pt;color:var(--muted2);margin-top:3px;">EIA (oil/LNG share); Strauss Center (width); Energy Aspects/straits.live (traffic); Al Jazeera/CNBC/Kpler.</p>
+  </div>
+
+  <div class="card navy" style="background:var(--navy-soft);border-color:#c4cee0;">
+    <h3>Iran timeline — dates you'll be asked</h3>
+    <div class="tl"><span class="d">Feb 28</span><span class="e">U.S./Israel air war begins (Op. <b>Epic Fury</b>); Khamenei killed</span></div>
+    <div class="tl"><span class="d">early Mar</span><span class="e">Iran moves to close Hormuz; IRGC declares it shut</span></div>
+    <div class="tl"><span class="d">~Apr 8</span><span class="e">Two-week ceasefire (Pakistan-mediated)</span></div>
+    <div class="tl"><span class="d">Apr 13</span><span class="e">Trump announces U.S. <b>naval blockade</b>; Iran re-closes strait</span></div>
+    <div class="tl"><span class="d">Apr–May</span><span class="e">IRGC seizes ships (Epaminondas, MSC Francesca, others)</span></div>
+    <div class="tl"><span class="d">May 29</span><span class="e">Blockade lifted — but strait <b>still not reopened</b></span></div>
+    <div class="tl"><span class="d">Jun 3</span><span class="e"><b>Now:</b> controlled partial flow, ~10 ships/day</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Why Hormuz = leverage</h3>
+    <p><b>Geography &gt; missiles.</b> Iran sits on the one chokepoint the world economy can't route around. Economy smaller than Florida's, but it can move U.S. gas prices.</p>
+    <p><b>The paradox:</b> full closure chokes <i>Iran's own</i> exports to China (its lifeline + protector). So Iran wants <b>calibrated disruption</b> — scary, not shut. Selective "friendly-nation" passage + tolls is that calibration.</p>
+  </div>
+
+  <div class="card">
+    <h3>Coercion without closure</h3>
+    <p><b>Toolkit:</b> GPS jamming/spoofing · fast-boat swarms · mines (the <i>threat</i> alone freezes insurers) · coastal drones/missiles · <b>ship seizures.</b></p>
+    <p><b>Seize &gt; sink:</b> a hostage is a bargaining chip; a wreck is a war. Seizing panics insurers without the death toll that forces a U.S. response.</p>
+    <p><b>Logic:</b> don't sink half the tankers — just make the route expensive, unpredictable, politically dangerous. Insurance does the rest.</p>
+  </div>
+
+  <div class="card k-navy">
+    <h3>New battlefield — quick hits</h3>
+    <p><b>Phone data:</b> CENTCOM confirmed (May '26) adversaries <b>bought</b> troops' commercial location data to target/surveil them. No hack. Advertising ID still not disabled on issued phones. <i>(CENTCOM didn't name Iran.)</i></p>
+    <p><b>AI war room:</b> Pentagon elevating Palantir's <b>Maven</b> inside CJADC2; commercial AI (Anthropic/OpenAI/Google/xAI) used in Iran war. Decision-support, <b>not</b> autonomous. Anthropic–DoD court fight = the dependency tension.</p>
+    <p><b>Drug-boat war:</b> Op. <b>Southern Spear</b> — 200+ killed, 60+ strikes since fall '25. Legality + effectiveness contested; boats mostly carry <b>cocaine (to Europe)</b>, not U.S. fentanyl (which comes overland via Mexico).</p>
+  </div>
+
+  <div class="card players">
+    <h3>Names &amp; players</h3>
+    <p><b>PAC-3 MSE</b> — scarce ~$4M Patriot interceptor (Lockheed). <b>Iskander</b> — Russia's hard-to-stop ballistic missile. <b>Shahed</b> — cheap swarm drone. <b>THAAD/SM-3</b> — other U.S. interceptors, drained in Iran war.</p>
+    <p><b>Maven</b> (Palantir) + <b>Claude</b> (Anthropic) — AI used in the Iran war. <b>CENTCOM</b> — confirmed the phone-data threat. <b>IRGC</b> — ran the ship seizures. <b>Op. Epic Fury</b> — U.S. air war on Iran. <b>Op. Southern Spear</b> — drug-boat strikes.</p>
+  </div>
+
+</div>
+
+<div class="seg">DELIVERY KIT · LINES, REBUTTALS, VIEWER Q&amp;A, DO-NOT-SAY</div>
+<div class="cols">
+
+  <div class="card amber">
+    <h3>The lines that land</h3>
+    <div class="line">Russia is making the cities run out of protection. Ukraine is making Russia's rear run out of safety.</div>
+    <div class="line">Every Patriot fired over Ukraine is one Washington can't send to Taiwan or Japan.</div>
+    <div class="line">A four-million-dollar interceptor to kill a fifty-thousand-dollar drone. Even when you win, you lose on cost.</div>
+    <div class="line">A cheap drone can catch a moped. It can't catch a bullet falling from space. That's why Ukraine still begs for Patriots.</div>
+    <div class="line">Calling Hormuz "open" doesn't mean shippers believe it's safe — insurance is up four-thousand-fold.</div>
+    <div class="line">Iran's leverage isn't its missiles. It's the map.</div>
+    <div class="line">Nobody hacked the soldiers' phones. Our enemies just bought their location.</div>
+  </div>
+
+  <div class="card green">
+    <h3>If a guest/caller says X → you say Y</h3>
+    <div class="xy"><span class="x">Ukraine's losing its nerve.</span><br><span class="y">It's not willpower — it's the interceptor count. Inventory, not morale.</span></div>
+    <div class="xy"><span class="x">Just send more Patriots.</span><br><span class="y">The launchers aren't scarce — the $4M missiles are, and the world built only ~620 last year.</span></div>
+    <div class="xy"><span class="x">Cheap drones can replace Patriots.</span><br><span class="y">For slow Shaheds, yes. For a ballistic missile? No drone catches a hypersonic warhead.</span></div>
+    <div class="xy"><span class="x">Iran will close the strait.</span><br><span class="y">Full closure chokes its own exports to China. It wants it scary, not shut.</span></div>
+    <div class="xy"><span class="x">The strait reopened.</span><br><span class="y">A trickle under escort — ~10 ships a day vs 95. The blockade ended; the strait didn't reopen.</span></div>
+    <div class="xy"><span class="x">Congress has done nothing.</span><br><span class="y">Multiyear deals + billions are flowing. You can't legislate a rocket-motor plant into existence — that's a 3-5 yr build.</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Viewer Q&amp;A — lightning answers</h3>
+    <div class="qa"><span class="q">Fiber-optic cable reeled back in?</span> <span class="a">No — one-way, disposable; destroyed on impact.</span></div>
+    <div class="qa"><span class="q">Doesn't Europe have Patriots?</span> <span class="a">Yes, but stocks are thin &amp; the scarce missiles come off the same U.S. line. Redistributes scarcity.</span></div>
+    <div class="qa"><span class="q">Why no laws to fix production?</span> <span class="a">There are — 7-yr deal to triple PAC-3 + $4.76B contract. Catch: factories take till ~2028–2030.</span></div>
+    <div class="qa"><span class="q">Why factories in neighborhoods?</span> <span class="a">Soviet "monotown" plant-plus-housing planning + modern dispersal. Frozen geography, 70–80 yrs old.</span></div>
+    <div class="qa"><span class="q">Interceptor-drone math?</span> <span class="a">Works on slow drones; can't touch ballistic missiles — those still need Patriots.</span></div>
+    <div class="qa"><span class="q">"Occupied territory"?</span> <span class="a">Held by force, claimed on paper, recognized by almost no one — Donetsk, Luhansk, Zaporizhzhia, Kherson + Crimea. UN voted 143–5.</span></div>
+    <div class="qa"><span class="q">Where's your data from?</span> <span class="a">Lockheed filings, CSIS, U.S. Army, Ukrainian Air Force Cmd, EIA. Ranges where classified.</span></div>
+    <div class="qa"><span class="q">What happened to HIMARS?</span> <span class="a">Countered — GPS jamming + targets moved past ~80 km. Now one tool among many; ATACMS/PrSM fly farther.</span></div>
+    <div class="qa"><span class="q">Taiwan points U.S. missiles at China?</span> <span class="a">Real — HIMARS, ATACMS, Harpoon, Patriot delivering now ($11B Dec '25 deal). Defensive deterrence; Ukraine is the live lesson.</span></div>
+    <div class="qa"><span class="q">U.S. shortage hits Japan?</span> <span class="a">Japan just exported PAC-3 to backfill the U.S.; its own output capped by a shared Boeing-seeker bottleneck.</span></div>
+  </div>
+
+  <div class="card k-red">
+    <h3>⛔ Do-not-say — failed fact-check</h3>
+    <div class="dns"><span class="no">"40+ bombers destroyed" / "34% of carriers."</span> <span class="ok">"Ukraine says 40+; imagery confirms a dozen-plus destroyed, ~40 damaged."</span></div>
+    <div class="dns"><span class="no">"$600 drone killed a $350M plane."</span> <span class="ok">"Cheap drones, irreplaceable bombers."</span></div>
+    <div class="dns"><span class="no">"Russia builds 60–70 Iskanders/month" as fact.</span> <span class="ok">"Ukrainian intelligence estimates ~60–70/mo."</span></div>
+    <div class="dns"><span class="no">A precise Ukrainian Patriot inventory.</span> <span class="ok">Talk flow (~600 in 3 yrs; 60+/mo), not stockpile.</span></div>
+    <div class="dns"><span class="no">"An Iskander costs $3M."</span> <span class="ok">"Estimates vary; the point is the exchange ratio."</span></div>
+    <div class="dns"><span class="no">"The U.S. is out of interceptors."</span> <span class="ok">"Enough for this war; the risk is the next one." (CSIS)</span></div>
+    <div class="dns"><span class="no">"The strait reopened May 29."</span> <span class="ok">"The blockade lifted; shipping hasn't returned."</span></div>
+    <div class="dns"><span class="no">"Iran earns $100B in Hormuz tolls."</span> <span class="ok">"Low single-digit billions at most — it's a natural strait."</span></div>
+    <div class="dns"><span class="no">"Iran/CENTCOM confirmed Iran hacked phones."</span> <span class="ok">"Bought, not hacked; CENTCOM didn't name a country."</span></div>
+    <div class="dns"><span class="no">"AI is running the war."</span> <span class="ok">"AI is decision-support; humans stay in the loop."</span></div>
+    <div class="dns"><span class="no">"These boat strikes stop U.S. fentanyl."</span> <span class="ok">"Fentanyl comes overland via Mexico; boats carry cocaine."</span></div>
+    <div class="dns"><span class="no">"534 THAAD were fired."</span> <span class="ok">"534 = total ever delivered; prewar pool was smaller."</span></div>
+  </div>
+
+  <div class="card k-gray">
+    <h3>Numbers to have cold (either segment)</h3>
+    <div class="num"><span class="l">Oil/LNG through Hormuz</span><span class="v">~20%</span></div>
+    <div class="num"><span class="l">Ships/day now vs normal</span><span class="v">~10 / 95</span></div>
+    <div class="num"><span class="l">Hormuz insurance jump</span><span class="v">~4,000×</span></div>
+    <div class="num"><span class="l">Ukraine need vs world build</span><span class="v">60+ vs ~52/mo</span></div>
+    <div class="num"><span class="l">One PAC-3 interceptor</span><span class="v">~$4M</span></div>
+    <div class="num"><span class="l">Spiderweb drones / destroyed</span><span class="v">117 / ~11–13</span></div>
+    <div class="num"><span class="l">Ballistic intercept rate (May 24)</span><span class="v">36.7%</span></div>
+    <div class="num"><span class="l">Kyiv strike dead (Jun 1–2)</span><span class="v">22+</span></div>
+    <div class="num"><span class="l">UN vote vs annexation</span><span class="v">143–5</span></div>
+    <div class="num"><span class="l">Ukraine under occupation</span><span class="v">~20%</span></div>
+    <div class="num"><span class="l">Drug-boat strikes / killed</span><span class="v">60+ / 200+</span></div>
+    <div class="num"><span class="l">PAC-3 target year</span><span class="v">2,000/yr by '30</span></div>
+  </div>
+
+</div>
+
+<div class="foot">— End of cheat sheet — R² Media · June 3, 2026 · Pair with the full Research Brief · Say "estimated," attribute the source, prefer the range —</div>
+
+</body>
+</html>
