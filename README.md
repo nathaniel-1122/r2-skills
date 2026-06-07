@@ -8,9 +8,9 @@ This repository holds R² Media's custom **Claude Code skills**. There are three
   fact-checks the numbers, and produces two host-ready PDFs — a long **Research
   Brief** to read beforehand and a one-page **Host Cheat Sheet** for the desk.
 - **`story-deep-dive`** — researches one story in depth and produces the two-part
-  package: a ~30-page **Deep-Dive Field Guide** (the "teach-me" main read) and a
-  ~7-page **Quick Dossier** (the fast reference, with a Who-To-Interview list), both
-  with numbered, clickable sources.
+  package: a **Deep-Dive Field Guide** (the "teach-me" main read) and a **Quick Dossier**
+  (the fast reference, with a Who-To-Interview list), both with numbered, clickable sources.
+  Length flexes to the story.
 
 A "skill" is just an instruction file that teaches Claude how to do one of our
 workflows the same way every time. You don't run code — you talk to Claude, and
@@ -207,12 +207,12 @@ It works in checkpoints, stopping for your OK along the way:
 This one researches a **single story** in depth and hands back the two-part package we
 use to build an episode:
 
-- a ~30-page **Deep-Dive Field Guide** — the illustrated "teach-me" read (chapters, charts,
+- a **Deep-Dive Field Guide** — the illustrated "teach-me" read (chapters, charts,
   key terms, "questions to ask" boxes), and
-- a ~7-page **Quick Dossier** — the fast, fact-dense reference, ending with a **Who-To-Interview**
-  list.
+- a **Quick Dossier** — the fast, fact-dense reference, ending with a **Who-To-Interview** list.
 
-Both come out as PDFs with **numbered, clickable sources** — every figure traces to a real link.
+Both come out as PDFs with **numbered, clickable sources** — every figure traces to a real link,
+and each is **as long as the story needs** (no fixed page count).
 
 **Which folder to open first.** It saves the finished files into whatever folder you have open,
 so open the folder where you want them to land (e.g. a `story-research` folder), using the folder
