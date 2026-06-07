@@ -197,6 +197,48 @@ It works in checkpoints, stopping for your OK along the way:
 
 ---
 
+## Turning on Nimble research (recommended for `live-show-prep`)
+
+`live-show-prep` does its homework with **Nimble**, our web-research tool. It's
+**optional** — without a key the skill just uses ordinary web search — but with it
+the research is better, so it's worth two minutes. This is a **one-time** setup per Mac.
+
+> 🔒 **Never put this key in this repo, in a story file, or in a shared chat.** It
+> lives only on your own Mac, in a hidden settings file in your home folder.
+
+**Step 1 — get your key.** Ask Nathaniel for your **Nimble API key**. It's a long
+string of letters and numbers (it looks like `af2799…3fde`).
+
+**Step 2 — save it on your Mac.** Open the **Terminal** app, then paste the line
+below **with your real key in place of `paste-your-key-here`**, and press Return:
+
+```
+echo 'export NIMBLE_API_KEY="paste-your-key-here"' >> ~/.zshrc
+```
+
+> Already have a `NIMBLE_API_KEY` line from before? Don't add a second one — you'd end
+> up with two and they fight. Open `~/.zshrc` in a text editor and replace the old
+> value, or just message Nathaniel and he'll sort it.
+
+**Step 3 — open a brand-new Terminal window.** This matters: the change only takes
+effect in Terminal windows you open *after* Step 2. In the new window, paste this check:
+
+```
+[ -n "$NIMBLE_API_KEY" ] && echo "✅ key is set" || echo "❌ not set — redo Step 2, then open a NEW Terminal"
+nimble search --query "test" 2>&1 | head -5
+```
+
+- See **✅ key is set** followed by some `{ "results": … }` text? You're done — Nimble
+  is on, and `live-show-prep` will use it automatically.
+- Says **401**? The key didn't load — redo Step 2 and be sure to open a **new** Terminal.
+- Mentions `search_depth 'fast' … not enabled`? **Ignore it** — it's harmless; the skill
+  uses the standard setting.
+- Says **`nimble: command not found`**? The Nimble tool isn't installed on your Mac yet —
+  the skill will just use regular web search (totally fine). Ask Nathaniel if you want the
+  full Nimble setup.
+
+---
+
 ## Keeping it up to date
 
 Nathaniel improves the skill over time. To pull his latest changes:
