@@ -1,0 +1,249 @@
+<!-- ============================================================================
+  R² STORY-DEEP-DIVE — FIELD GUIDE TEMPLATE  ·  DO NOT SHIP THIS CONTENT.
+  Keep the <style> block VERBATIM (it's the house design system). The body is a
+  SKELETON with [bracketed placeholders] showing every component once. Build a new
+  guide by keeping the <style>, deleting the placeholder body, and writing this
+  story's chapters from live research. Fonts load from Google Fonts at render time
+  (render with assets/render.sh). Citations: in-text <sup class="c"><a href="#s7">7</a></sup>
+  link to the numbered Sources list; every [n] in the text must have a matching source.
+============================================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>R² Media — Deep-Dive Field Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#14161b; --paper:#faf7f0; --paper2:#f1ece0;
+    --rule:#dcd5c5; --muted:#56534a; --muted2:#7c786c;
+    --red:#9f2012; --navy:#1d2c4d; --amber:#a96a14; --green:#2c6a3b;
+    --blue-soft:#eef1f7; --amber-soft:#faf1df; --red-soft:#fbeae6; --green-soft:#e9f1ea;
+    --serif-display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+    --serif-body:"Newsreader","Charter","Iowan Old Style",Georgia,serif;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{ margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--serif-body); font-size:11.2pt; line-height:1.56;
+    text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased;
+    font-feature-settings:"kern" 1,"liga" 1,"onum" 1; }
+  @page{ size:Letter; margin:17mm 18mm 18mm 18mm;
+    @bottom-center{ content:counter(page) "  /  " counter(pages);
+      font-family:"IBM Plex Sans",Arial,sans-serif; font-size:7.6pt; letter-spacing:.12em; color:#9a958a; }
+    @bottom-left{ content:"R\00B2 MEDIA \00B7 EXPLANATORY DEEP DIVE";
+      font-family:"IBM Plex Sans",Arial,sans-serif; font-size:6.8pt; letter-spacing:.14em;
+      text-transform:uppercase; color:#bdb6a8; } }
+  @page:first{ @bottom-center{ content:""; } @bottom-left{ content:""; } }
+  .wrap{ max-width:6.6in; margin:0 auto; }
+  p{ margin:0 0 10px; } strong{ font-weight:600; } em{ font-style:italic; }
+  a{ color:var(--navy); text-decoration:none; }
+  h1,h2,h3,h4{ font-family:var(--serif-display); font-weight:600; line-height:1.1; }
+
+  /* cover */
+  .cover{ padding:0 0 10px; border-bottom:3px double var(--ink); margin-bottom:16px; }
+  .kicker{ font-family:var(--sans); font-size:8pt; letter-spacing:.3em; text-transform:uppercase; color:var(--red); font-weight:600; margin-bottom:12px; }
+  .logo{ font-family:var(--serif-display); font-weight:700; font-size:12pt; letter-spacing:.04em; }
+  .logo sup{ color:var(--red); font-size:.62em; }
+  .cover h1{ font-size:37pt; font-weight:600; letter-spacing:-.6px; line-height:1; margin:6px 0 10px; }
+  .cover .dek{ font-family:var(--serif-body); font-size:13pt; color:var(--muted); font-style:italic; max-width:5.9in; line-height:1.42; }
+  .cover .tags{ font-family:var(--sans); font-size:8.2pt; letter-spacing:.06em; text-transform:uppercase; color:var(--navy); font-weight:600; margin-top:13px; }
+  .cover .meta{ font-family:var(--sans); font-size:8pt; letter-spacing:.03em; color:var(--muted2); text-transform:uppercase; margin-top:5px; }
+
+  /* chapter heads */
+  h3.chap{ font-size:17pt; font-weight:600; margin:26px 0 6px; padding-top:9px; border-top:1.5px solid var(--rule); break-after:avoid; }
+  h3.chap .num{ color:var(--red); font-family:var(--sans); font-weight:700; font-size:11pt; margin-right:9px; }
+  .partbreak{ break-before:page; }
+
+  /* callout boxes */
+  .box{ border:1px solid var(--rule); border-radius:5px; padding:11px 15px; margin:13px 0; break-inside:avoid; background:#fff; }
+  .box .label{ font-family:var(--sans); font-size:7.6pt; letter-spacing:.16em; text-transform:uppercase; font-weight:700; display:block; margin-bottom:7px; }
+  .box ul{ margin:5px 0 0; padding-left:18px; } .box li{ margin:4px 0; line-height:1.5; } .box p{ line-height:1.55; } .box p:last-child{ margin-bottom:0; }
+  .learn{ background:var(--blue-soft); border-color:#c4cee0; } .learn .label{ color:var(--navy); }
+  .terms{ background:#fff; border-left:3px solid var(--navy); } .terms .label{ color:var(--navy); } .terms b{ color:var(--navy); }
+  .gotcha{ background:var(--red-soft); border-color:#e6c3bb; border-left:3px solid var(--red); } .gotcha .label{ color:var(--red); }
+  .take{ background:var(--green-soft); border-color:#c2d8c7; border-left:3px solid var(--green); } .take .label{ color:var(--green); }
+  .ask{ background:#fbf6ee; border:1px dashed var(--amber); } .ask .label{ color:var(--amber); }
+  .ask ul{ padding-left:0; list-style:none; margin:0; } .ask li{ font-family:var(--serif-body); font-style:italic; font-size:11.5pt; line-height:1.4; padding-left:18px; position:relative; margin:7px 0; }
+  .ask li:before{ content:"\201C"; position:absolute; left:0; top:1px; color:var(--amber); font-style:normal; font-size:15pt; }
+
+  /* stat cards + viz */
+  .stats{ display:flex; flex-wrap:wrap; gap:9px; margin:14px 0; break-inside:avoid; }
+  .stat{ flex:1 1 22%; min-width:1.3in; border:1px solid var(--rule); border-radius:5px; padding:10px 11px; background:#fff; }
+  .stat .big{ font-family:var(--serif-display); font-weight:600; font-size:21pt; color:var(--red); line-height:1; letter-spacing:-.5px; }
+  .stat .cap{ font-family:var(--sans); font-size:7.6pt; color:var(--muted); margin-top:6px; line-height:1.35; text-transform:uppercase; letter-spacing:.02em; }
+  .viz{ border:1px solid var(--rule); border-radius:5px; padding:13px 16px; margin:15px 0; background:#fff; break-inside:avoid; }
+  .viz .vtitle{ font-family:var(--sans); font-weight:700; font-size:9.4pt; text-transform:uppercase; letter-spacing:.05em; margin-bottom:11px; }
+  .bar{ display:flex; align-items:center; gap:10px; margin:8px 0; font-family:var(--sans); font-size:8.6pt; }
+  .bar .bl{ width:1.9in; text-align:right; color:var(--muted); flex:none; }
+  .bar .bt{ flex:1; } .bar .fill{ height:16px; border-radius:2px; display:inline-block; vertical-align:middle; }
+  .bar .bv{ font-weight:700; color:var(--ink); margin-left:8px; }
+  .src{ font-size:7.6pt; color:var(--muted2); font-family:var(--sans); margin-top:10px; line-height:1.4; }
+
+  /* tables */
+  table{ border-collapse:collapse; width:100%; margin:13px 0; font-size:9.2pt; break-inside:avoid; font-family:var(--sans); }
+  th{ background:var(--ink); color:var(--paper); text-align:left; padding:7px 9px; font-size:7.6pt; font-weight:600; letter-spacing:.05em; text-transform:uppercase; }
+  td{ padding:6px 9px; border-bottom:1px solid var(--rule); vertical-align:top; line-height:1.4; }
+  tr:nth-child(even) td{ background:#faf7f0; }
+
+  .lead{ font-size:12.4pt; line-height:1.5; }
+  .dropcap:first-letter{ float:left; font-family:var(--serif-display); font-weight:600; font-size:52pt; line-height:40px; padding:5px 9px 0 0; color:var(--red); }
+  .toc{ background:var(--paper2); border:1px solid var(--rule); border-radius:5px; padding:13px 17px; margin:16px 0; font-family:var(--sans); font-size:9.4pt; }
+  .toc .label{ font-size:7.6pt; letter-spacing:.16em; text-transform:uppercase; font-weight:700; color:var(--red); display:block; margin-bottom:8px; }
+  .toc ol{ margin:0; padding-left:20px; columns:2; column-gap:26px; } .toc li{ margin:3px 0; break-inside:avoid; }
+
+  /* citations + sources */
+  sup.c{ font-family:var(--sans); font-size:.62em; font-weight:700; line-height:0; }
+  sup.c a{ color:var(--red); }
+  .glossary{ font-family:var(--serif-body); font-size:10.4pt; } .glossary p{ margin-bottom:7px; } .glossary b{ color:var(--navy); }
+  .sources{ font-family:var(--sans); font-size:8.8pt; line-height:1.45; }
+  .sources ol{ margin:0; padding-left:26px; } .sources li{ margin:5px 0; color:var(--muted); }
+  .sources li:target{ background:#fbf1d8; }
+  .sources a{ color:var(--navy); text-decoration:underline; text-decoration-color:#c9c0ad; }
+  .backmatter{ break-before:page; }
+  .part-head{ margin:6px 0 16px; padding:16px 18px; background:var(--ink); color:var(--paper); border-radius:3px; }
+  .part-head .eyebrow{ font-family:var(--sans); font-size:7.8pt; letter-spacing:.34em; text-transform:uppercase; color:#c9a24a; font-weight:600; }
+  .part-head h2{ color:var(--paper); font-size:22pt; font-weight:600; margin:5px 0 5px; }
+  .part-head .dek2{ font-family:var(--serif-body); font-size:11pt; color:#dad5c8; font-style:italic; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ===== COVER ===== -->
+<header class="cover">
+  <div class="kicker">R² Media · Explanatory Deep Dive · Field Guide</div>
+  <div class="logo">R<sup>2</sup> MEDIA</div>
+  <h1>[Story Title]</h1>
+  <div class="dek">[One-line italic dek — the promise of the guide: what it teaches and why it matters.]</div>
+  <div class="tags">[Conflict + Money] · [Desk-Reported Series]</div>
+  <div class="meta">R² Media · Explanatory Deep Dive (field guide) · compiled [Month Year] · sources verified live</div>
+</header>
+
+<!-- optional opening chart -->
+<div class="viz">
+  <div class="vtitle">[Headline chart title — the one number that frames the story]</div>
+  <div class="bar"><span class="bl">[label, year]</span><span class="bt"><span class="fill" style="width:18%;background:var(--muted2);"></span><span class="bv">[14.5k]</span></span></div>
+  <div class="bar"><span class="bl">[label, year]</span><span class="bt"><span class="fill" style="width:52%;background:var(--green);"></span><span class="bv">[40k]</span></span></div>
+  <div class="bar"><span class="bl">[label, target]</span><span class="bt"><span class="fill" style="width:100%;background:var(--red);"></span><span class="bv">[100k]</span></span></div>
+  <div class="src">Source: [Outlet], [date].<sup class="c"><a href="#s1">1</a></sup> [One line on what the chart shows and the honest caveat.]</div>
+</div>
+
+<p class="lead dropcap">[The one-sentence version, if you read nothing else: one tight paragraph that states the whole thesis — the reframe that makes the story click. Drop a citation where a hard number appears.<sup class="c"><a href="#s1">1</a></sup>]</p>
+
+<div class="box learn">
+  <span class="label">How to use this guide</span>
+  <p><strong>What this is.</strong> A field guide, not a brief — it explains the <em>why</em> and <em>how</em> so you can walk into an interview, follow the argument, smell a dodgy answer, and ask the next question.</p>
+  <p><strong>How to read it.</strong> Each chapter opens with a <em>What you'll learn</em> box and closes with <em>Takeaways</em> and a <em>Questions to ask</em> box you can lift straight into an interview. <em>Key terms</em> boxes define the jargon; <em>Gotcha</em> boxes flag the traps. Every strong claim carries a bracketed source number; the full list is in the appendix.</p>
+  <p><strong>The thing to hold onto.</strong> [The single reframe that organizes the whole guide — state it in one sentence.]</p>
+</div>
+
+<div class="toc">
+  <span class="label">What's inside</span>
+  <ol>
+    <li>[Why this story matters]</li>
+    <li>[The core mechanism — how it actually works]</li>
+    <li>[The numbers / the scale]</li>
+    <li>[The key players]</li>
+    <li>[The debate / what's contested]</li>
+    <li>[Where it's going]</li>
+  </ol>
+</div>
+
+<!-- ===== CHAPTER 1 ===== -->
+<h3 class="chap"><span class="num">1</span>[Why This Story Matters]</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>[The single idea that reframes the story.]</li>
+<li>[Why it matters now — the trigger.]</li>
+<li>[The scale, in one or two numbers.]</li>
+</ul></div>
+
+<p>[Open with the reframe — the framing is the story. Narrative prose that teaches the concept, with hard claims cited inline.<sup class="c"><a href="#s2">2</a></sup> Keep paragraphs tight and explanatory; you're making the host fluent, not dumping facts.]</p>
+
+<div class="stats">
+  <div class="stat"><div class="big">[230×]</div><div class="cap">[what this number measures]</div></div>
+  <div class="stat"><div class="big">[800+]</div><div class="cap">[what this number measures]</div></div>
+  <div class="stat"><div class="big">[$20–50k]</div><div class="cap">[what this number measures]</div></div>
+  <div class="stat"><div class="big">[5]</div><div class="cap">[what this number measures]</div></div>
+</div>
+
+<div class="box terms"><span class="label">Key terms</span>
+<p><b>[Term].</b> [Plain-English definition the first time the jargon appears.]</p>
+<p><b>[Term].</b> [Definition.]</p>
+</div>
+
+<div class="box gotcha"><span class="label">Misconception / Gotcha</span>
+<p><strong>"[The tempting-but-wrong framing]."</strong> [Why it's wrong, and the defensible version to say instead. Flag contested figures here — give the range and which measure you're using.]<sup class="c"><a href="#s3">3</a></sup></p>
+</div>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul>
+<li>[One-line recap.]</li>
+<li>[One-line recap.]</li>
+<li>[One-line recap.]</li>
+</ul></div>
+
+<div class="box ask"><span class="label">Questions to ask</span>
+<ul>
+<li>[A sharp interview question this chapter sets up.]</li>
+<li>[A question that forces a real answer, not a talking point.]</li>
+<li>[A question that probes the contested figure.]</li>
+</ul></div>
+
+<!-- ===== CHAPTER 2 ===== -->
+<h3 class="chap"><span class="num">2</span>[The Core Mechanism]</h3>
+<div class="box learn"><span class="label">What you'll learn</span>
+<ul>
+<li>[How the thing actually works, step by step.]</li>
+<li>[The chokepoint / the lever / the constraint.]</li>
+</ul></div>
+
+<p>[Explain the mechanism. Use a table when comparing options or actors.]</p>
+
+<table>
+<tr><th>[Column]</th><th>[Column]</th><th>[Column]</th></tr>
+<tr><td>[row]</td><td>[value]<sup class="c"><a href="#s4">4</a></sup></td><td>[note]</td></tr>
+<tr><td>[row]</td><td>[value]</td><td>[note]</td></tr>
+</table>
+
+<div class="box take"><span class="label">Takeaways — what you now know</span>
+<ul><li>[Recap.]</li><li>[Recap.]</li></ul></div>
+<div class="box ask"><span class="label">Questions to ask</span>
+<ul><li>[Question.]</li><li>[Question.]</li></ul></div>
+
+<p style="color:var(--muted);font-style:italic;font-size:10pt;">[…continue with chapters 3–N the same way: What you'll learn → narrative with citations → Key terms / Gotcha as needed → Takeaways → Questions to ask. A full guide usually runs 6–9 chapters / ~30 pages.]</p>
+
+<!-- ===== BACK MATTER ===== -->
+<section class="backmatter">
+<div class="part-head">
+  <div class="eyebrow">Reference</div>
+  <h2>Glossary &amp; Sources</h2>
+  <div class="dek2">The jargon, defined once — and every source, numbered and linked.</div>
+</div>
+
+<h3 class="chap" style="border-top:none;"><span class="num">A</span>Glossary</h3>
+<div class="glossary">
+<p><b>[Term].</b> [One-line definition.]</p>
+<p><b>[Term].</b> [One-line definition.]</p>
+</div>
+
+<h3 class="chap"><span class="num">B</span>Sources</h3>
+<p style="font-family:var(--sans);font-size:8.4pt;color:var(--muted);">Researched live; every figure traced to a named source. Bracketed numbers in the text link here; click any link to open the original.</p>
+<div class="sources">
+<ol>
+<li id="s1">[Outlet / author — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s2">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s3">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s4">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+</ol>
+</div>
+
+<hr style="border:0;border-top:1px solid var(--rule);margin:16px 0;">
+<p style="text-align:center;color:var(--muted2);font-family:var(--sans);font-size:7.6pt;letter-spacing:.08em;text-transform:uppercase;">End of field guide · R² Media · compiled [Month Year] · pair with the Quick Dossier</p>
+</section>
+
+</div>
+</body>
+</html>

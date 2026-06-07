@@ -1,0 +1,138 @@
+<!-- ============================================================================
+  R² STORY-DEEP-DIVE — QUICK DOSSIER TEMPLATE  ·  DO NOT SHIP THIS CONTENT.
+  Keep the <style> VERBATIM. The body is a SKELETON with [placeholders] showing the
+  section structure. A real dossier is ~7 pages: terse, fact-dense, every number
+  bracket-cited to the numbered Sources list, ending with Who To Interview + Sources.
+  Render with assets/render.sh (fonts load from Google Fonts at render time).
+============================================================================ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>R² Media — Research Dossier</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  :root{
+    --ink:#14161b; --paper:#fbf9f3; --rule:#d9d2c2; --muted:#56534a; --muted2:#7e7a6e;
+    --red:#9f2012; --navy:#1d2c4d; --amber:#946011; --green:#2c6a3b;
+    --display:"Fraunces","Iowan Old Style",Georgia,serif;
+    --body:"Newsreader","Iowan Old Style",Georgia,serif;
+    --sans:"IBM Plex Sans","Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  body{ margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--body); font-size:10.4pt; line-height:1.46;
+    text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
+  @page{ size:Letter; margin:15mm 16mm 16mm 16mm;
+    @bottom-center{ content:counter(page) "  /  " counter(pages);
+      font-family:"IBM Plex Sans",Arial,sans-serif; font-size:7.4pt; letter-spacing:.12em; color:#9a958a; }
+    @bottom-left{ content:"R\00B2 MEDIA \00B7 RESEARCH DOSSIER";
+      font-family:"IBM Plex Sans",Arial,sans-serif; font-size:6.6pt; letter-spacing:.14em; text-transform:uppercase; color:#bdb6a8; } }
+  @page:first{ @bottom-center{ content:""; } @bottom-left{ content:""; } }
+  .wrap{ max-width:6.7in; margin:0 auto; }
+  p{ margin:0 0 7px; } strong{ font-weight:600; } em{ font-style:italic; }
+  a{ color:var(--navy); text-decoration:none; }
+
+  .mast{ border-bottom:2.5px solid var(--ink); padding-bottom:8px; margin-bottom:12px; }
+  .mast .kick{ font-family:var(--sans); font-size:7.6pt; letter-spacing:.28em; text-transform:uppercase; color:var(--red); font-weight:600; }
+  .mast h1{ font-family:var(--display); font-weight:600; font-size:24pt; letter-spacing:-.4px; margin:4px 0 4px; }
+  .mast .tags{ font-family:var(--sans); font-size:8pt; letter-spacing:.05em; text-transform:uppercase; color:var(--navy); font-weight:600; }
+  .mast .meta{ font-family:var(--sans); font-size:7.6pt; letter-spacing:.03em; text-transform:uppercase; color:var(--muted2); margin-top:3px; }
+
+  .oneline{ background:#fff; border:1px solid var(--rule); border-left:3px solid var(--red); border-radius:4px; padding:9px 12px; margin:10px 0; }
+  .oneline .l{ font-family:var(--sans); font-size:7.4pt; letter-spacing:.16em; text-transform:uppercase; font-weight:700; color:var(--red); display:block; margin-bottom:4px; }
+  .oneline p{ font-size:11pt; line-height:1.4; margin:0; }
+  .howto{ font-family:var(--sans); font-size:8.6pt; color:var(--muted); line-height:1.45; border-left:2px solid var(--rule); padding-left:10px; margin:10px 0; }
+
+  h2.sec{ font-family:var(--display); font-weight:600; font-size:13.5pt; margin:16px 0 5px; padding-top:7px; border-top:1px solid var(--rule); break-after:avoid; }
+  h2.sec .n{ color:var(--red); font-family:var(--sans); font-weight:700; font-size:10pt; margin-right:7px; }
+  ul.facts{ margin:6px 0; padding-left:17px; } ul.facts li{ margin:5px 0; line-height:1.45; }
+
+  sup.c{ font-family:var(--sans); font-size:.62em; font-weight:700; line-height:0; } sup.c a{ color:var(--red); }
+
+  .interview{ background:#fff; border:1px solid var(--rule); border-radius:4px; padding:10px 13px; margin:10px 0; break-inside:avoid; }
+  .interview h3{ font-family:var(--sans); font-size:8pt; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:var(--navy); margin:0 0 6px; }
+  .interview .grp{ font-family:var(--sans); font-size:7.4pt; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:var(--muted2); margin:7px 0 3px; }
+  .interview ul{ margin:0; padding-left:16px; } .interview li{ margin:3px 0; font-size:9.6pt; line-height:1.4; }
+  .interview b{ color:var(--ink); }
+
+  .sources{ font-family:var(--sans); font-size:8.4pt; line-height:1.42; break-before:auto; }
+  .sources h2{ font-family:var(--display); font-weight:600; font-size:13.5pt; margin:16px 0 6px; padding-top:7px; border-top:1px solid var(--rule); }
+  .sources ol{ margin:0; padding-left:24px; } .sources li{ margin:4px 0; color:var(--muted); }
+  .sources li:target{ background:#fbf1d8; } .sources a{ color:var(--navy); text-decoration:underline; text-decoration-color:#c9c0ad; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="kick">R² Media · Research Dossier</div>
+  <h1>[Story Title]</h1>
+  <div class="tags">[Conflict + Money] · [Desk-Reported Series]</div>
+  <div class="meta">R² Media research dossier · compiled [Month Year] · pure-background briefing</div>
+</header>
+
+<div class="oneline"><span class="l">The story in one line</span>
+<p>[The whole thesis in two or three sentences — the reframe plus the stakes.]</p></div>
+
+<div class="howto">[How to read it: Sections 1–N are pure background, built for scripting — every number is individually sourced and the bracketed superscripts link to the source. The closing Who To Interview list sits outside the page count. Where figures differ across outlets, the most recent and authoritative is used and the discrepancy is flagged.]</div>
+
+<h2 class="sec"><span class="n">1</span>Executive Summary</h2>
+<ul class="facts">
+<li>[Punchy claim that captures the core finding.]<sup class="c"><a href="#s1">1</a></sup></li>
+<li>[The core math / asymmetry in one line.]<sup class="c"><a href="#s2">2</a></sup></li>
+<li>[The most alarming or surprising single figure.]<sup class="c"><a href="#s3">3</a></sup></li>
+<li>[The counter-current / what's changing.]<sup class="c"><a href="#s4">4</a></sup></li>
+</ul>
+
+<h2 class="sec"><span class="n">2</span>Why This Matters Now</h2>
+<p>[The trigger — why this moved from trade-press to front-page. 2–4 tight sentences setting the moment.]</p>
+<ul class="facts">
+<li><b>[Dimension]:</b> [number + context].<sup class="c"><a href="#s5">5</a></sup></li>
+<li><b>[Dimension]:</b> [number + context].<sup class="c"><a href="#s6">6</a></sup></li>
+</ul>
+
+<h2 class="sec"><span class="n">3</span>How We Got Here</h2>
+<p>[The origin / history that explains the present state — the decision, the trend, the structural cause.]<sup class="c"><a href="#s7">7</a></sup></p>
+
+<h2 class="sec"><span class="n">4</span>[The Mechanism / Key Dynamic]</h2>
+<p>[How it actually works.]</p>
+
+<h2 class="sec"><span class="n">5</span>[The Players]</h2>
+<p>[Who holds the cards — states, companies, individuals — and what each controls.]</p>
+
+<h2 class="sec"><span class="n">6</span>[The Debate]</h2>
+<p>[What's genuinely contested, and the strongest case on each side — so you don't sound one-note on air.]</p>
+
+<p style="color:var(--muted);font-style:italic;font-size:9pt;">[…sections continue to ~9: scale/numbers, risks, what to watch. Keep each terse and sourced.]</p>
+
+<div class="interview">
+  <h3>Who To Interview</h3>
+  <div class="grp">People</div>
+  <ul>
+    <li><b>[Name]</b> — [role / why they're the right voice; how to reach].</li>
+    <li><b>[Name]</b> — [role / angle].</li>
+  </ul>
+  <div class="grp">Companies</div>
+  <ul><li><b>[Company]</b> — [what they'd speak to].</li></ul>
+  <div class="grp">Organizations</div>
+  <ul><li><b>[Org / think tank]</b> — [the analyst or desk to approach].</li></ul>
+</div>
+
+<div class="sources">
+<h2>Sources</h2>
+<ol>
+<li id="s1">[Outlet / author — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s2">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s3">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s4">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s5">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s6">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+<li id="s7">[Outlet — "Title," date.] <a href="https://example.com">[link]</a></li>
+</ol>
+</div>
+
+</div>
+</body>
+</html>
