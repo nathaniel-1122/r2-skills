@@ -1,12 +1,17 @@
 # R² Media — Claude Skills
 
-This repository holds R² Media's custom **Claude Code skills**. Right now the
-main one is **`source-casting`** — it researches and ranks interview sources for
-a story and produces a CSV you import straight into Cockpit.
+This repository holds R² Media's custom **Claude Code skills**. There are two:
+
+- **`source-casting`** — researches and ranks interview sources for a story and
+  produces a CSV you import straight into Cockpit.
+- **`live-show-prep`** — preps a live show: it live-researches tonight's lineup,
+  fact-checks the numbers, and produces two host-ready PDFs — a long **Research
+  Brief** to read beforehand and a one-page **Host Cheat Sheet** for the desk.
 
 A "skill" is just an instruction file that teaches Claude how to do one of our
 workflows the same way every time. You don't run code — you talk to Claude, and
-the skill kicks in.
+the skill kicks in. Both skills live in this one repo, so you clone it **once** and
+link each skill you want.
 
 ---
 
@@ -29,25 +34,27 @@ at once, then press Return. It only *looks* at your machine — it changes nothi
 and tells you what's already in place and what's missing:
 
 ```
-echo "Checking your source-casting setup…"; echo
+echo "Checking your r2-skills setup…"; echo
 command -v git >/dev/null 2>&1 && echo "✅ git is installed" || echo "❌ git is NOT installed  → do Step 1's note about git"
 [ -d ~/r2-skills/.git ] && echo "✅ repo is cloned at ~/r2-skills" || echo "❌ repo not cloned  → do Step 1"
 [ -d ~/.claude/skills ] && echo "✅ Claude skills folder exists" || echo "❌ skills folder missing  → do Step 2"
-L=$(readlink ~/.claude/skills/source-casting 2>/dev/null)
-if [ "$L" = "$HOME/r2-skills/.claude/skills/source-casting" ]; then echo "✅ skill is linked into Claude"
-elif [ -n "$L" ]; then echo "⚠️  linked, but to the wrong place ($L)  → message Nathaniel"
-elif [ -e ~/.claude/skills/source-casting ]; then echo "⚠️  it's a copy, not a link  → message Nathaniel"
-else echo "❌ skill is not linked  → do Step 3"; fi
-[ -f ~/.claude/commands/source-casting.md ] && echo "⚠️  an old 'source-casting' slash-command exists and may shadow the skill  → message Nathaniel"
+for s in source-casting live-show-prep; do
+  L=$(readlink ~/.claude/skills/$s 2>/dev/null)
+  if [ "$L" = "$HOME/r2-skills/.claude/skills/$s" ]; then echo "✅ '$s' is linked into Claude"
+  elif [ -n "$L" ]; then echo "⚠️  '$s' linked, but to the wrong place ($L)  → message Nathaniel"
+  elif [ -e ~/.claude/skills/$s ]; then echo "⚠️  '$s' is a copy, not a link  → message Nathaniel"
+  else echo "❌ '$s' is not linked  → do Step 3"; fi
+done
 for d in ~/.claude/skills/*/; do
   f="${d}SKILL.md"; [ -f "$f" ] || continue
   fold=$(basename "$d")
   nm=$(grep -m1 '^name:' "$f" | sed 's/^name:[[:space:]]*//;s/[[:space:]]*$//;s/"//g')
-  [ -n "$nm" ] && [ "$nm" != "$fold" ] && echo "⚠️  folder '$fold' actually holds a skill named '$nm' — mixed-up file, could confuse Claude  → message Nathaniel"
+  [ -n "$nm" ] && [ "$nm" != "$fold" ] && echo "⚠️  folder '$fold' actually holds a skill named '$nm' — mixed-up file  → message Nathaniel"
 done
 echo
-if [ -f "$(readlink ~/.claude/skills/source-casting 2>/dev/null)/SKILL.md" ]; then
-  echo "🎉 ALL SET — the skill is installed. Nothing to do. (To get the newest version, run 'cd ~/r2-skills && git pull'.)"
+ok=1; for s in source-casting live-show-prep; do [ -f "$(readlink ~/.claude/skills/$s 2>/dev/null)/SKILL.md" ] || ok=0; done
+if [ "$ok" = 1 ]; then
+  echo "🎉 ALL SET — both skills are installed. Nothing to do. (To get the newest versions, run 'cd ~/r2-skills && git pull'.)"
 else
   echo "➡️  NOT fully set up — do the steps below for anything marked ❌, then run this check again."
 fi
@@ -80,16 +87,18 @@ called `r2-skills` in your home folder.
 mkdir -p ~/.claude/skills
 ```
 
-**Step 3 — link the skill into Claude (this is the important one):**
+**Step 3 — link the skills into Claude (this is the important one):**
 
 ```
 ln -s ~/r2-skills/.claude/skills/source-casting ~/.claude/skills/source-casting
+ln -s ~/r2-skills/.claude/skills/live-show-prep  ~/.claude/skills/live-show-prep
 ```
 
-That `ln -s` command makes a **shortcut** (a "symlink"). It tells Claude: "the
-source-casting skill lives inside the r2-skills folder." Because it's a shortcut
-and not a copy, whenever you update the repo (see below) Claude instantly uses
-the new version — you never re-install.
+Those `ln -s` commands each make a **shortcut** (a "symlink"). They tell Claude:
+"these skills live inside the r2-skills folder." Because they're shortcuts and not
+copies, whenever you update the repo (see below) Claude instantly uses the new
+version — you never re-install. (Want only one skill? Just run the line for the one
+you want.)
 
 **Step 4 — confirm it worked:** paste the **"Check first"** block from above again.
 It should now say **🎉 ALL SET**.
@@ -99,7 +108,7 @@ It should now say **🎉 ALL SET**.
 
 ---
 
-## How to use it
+## How to use `source-casting`
 
 **Which folder to open first.** The skill works in *any* folder (it's installed
 globally), but it **saves the finished CSV into whatever folder you have open** —
@@ -137,6 +146,54 @@ Then in Cockpit, open a story → **Import Sources** → paste or upload that CS
 **Important:** talking to the skill *while it's running* only steers that one
 story. It does **not** change the skill itself. To change the skill permanently
 (for every future story), see the next section.
+
+---
+
+## How to use `live-show-prep`
+
+This one preps a live show. You give it the show's **segment lineup** — the little
+text files with each segment's topic bullets, the on-screen clips/chyrons, and the
+viewer questions (the `Live Segment_*.txt` files) — and it hands back two PDFs:
+
+- a long **Research Brief** to read before air, and
+- a one-page **Host Cheat Sheet** for the desk (key stats, punchy lines, rebuttals,
+  quick answers to the viewer questions, and a "Do-Not-Say" list of numbers that
+  don't hold up).
+
+**Which folder to open first.** Like the other skill, it saves the finished files
+into whatever folder you have open — so open the folder where your show files live
+(or where you want the PDFs to land), using the folder picker (bottom-left in Claude).
+
+Then just ask in plain English, e.g.:
+
+> "Prep tonight's live show from these segment files."
+
+or point it at the folder, or type the slash command:
+
+```
+/live-show-prep
+```
+
+It works in checkpoints, stopping for your OK along the way:
+
+1. **Intake** — it reads the lineup and lists back the segments, the must-cover clips,
+   and every viewer question, plus the research buckets it'll chase. You confirm.
+2. **Live research + fact-check** — it researches each story with live web data
+   (it'll use **Nimble** if your `NIMBLE_API_KEY` is set, otherwise normal web
+   search), then shows you the headline findings and the **Do-Not-Say** list before
+   writing. You catch anything off.
+3. **Write + render** — it builds both documents in our house field-guide format and
+   renders them to PDF (with the fonts baked in, so they print anywhere). The editable
+   `.html` sources land next to the PDFs.
+
+**Good to know:**
+
+- **Research is live**, so the facts reflect the show date — not Claude's memory. Every
+  number carries a source and a confidence flag; shaky stats get quarantined, not stated.
+- It needs **Google Chrome** installed (that's what turns the pages into PDFs) and an
+  internet connection the first time it renders (to fetch the fonts).
+- Want the text bigger/smaller or a different look? Just ask — or tell Nathaniel and
+  he'll tweak the template once for everyone.
 
 ---
 
@@ -192,8 +249,10 @@ Two ways:
 ## What's in this repo (for reference)
 
 ```
-.claude/skills/source-casting/SKILL.md   ← the skill itself (plain-English instructions)
+.claude/skills/source-casting/SKILL.md   ← the source-casting skill (plain-English instructions)
+.claude/skills/live-show-prep/SKILL.md   ← the live-show-prep skill
+.claude/skills/live-show-prep/assets/    ← its design templates (brief + cheat sheet) and render.sh
 check-skill-names.py                     ← a guardrail script that checks skill folders are named correctly
-_archive/                                ← older versions of the skill, kept for reference only (not active)
+_archive/                                ← older versions, kept for reference only (not active)
 README.md                                ← this file
 ```
