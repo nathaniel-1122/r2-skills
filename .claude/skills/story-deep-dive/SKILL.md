@@ -1,6 +1,6 @@
 ---
 name: story-deep-dive
-description: "Use this skill to research a single story in depth and produce R²'s two-part deep-dive package: a ~30-page illustrated Deep-Dive Field Guide (the 'teach-me' main read) and a ~7-page Quick Dossier (the fast reference, with a Who-To-Interview list). Both are live-researched with numbered, hyperlinked sources. Triggers: 'do a deep dive on X', 'build the field guide + dossier for [story]', 'research [topic] for an episode', 'make a story deep-dive'."
+description: "Use this skill to research a single story in depth and produce R²'s two-part deep-dive package: an illustrated Deep-Dive Field Guide (the 'teach-me' main read) and a Quick Dossier (the fast reference, with a Who-To-Interview list). Both are live-researched with numbered, hyperlinked sources, and designed to be genuinely engaging to read (strong signposting, badge-coded callouts, pulled-out stats). Length flexes to the story. Triggers: 'do a deep dive on X', 'build the field guide + dossier for [story]', 'research [topic] for an episode', 'make a story deep-dive'."
 allowed-tools:
   - Bash(nimble:*)
   - Bash(bash:*)
@@ -32,11 +32,16 @@ every figure carries a **numbered, clickable source**.
 
 ## THE TWO DELIVERABLES
 
-1. **Deep-Dive Field Guide** (`… (Field Guide).pdf`) — ~30 pages. Illustrated, chaptered,
-   explanatory. Teaches the *why* and *how* so the host can follow the argument and ask
-   sharp questions. Per-chapter boxes; charts; numbered hyperlinked sources + appendix.
-2. **Quick Dossier** (`… (Dossier).pdf`) — ~7 pages. Terse, numbered sections; every fact
-   bracket-sourced; ends with a **Who To Interview** list (people, companies, orgs).
+1. **Deep-Dive Field Guide** (`… (Field Guide).pdf`) — the illustrated, chaptered, explanatory
+   read. Teaches the *why* and *how* so the host can follow the argument and ask sharp questions.
+   Per-chapter signposting (a one-line **THE GIST**, badge-coded boxes), charts, pulled-out stat
+   bands, pull quotes; numbered hyperlinked sources + appendix.
+2. **Quick Dossier** (`… (Dossier).pdf`) — the terse, fast reference: a one-line thesis hero, a
+   key-numbers strip, numbered sections (every fact bracket-sourced), and a **Who To Interview**
+   card set (people, companies, orgs).
+
+**Length flexes to the story.** Make each document as long as it needs to be to genuinely prepare
+the reader — more chapters/sections or fewer. Completeness over page count; never pad to a length.
 
 Both are built from bundled templates so the house format is identical every time. The
 templates live in `assets/` next to this file:
@@ -64,8 +69,12 @@ templates live in `assets/` next to this file:
    figure and **say so on the page** — give the range and which measure you're using (e.g.,
    "Japan defense spend ≈2% of GDP on Tokyo's accounting vs ≈1.4% on SIPRI's calendar-year
    measure — say which"). The host must not get caught out.
-4. **Teach, don't dump.** The Field Guide makes the reader *fluent* — explain mechanisms and
-   concepts. The Dossier is the opposite: terse, scannable, every line a fact.
+4. **Teach, don't dump — and make it a pleasure to read.** The Field Guide makes the reader
+   *fluent* (explain mechanisms and concepts), but lean on the design system — **THE GIST**
+   one-liners, badge-coded boxes, pulled-out stat bands, pull quotes, sub-heads, sidebars — to
+   chunk the text and keep an easily-distracted reader engaged *without* sacrificing rigor or
+   detail. Vary the visual rhythm chapter to chapter. The Dossier is the opposite mode: terse,
+   scannable, every line a fact.
 5. **Never overwrite existing files.** Name outputs clearly; write alongside any prior version.
 
 ---
@@ -120,17 +129,24 @@ authoritative one and write the **flag** you'll put on the page. Confirm every l
 
 Copy `assets/template-field-guide.html`, **keep its `<style>`**, rebuild the body:
 
-- **Cover** — kicker, masthead, title, italic dek, series + tags, compiled line.
-- Optional **headline chart** (the `.viz` bar) for the framing number.
-- **One-sentence version** (drop-cap lead) → **How to use this guide** box → **What's inside** TOC.
-- **Chapters** — each: `What you'll learn` → explanatory narrative **with inline citations** →
-  `Key terms` and/or `Misconception / Gotcha` boxes → `Takeaways` → **`Questions to ask`** box
-  (sharp interview questions the chapter sets up). Use `.stats` cards and `.viz` bars for numbers.
+- **Cover** (`.cover`) — wordmark + series pill, kicker, big title, italic dek, topic tags, a
+  **reading-map** pill row (chapter count, sources count, the payoff), and the compiled/sourced line.
+- **The one-sentence version** — the dark **`.bigidea`** band ("if you read nothing else").
+- **How to use this guide** (`.howto`) → **The route** TOC (`.toc`, numbered).
+- **Chapters** (`<section class="chap">`) — each opens with `.chap-open` (a big ghost numeral, a
+  `Chapter N` kicker, the title, and a one-line **`.gist` THE GIST** band), then a
+  `What you'll learn` box → explanatory narrative **with inline citations**, paced with
+  `.statband` (a big pulled-out number), `.pull` (a pull quote), `.viz` charts, `h4.sub`
+  sub-heads, and the occasional `.aside` sidebar → `Key terms` / `Misconception / Gotcha` boxes →
+  `Takeaways` → **`Questions to ask`** (the sharp interview questions the chapter sets up).
+  Chapters start on a new page automatically.
 - **Glossary** + a numbered **Sources** appendix (`<li id="s1">…<a href>`). Footer page numbers
-  render automatically (CSS `@page`); the cover stays clean.
+  render automatically; the cover stays clean.
 
-Box classes (see template): `.box.learn / .terms / .gotcha / .take / .ask`; `.stats/.stat`;
-`.viz/.bar`; `table`; citations `<sup class="c"><a href="#sN">N</a></sup>` → `.sources ol li[id]`.
+Components (see template): boxes `.box.learn / .terms / .gotcha / .take / .ask` (each carries a
+colored `.badge` glyph — ◎ § ! ✓ ?); `.bigidea`, `.gist`, `.statband`, `.pull`, `.aside`,
+`.stats/.stat`, `.viz/.bar`, `table`; citations `<sup class="c"><a href="#sN">N</a></sup>` →
+`.sources ol li[id]`. Keep the badge glyphs and box classes as-is — they're the learnable system.
 
 ---
 
@@ -138,13 +154,15 @@ Box classes (see template): `.box.learn / .terms / .gotcha / .take / .ask`; `.st
 
 Copy `assets/template-dossier.html`, keep its `<style>`, rebuild the body:
 
-- Masthead + tags; **"The story in one line"** box; a one-line **how-to-read** note.
-- **Numbered sections** (1. Executive Summary as cited bullets → 2. Why This Matters Now →
-  3. How We Got Here → mechanism → players → debate → scale → risks → what to watch). Terse, every
-  number bracket-cited.
-- **Who To Interview** — grouped People / Companies / Organizations, each with a one-line why.
+- Masthead (wordmark + series pill) + kicker + big title + tags.
+- **The story in one line** — the dark `.oneline` hero.
+- A **key-numbers strip** (`.keynums`) — 3–4 of the most important figures up top, for instant scanning.
+- A one-line **how-to-read** note, then **numbered sections** (`h2.sec` with a red number badge):
+  Executive Summary as cited bullets → Why This Matters Now → How We Got Here → mechanism →
+  players → debate → scale → risks → what to watch. Terse, every number bracket-cited.
+- **Who To Interview** — `.icards` grouped People / Companies / Organizations, each with a one-line why.
 - A numbered **Sources** list. Keep the dossier's facts and citations **consistent with the Field
-  Guide** (you can reuse the same source set).
+  Guide** (reuse the same source set).
 
 ---
 
@@ -167,13 +185,24 @@ render, and nothing is clipped, and spot-check that a couple of source links are
 
 ## DESIGN SYSTEM (lives in the template `<style>`)
 
+The design goal: a **premium intelligence-briefing / explanatory-magazine** feel that is genuinely
+engaging and easy to read — strong signposting and scannable entry points for an easily-distracted
+reader — while staying serious, credible, and detail-dense. The signposting is a *learnable system*,
+so keep it consistent:
+
 - **Type:** *Newsreader* (body), *Fraunces* (display/headlines/numerals), *IBM Plex Sans*
   (labels, tables, citations). Loaded from Google Fonts; embedded at render.
-- **Palette:** warm paper, ink near-black, R² red accent; navy/amber/green box types.
-- **Print:** US Letter, footer page numbers, page-break-safe boxes, charts/stat cards.
+- **Palette:** warm paper, near-black ink, R² red accent; the **box taxonomy is colored and
+  badge-coded** so the eye sorts the page: navy ◎ *what you'll learn*, teal § *key terms*, red !
+  *gotcha*, green ✓ *takeaways*, amber ? *questions to ask*. Don't recolor or relabel these.
+- **Rhythm tools** (use them to vary the pace and re-grab attention): `.bigidea` dark lead band,
+  `.gist` chapter one-liners, `.statband` big pulled-out numbers, `.pull` pull quotes, `.aside`
+  sidebars, the `.viz` bar chart, and oversized ghost chapter numerals.
+- **Print:** US Letter, footer page numbers, page-break-safe boxes, new-page chapter starts.
 
 If you need the type bigger/smaller, change `body { font-size }` in the template `<style>` and
-scale headings proportionally, then re-render.
+scale headings proportionally, then re-render. To redesign the look itself, use the **frontend-design**
+skill — but keep the badge taxonomy and box classes stable so the system stays learnable.
 
 ---
 

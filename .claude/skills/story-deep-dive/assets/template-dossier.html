@@ -1,9 +1,9 @@
 <!-- ============================================================================
   R² STORY-DEEP-DIVE — QUICK DOSSIER TEMPLATE  ·  DO NOT SHIP THIS CONTENT.
   Keep the <style> VERBATIM. The body is a SKELETON with [placeholders] showing the
-  section structure. A real dossier is ~7 pages: terse, fact-dense, every number
-  bracket-cited to the numbered Sources list, ending with Who To Interview + Sources.
-  Render with assets/render.sh (fonts load from Google Fonts at render time).
+  section structure. A real dossier is terse and fact-dense: every number bracket-cited
+  to the numbered Sources list, ending with Who To Interview + Sources. LENGTH FLEXES to
+  the story — enough sections to brief it fully, no padding. Render with assets/render.sh.
 ============================================================================ -->
 <!DOCTYPE html>
 <html lang="en">
@@ -11,72 +11,95 @@
 <meta charset="utf-8">
 <title>R² Media — Research Dossier</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
   :root{
-    --ink:#14161b; --paper:#fbf9f3; --rule:#d9d2c2; --muted:#56534a; --muted2:#7e7a6e;
-    --red:#9f2012; --navy:#1d2c4d; --amber:#946011; --green:#2c6a3b;
+    --ink:#191b21; --paper:#faf6ec; --paper2:#f2ebdb; --card:#fffdf8; --rule:#ddd4c0;
+    --muted:#5b574c; --muted2:#857f70; --red:#b22a17; --red-deep:#8a1d10;
+    --navy:#1d2c52; --amber:#b0700f; --green:#2d6a3b; --teal:#1c6770;
+    --teal-soft:#e4f0f1; --green-soft:#e7f1e9;
     --display:"Fraunces","Iowan Old Style",Georgia,serif;
     --body:"Newsreader","Iowan Old Style",Georgia,serif;
     --sans:"IBM Plex Sans","Helvetica Neue",Arial,system-ui,sans-serif;
   }
-  *{box-sizing:border-box;}
-  html{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  *{ box-sizing:border-box; }
+  html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   body{ margin:0; background:var(--paper); color:var(--ink);
-    font-family:var(--body); font-size:10.4pt; line-height:1.46;
+    font-family:var(--body); font-size:10.6pt; line-height:1.48;
     text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
-  @page{ size:Letter; margin:15mm 16mm 16mm 16mm;
-    @bottom-center{ content:counter(page) "  /  " counter(pages);
-      font-family:"IBM Plex Sans",Arial,sans-serif; font-size:7.4pt; letter-spacing:.12em; color:#9a958a; }
-    @bottom-left{ content:"R\00B2 MEDIA \00B7 RESEARCH DOSSIER";
-      font-family:"IBM Plex Sans",Arial,sans-serif; font-size:6.6pt; letter-spacing:.14em; text-transform:uppercase; color:#bdb6a8; } }
-  @page:first{ @bottom-center{ content:""; } @bottom-left{ content:""; } }
-  .wrap{ max-width:6.7in; margin:0 auto; }
-  p{ margin:0 0 7px; } strong{ font-weight:600; } em{ font-style:italic; }
-  a{ color:var(--navy); text-decoration:none; }
+  @page{ size:Letter; margin:14mm 15mm 15mm 15mm;
+    @bottom-center{ content:counter(page); font-family:"IBM Plex Sans",Arial,sans-serif; font-size:7.6pt; font-weight:600; letter-spacing:.1em; color:#a39c8b; }
+    @bottom-right{ content:"R\00B2 \00B7 DOSSIER"; font-family:"IBM Plex Sans",Arial,sans-serif; font-size:6.4pt; letter-spacing:.16em; color:#c3bba8; } }
+  @page:first{ @bottom-center{ content:""; } @bottom-right{ content:""; } }
+  .wrap{ max-width:6.8in; margin:0 auto; }
+  p{ margin:0 0 7px; } strong{ font-weight:600; } em{ font-style:italic; } a{ color:var(--navy); text-decoration:none; }
 
-  .mast{ border-bottom:2.5px solid var(--ink); padding-bottom:8px; margin-bottom:12px; }
-  .mast .kick{ font-family:var(--sans); font-size:7.6pt; letter-spacing:.28em; text-transform:uppercase; color:var(--red); font-weight:600; }
-  .mast h1{ font-family:var(--display); font-weight:600; font-size:24pt; letter-spacing:-.4px; margin:4px 0 4px; }
-  .mast .tags{ font-family:var(--sans); font-size:8pt; letter-spacing:.05em; text-transform:uppercase; color:var(--navy); font-weight:600; }
-  .mast .meta{ font-family:var(--sans); font-size:7.6pt; letter-spacing:.03em; text-transform:uppercase; color:var(--muted2); margin-top:3px; }
+  /* masthead */
+  .mast{ display:flex; justify-content:space-between; align-items:center; border-bottom:2.5px solid var(--ink); padding-bottom:8px; }
+  .mast .wordmark{ font-family:var(--display); font-weight:700; font-size:12pt; letter-spacing:.04em; } .mast .wordmark sup{ color:var(--red); font-size:.6em; }
+  .mast .series{ font-family:var(--sans); font-size:7.2pt; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--paper); background:var(--red); padding:4px 10px; border-radius:30px; }
+  .kick{ font-family:var(--sans); font-size:8pt; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--red); margin:14px 0 0; }
+  h1.title{ font-family:var(--display); font-weight:900; font-size:32pt; line-height:.98; letter-spacing:-.7px; margin:5px 0 0; }
+  .tags{ font-family:var(--sans); font-size:8pt; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--navy); margin-top:9px; }
 
-  .oneline{ background:#fff; border:1px solid var(--rule); border-left:3px solid var(--red); border-radius:4px; padding:9px 12px; margin:10px 0; }
-  .oneline .l{ font-family:var(--sans); font-size:7.4pt; letter-spacing:.16em; text-transform:uppercase; font-weight:700; color:var(--red); display:block; margin-bottom:4px; }
-  .oneline p{ font-size:11pt; line-height:1.4; margin:0; }
-  .howto{ font-family:var(--sans); font-size:8.6pt; color:var(--muted); line-height:1.45; border-left:2px solid var(--rule); padding-left:10px; margin:10px 0; }
+  /* one-line hero */
+  .oneline{ background:var(--ink); color:#f6f1e5; border-radius:8px; padding:15px 19px; margin:14px 0; break-inside:avoid; }
+  .oneline .l{ font-family:var(--sans); font-size:7.6pt; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#e2b13f; margin-bottom:7px; }
+  .oneline p{ font-family:var(--display); font-weight:500; font-size:13pt; line-height:1.32; margin:0; color:#fbf7ec; }
+  .howto{ font-family:var(--sans); font-size:8.6pt; color:var(--muted); line-height:1.45; border-left:3px solid var(--rule); padding-left:11px; margin:11px 0; }
 
-  h2.sec{ font-family:var(--display); font-weight:600; font-size:13.5pt; margin:16px 0 5px; padding-top:7px; border-top:1px solid var(--rule); break-after:avoid; }
-  h2.sec .n{ color:var(--red); font-family:var(--sans); font-weight:700; font-size:10pt; margin-right:7px; }
-  ul.facts{ margin:6px 0; padding-left:17px; } ul.facts li{ margin:5px 0; line-height:1.45; }
+  /* key numbers strip */
+  .keynums{ display:flex; flex-wrap:wrap; gap:9px; margin:12px 0; break-inside:avoid; }
+  .keynums .k{ flex:1 1 22%; min-width:1.3in; background:var(--card); border:1px solid var(--rule); border-top:3px solid var(--red); border-radius:7px; padding:9px 11px; }
+  .keynums .kn{ font-family:var(--display); font-weight:700; font-size:18pt; color:var(--red); line-height:1; letter-spacing:-.4px; }
+  .keynums .kl{ font-family:var(--sans); font-size:7pt; color:var(--muted); text-transform:uppercase; letter-spacing:.03em; margin-top:5px; line-height:1.3; }
 
+  /* sections */
+  h2.sec{ font-family:var(--display); font-weight:700; font-size:14pt; margin:17px 0 6px; padding-top:9px; border-top:2px solid var(--ink);
+    display:flex; align-items:center; gap:10px; break-after:avoid; }
+  h2.sec .n{ font-family:var(--display); font-weight:700; font-size:10pt; color:#fff; background:var(--red); width:22px; height:22px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; flex:none; }
+  ul.facts{ margin:6px 0; padding-left:18px; } ul.facts li{ margin:5px 0; line-height:1.46; } ul.facts li b{ color:var(--ink); }
   sup.c{ font-family:var(--sans); font-size:.62em; font-weight:700; line-height:0; } sup.c a{ color:var(--red); }
 
-  .interview{ background:#fff; border:1px solid var(--rule); border-radius:4px; padding:10px 13px; margin:10px 0; break-inside:avoid; }
-  .interview h3{ font-family:var(--sans); font-size:8pt; letter-spacing:.1em; text-transform:uppercase; font-weight:700; color:var(--navy); margin:0 0 6px; }
-  .interview .grp{ font-family:var(--sans); font-size:7.4pt; letter-spacing:.08em; text-transform:uppercase; font-weight:700; color:var(--muted2); margin:7px 0 3px; }
-  .interview ul{ margin:0; padding-left:16px; } .interview li{ margin:3px 0; font-size:9.6pt; line-height:1.4; }
-  .interview b{ color:var(--ink); }
+  /* interview cards */
+  .interview{ break-inside:avoid; margin:12px 0; }
+  .interview h2{ font-family:var(--display); font-weight:700; font-size:14pt; margin:0 0 9px; padding-top:9px; border-top:2px solid var(--ink); }
+  .icards{ display:flex; flex-wrap:wrap; gap:9px; }
+  .icard{ flex:1 1 30%; min-width:2.0in; background:var(--card); border:1px solid var(--rule); border-radius:7px; padding:10px 12px; }
+  .icard .grp{ font-family:var(--sans); font-size:7.2pt; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid var(--rule); }
+  .icard ul{ margin:0; padding-left:15px; } .icard li{ margin:4px 0; font-size:9.2pt; line-height:1.38; } .icard b{ color:var(--ink); }
 
-  .sources{ font-family:var(--sans); font-size:8.4pt; line-height:1.42; break-before:auto; }
-  .sources h2{ font-family:var(--display); font-weight:600; font-size:13.5pt; margin:16px 0 6px; padding-top:7px; border-top:1px solid var(--rule); }
-  .sources ol{ margin:0; padding-left:24px; } .sources li{ margin:4px 0; color:var(--muted); }
-  .sources li:target{ background:#fbf1d8; } .sources a{ color:var(--navy); text-decoration:underline; text-decoration-color:#c9c0ad; }
+  /* sources */
+  .sources{ font-family:var(--sans); font-size:8.6pt; line-height:1.44; break-before:auto; }
+  .sources h2{ font-family:var(--display); font-weight:700; font-size:14pt; margin:17px 0 7px; padding-top:9px; border-top:2px solid var(--ink); }
+  .sources ol{ margin:0; padding-left:0; list-style:none; counter-reset:s; }
+  .sources li{ counter-increment:s; margin:5px 0; color:var(--muted); padding-left:28px; position:relative; }
+  .sources li:before{ content:counter(s); position:absolute; left:0; top:0; font-family:var(--display); font-weight:700; font-size:8.4pt; color:#fff; background:var(--red); width:19px; height:19px; border-radius:5px; display:flex; align-items:center; justify-content:center; }
+  .sources li:target:before{ background:var(--amber); }
+  .sources a{ color:var(--navy); text-decoration:underline; text-decoration-color:#c9c0ad; }
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header class="mast">
-  <div class="kick">R² Media · Research Dossier</div>
-  <h1>[Story Title]</h1>
-  <div class="tags">[Conflict + Money] · [Desk-Reported Series]</div>
-  <div class="meta">R² Media research dossier · compiled [Month Year] · pure-background briefing</div>
+  <div class="wordmark">R<sup>2</sup> MEDIA</div>
+  <div class="series">[Desk-Reported Series]</div>
 </header>
+<div class="kick">Research Dossier · Pure-Background Briefing</div>
+<h1 class="title">[Story Title]</h1>
+<div class="tags">[Conflict] &nbsp;•&nbsp; [Money] &nbsp;•&nbsp; [Power]</div>
 
-<div class="oneline"><span class="l">The story in one line</span>
+<div class="oneline"><div class="l">The story in one line</div>
 <p>[The whole thesis in two or three sentences — the reframe plus the stakes.]</p></div>
 
-<div class="howto">[How to read it: Sections 1–N are pure background, built for scripting — every number is individually sourced and the bracketed superscripts link to the source. The closing Who To Interview list sits outside the page count. Where figures differ across outlets, the most recent and authoritative is used and the discrepancy is flagged.]</div>
+<div class="keynums">
+  <div class="k"><div class="kn">[230×]</div><div class="kl">[what it measures]</div></div>
+  <div class="k"><div class="kn">[800+]</div><div class="kl">[what it measures]</div></div>
+  <div class="k"><div class="kn">[$20–50k]</div><div class="kl">[what it measures]</div></div>
+  <div class="k"><div class="kn">[5]</div><div class="kl">[what it measures]</div></div>
+</div>
+
+<div class="howto">[How to read it: numbered sections are pure background, built for scripting — every figure is individually sourced and the bracketed superscripts link to the source. The Who To Interview list sits outside the page count. Where figures differ across outlets, the most recent and authoritative is used and the discrepancy is flagged.]</div>
 
 <h2 class="sec"><span class="n">1</span>Executive Summary</h2>
 <ul class="facts">
@@ -87,14 +110,14 @@
 </ul>
 
 <h2 class="sec"><span class="n">2</span>Why This Matters Now</h2>
-<p>[The trigger — why this moved from trade-press to front-page. 2–4 tight sentences setting the moment.]</p>
+<p>[The trigger — why this moved from trade-press to front-page. 2–4 tight sentences.]</p>
 <ul class="facts">
 <li><b>[Dimension]:</b> [number + context].<sup class="c"><a href="#s5">5</a></sup></li>
 <li><b>[Dimension]:</b> [number + context].<sup class="c"><a href="#s6">6</a></sup></li>
 </ul>
 
 <h2 class="sec"><span class="n">3</span>How We Got Here</h2>
-<p>[The origin / history that explains the present state — the decision, the trend, the structural cause.]<sup class="c"><a href="#s7">7</a></sup></p>
+<p>[The origin / history that explains the present state.]<sup class="c"><a href="#s7">7</a></sup></p>
 
 <h2 class="sec"><span class="n">4</span>[The Mechanism / Key Dynamic]</h2>
 <p>[How it actually works.]</p>
@@ -105,19 +128,18 @@
 <h2 class="sec"><span class="n">6</span>[The Debate]</h2>
 <p>[What's genuinely contested, and the strongest case on each side — so you don't sound one-note on air.]</p>
 
-<p style="color:var(--muted);font-style:italic;font-size:9pt;">[…sections continue to ~9: scale/numbers, risks, what to watch. Keep each terse and sourced.]</p>
+<p style="color:var(--muted);font-style:italic;font-size:9pt;">[…add sections as the story needs (scale/numbers, risks, what to watch). Keep each terse and sourced — length follows the story, not a page target.]</p>
 
 <div class="interview">
-  <h3>Who To Interview</h3>
-  <div class="grp">People</div>
-  <ul>
-    <li><b>[Name]</b> — [role / why they're the right voice; how to reach].</li>
-    <li><b>[Name]</b> — [role / angle].</li>
-  </ul>
-  <div class="grp">Companies</div>
-  <ul><li><b>[Company]</b> — [what they'd speak to].</li></ul>
-  <div class="grp">Organizations</div>
-  <ul><li><b>[Org / think tank]</b> — [the analyst or desk to approach].</li></ul>
+  <h2>Who To Interview</h2>
+  <div class="icards">
+    <div class="icard"><div class="grp">People</div>
+      <ul><li><b>[Name]</b> — [role / why they're the right voice; how to reach].</li><li><b>[Name]</b> — [angle].</li></ul></div>
+    <div class="icard"><div class="grp">Companies</div>
+      <ul><li><b>[Company]</b> — [what they'd speak to].</li></ul></div>
+    <div class="icard"><div class="grp">Organizations</div>
+      <ul><li><b>[Org / think tank]</b> — [the analyst or desk to approach].</li></ul></div>
+  </div>
 </div>
 
 <div class="sources">
