@@ -174,10 +174,20 @@ Deliver the two PDFs with a short note: what each is, the headline findings, and
 
 ## DESIGN SYSTEM (for reference; it lives in the template `<style>`)
 
+The look is a **premium intelligence-briefing / explanatory-magazine** style — engaging and easy to
+scan (built so an easily-distracted reader stays oriented) while staying serious and detail-dense.
+Keep the signposting consistent; it's a learnable system.
+
 - **Type:** *Newsreader* (body, made for long-form news), *Fraunces* (display/headlines/numerals),
   *IBM Plex Sans* (labels, tables, chips). Loaded from Google Fonts; embedded at render.
-- **Palette:** warm paper, ink near-black, R² red accent, navy / amber / green for box types;
-  green = HIGH, amber = MED, grey = LOW confidence chips.
+- **Palette + badge taxonomy:** warm paper, near-black ink, R² red accent. Callout boxes are colored
+  and **badge-coded** so the eye sorts the page: navy ◎ *what you'll learn*, teal § *key terms*,
+  red ! *gotcha*, green ✓ *takeaways*, amber " *host lines*, ink ? *audience question*. Don't recolor
+  or relabel these.
+- **Rhythm:** bold cover with reading-map pills, dark Part dividers, oversized ghost chapter numerals,
+  stat cards, optional stat bands / pull quotes; the cheat sheet uses a dark through-line hero, red
+  segment headers, and a key-stats grid.
+- **Confidence chips:** green = HIGH, amber = MED, grey = LOW.
 - **Print:** US Letter, comfortable measure, generous leading, page-break-safe boxes, footer page numbers.
 
 If the host wants the type bigger/smaller, change the `body { font-size }` in the template `<style>`
