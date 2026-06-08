@@ -36,6 +36,22 @@ Do not hunt for one-to-one title matches. An archetype is a **lane of expertise*
 
 ---
 
+## CORE PRINCIPLE — PEOPLE *IN* THE STORY, NOT COMMENTATORS *ABOUT* IT
+
+Center every story on the people who sit **at the pressure points** — who built it, bought it, ran it, decided it, were affected by it, or walked away from it — not on the professional explainers who narrate it from outside. Commentators (academics, think-tankers, pundits, beat journalists, "X researchers") are seasoning, not the dish. They are useful for framing and a contested-claim quote, but a casting list that fills up with meta-commentary has drifted off the story.
+
+Apply this as a working test the whole way through archetype design **and** research:
+
+- **For every archetype, ask: does this lane hold people who *touched the thing*, or people who *talk about the thing*?** Favor operators, insiders, buyers, builders, defectors, regulators-who-decided, and firsthand-affected parties. Inherently-commentary lanes (academics, think-tankers, pundits, beat journalists, "X researchers") are legitimate but secondary.
+- **Name the decision or the action, not the opinion.** "People inside a bank/firm/vendor who had to decide whether to buy this, how fast, and what's real vs. hype" beats "AI-adoption researchers." "Former lab staff who built the thing and now see it differently" beats "AI ethicists."
+- **Reach the principals directly.** Cast the companies, agencies, and labs at the center of the story as org-as-sources (via their press desks) rather than substituting an outside expert who will comment on them. Go to the source, not the sidelines.
+- **Weight the *design* toward the center, not the *volume*.** The centering rule governs which lanes you prioritize and how the finished piece is ultimately weighted — it is **not** a license to under-research any lane. Generate full lead volume everywhere, commentary lanes included (conversion runs ~10% across the board, so leads are always wanted). The journalists cap how many commentators actually make the piece at **interview-selection time** — research stays high-volume. If the *pressure-point lanes* look thin, recast and dig harder there before researching; never thin out a commentary lane to force proportion.
+- **Defectors and disillusioned insiders are gold.** Former operators who bought into a culture and now describe it from the inside are pressure-point sources, not commentators — prioritize them.
+
+This is not a reason to exclude critics or experts — adversarial and analytical voices still make the work defensible (see below). It is a rule about **proportion and altitude in the casting design**: keep the story populated by the people living it, while still surfacing as many qualified leads as possible in every lane.
+
+---
+
 ## PHASE 1 — ARCHETYPE IDENTIFICATION
 
 Read the story pitch or brief in $ARGUMENTS. Based on the story's focus, generate a comprehensive list of source archetypes — each defined by **what a person or organization can authoritatively speak to on the record**, not by a specific job title. An archetype is a lane of knowledge, and it can be filled by anyone who genuinely commands it: former officials, industry figures, analysts, academics, practitioners — **and laypeople whose lived or firsthand experience makes them an authority on the subject without holding a title for it.** An archetype can also be filled by **an organization speaking on the record** — a company, agency, or institution whose official position is itself the story (see *Organizations as sources* in Phase 2); for some stories these org sources are the primary targets, not an afterthought. Someone who lived through the events, did the work, or knows the topic deeply from the inside belongs in a lane right alongside the credentialed experts. Think like a producer: which areas of knowledge and which perspectives — insider, expert, critic, affected party, firsthand witness, institutional, contrarian — make this story complete and defensible?
@@ -132,13 +148,19 @@ Confidence measures **how sure we are this is a real, reachable person** — it 
 
 Sources are split between **Nathaniel** and **Johnny** **by archetype, not by individual person** — every contact in a given archetype is owned by the same person. This keeps outreach simple: whoever owns an archetype runs one consistent outreach approach across the whole bucket, and either person can take **several archetypes at once** when their outreach looks alike (same channel, same framing, same kind of ask).
 
+**Split by outreach angle first, then balance volume.** The point of the division is *email-writing efficiency*: each owner should hold buckets that share an **outreach motion** so they write one consistent set of emails instead of context-switching. Before proposing owners, cluster the archetypes by their outreach angle — the combination of **channel** (press desk / official form / faculty inbox / personal site / X-DM / LinkedIn), **tone** (formal vs. warm), and **ask** (on-record authority quote / firsthand-experience interview / background). Buckets in the same cluster should go to the same owner. Most stories collapse into ~2 motions, e.g.:
+- **"Institutions & experts" (formal, on-record authority):** reach a named org or credentialed expert through a press desk, official channel, or faculty inbox; the ask is an authoritative on-record interview. (Frontier orgs, agencies, think-tankers, academics — the email shape is the same.)
+- **"Operators & insiders" (direct, firsthand, trust-first):** reach a builder, operator, or disillusioned insider through personal channels (site, Substack, X/LinkedIn DM); the ask is "tell us what you actually did/saw," warm and personal.
+
+Then balance: if one motion holds far more contacts, **split that motion across both owners** (keeping sub-clusters intact) rather than handing one person a wildly heavier load. Aim for a roughly even contact count while never breaking a single archetype across owners. When a bucket could sit in two motions (e.g. academics — *formal ask* but *direct-to-person channel*), surface the judgment call to the journalists rather than silently picking.
+
 Assignment is decided at the **Assignment Checkpoint below, after research is finished** — when the real count of contacts in each archetype is known, so the journalists can see the size and shape of each bucket before claiming it.
 
-You propose a starting lean for them to react to, not a final answer:
-- **Nathaniel** — institutional sources, officials, think-tank voices, on-record named experts.
-- **Johnny** — press contacts, spokespeople, connectors, background sources.
-- (`is_press = y` archetypes almost always go to Johnny.)
-- **Organization-as-source** buckets (a company/agency reached through its press office) can go to **either** owner — assign by whose outreach they resemble, not automatically to Johnny.
+You propose a starting lean for them to react to, not a final answer. Lean on these tendencies *within* the outreach-angle clustering:
+- **Nathaniel** — institutional sources, officials, think-tank voices, on-record named experts (the "institutions & experts" motion).
+- **Johnny** — press contacts, spokespeople, connectors, background sources, operators/insiders (the "operators & insiders" motion).
+- (`is_press = y` archetypes lean Johnny, but follow the outreach-angle cluster first.)
+- **Organization-as-source** buckets (a company/agency reached through its press office) can go to **either** owner — assign by whose outreach motion they resemble, not automatically to Johnny.
 
 The journalists make the final call.
 
@@ -152,7 +174,7 @@ For each archetype, show:
 - a one-line **outreach note** — *how* you reach that bucket and *what* you ask (channel + kind of ask). This is the batching signal: buckets whose notes read alike should be claimed by the same owner so they run one consistent outreach. Keep it short and comparable.
 - the **proposed owner** (Nathaniel or Johnny).
 
-Order the table so archetypes with **similar outreach sit next to each other**, making it easy to claim a group in one go.
+**Group the table by outreach motion** (see Assignment Logic): put all the buckets that share an outreach angle together under their owner, so the journalists see each person's set as one coherent email playbook rather than a scattered topic list. Order archetypes with **similar outreach next to each other** within each owner's group, making it easy to claim or reassign a whole motion in one go. State the shared angle so the consistency is visible at a glance.
 
 Below the table, always print a **volume tally** — the running total of people assigned to each owner — so the split can be balanced by workload, not just by topic:
 
@@ -250,6 +272,26 @@ Add `--dry-run` to preview the report without writing. (The nickname/normalizati
 **Organization-as-source rows** are handled too: an org name in `name` is deduped like any other and isn't nickname-expanded in the normal case (`SpaceX` stays `SpaceX`). Skim the report for any org name that got unexpectedly rewritten (rare — e.g. an org whose first word is a common nickname) and fix it by hand.
 
 After writing and canonicalizing the file, tell the journalist they can paste its contents (or upload the file) into Cockpit → a story's **Import Sources** modal, where they pick the keepers and file them into buckets.
+
+---
+
+## FINAL STEP — SOURCING GUIDE SPREADSHEET (orientation for outreach, not the emails)
+
+After the CSV is delivered, also produce a **"Sourcing Guide" spreadsheet (`.xlsx`)** — a working, human-readable reference that orients whoever writes the outreach. **You are not writing emails** — you are giving the writer the per-source context they need so their own emails land. Build it **from the delivered CSV** (single source of truth, so the two never drift).
+
+**Sheet 1 — "Sources"** (one row per contact, i.e. per bucket; cross-listed people repeat per bucket, same as the CSV). Columns, in order:
+
+- **Bucket** · **Owner** · **Priority** — grouping/triage columns.
+- **Name** · **Role/Title** · **Organization**.
+- **Contact info** — the actionable path(s): email and/or phone and/or LinkedIn/profile, plus the best route from notes (e.g. "via press@…", "via Substack/X DM"). Keep email and phone in their own columns where useful; fold profile + route into a "Profile / best route" column.
+- **Topic they can speak on** — the story-specific angle (from `why_relevant`): what only this source can tell the piece.
+- **Notes worth knowing** — sensitivities, "verify" flags, press routing, vendor-bias caveats, cross-listing.
+
+Sort by Owner → outreach motion → Bucket → Priority (A→C) → Name. Freeze the header row, add an autofilter, wrap text, and set sensible column widths (Topic and Notes wide). Light header fill in the R² red.
+
+**Sheet 2 — "Bucket angles"** (one row per bucket) — preserves the orientation that drives email-writing: **Owner · Outreach motion · Bucket · Count (priority breakdown) · Story angle · Outreach angle**. Story angle = why the bucket matters to this story; Outreach angle = channel + tone + the specific ask + a one-line way in. This is the posture, not the email text.
+
+Build with `openpyxl` (or the `xlsx` skill). Save next to the CSV as `[Story Title] — Sourcing Guide — [YYYY-MM-DD].xlsx`. Tell the journalist this is the companion to the import CSV: the CSV is *who & how-to-reach* (for Cockpit import); the Sourcing Guide spreadsheet is the *working outreach reference* — who/contact/topic/notes per person on Sheet 1, and the per-bucket why-they-matter + what-posture-to-take on Sheet 2.
 
 ---
 
