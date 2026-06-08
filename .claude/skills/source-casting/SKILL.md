@@ -129,7 +129,7 @@ The first sixteen columns are read by Cockpit's importer. `notes` and `links` ar
 | 13 | `story` | **Leave blank.** The CRM assigns the story at import time. |
 | 14 | `location` | City and State/Country. |
 | 15 | `political_leaning` | One of: **Left / Center-Left / Non-Partisan / Center-Right / Right / Unknown** — inferred from research. (Cockpit collapses Center-Left→Left, Center-Right→Right, Unknown→Non-Partisan on import; emit the precise value anyway.) |
-| 16 | `assigned_to` | **Nathaniel** or **Johnny** — assigned **per archetype** at the Assignment Checkpoint (whole bucket → one owner). See Assignment Logic. |
+| 16 | `assigned_to` | **Nathaniel** or **Johnny** — assigned **per archetype** at the Assignment Checkpoint (whole bucket → one owner). See Assignment Logic. **This value sets two things in Cockpit: the contact's owner AND the bucket's owner.** On import, the bucket takes its owner from the `assigned_to` of its rows — so the per-archetype designation here is exactly what drives Cockpit's Pipeline **owner filter** (filtering to Nathaniel/Johnny shows only that person's buckets). Because every row in an archetype carries the same `assigned_to`, the bucket gets a single, correct owner. Keep this invariant: never split an archetype across owners in the CSV. |
 | 17 | `notes` | **Prose only — no URLs.** Sensitivities, known positions, preferred contact channel, and anything needing manual verification. When `is_press = y`, record the press/media-relations contact name and email here. Lands in the contact's Notes field in Cockpit. |
 | 18 | `links` | **All URLs except `linkedin`/`source_url`.** Credibility evidence (media appearances, published work, op-eds, cited research, testimony) and social profiles (X, Instagram, Substack). Format each as `Label: URL`, separated by semicolons — e.g. `Op-ed (Foreign Affairs): https://… ; Senate testimony: https://… ; X: https://… ; Substack: https://…`. Lands in the contact's link list in Cockpit. |
 
@@ -200,7 +200,7 @@ Assigned so far —  Nathaniel: 9   ·   Johnny: 10   ·   Unassigned: 0   (19 t
 
 **After every change, re-print the full table AND the updated volume tally, then wait again.** Never apply a reassignment silently and never jump to the CSV off an un-reprinted table — the journalists confirm against the numbers they can see, and the tally is how they manage each person's volume.
 
-Once approved, write that owner into `assigned_to` for **every contact in the archetype** (whole bucket → one owner; no per-person exceptions).
+Once approved, write that owner into `assigned_to` for **every contact in the archetype** (whole bucket → one owner; no per-person exceptions). Per-person exceptions are *not* a CSV concern — the journalists make them later inside Cockpit by reassigning an individual contact's owner. Cockpit handles that case: the reassigned contact then surfaces under the other owner's filter while the bucket keeps its designated owner. Your job here is the clean whole-bucket assignment.
 
 **Only generate the CSV after the archetype assignment is approved.**
 
