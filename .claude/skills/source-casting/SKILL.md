@@ -36,6 +36,22 @@ Do not hunt for one-to-one title matches. An archetype is a **lane of expertise*
 
 ---
 
+## CORE PRINCIPLE — PEOPLE *IN* THE STORY, NOT COMMENTATORS *ABOUT* IT
+
+Center every story on the people who sit **at the pressure points** — who built it, bought it, ran it, decided it, were affected by it, or walked away from it — not on the professional explainers who narrate it from outside. Commentators (academics, think-tankers, pundits, beat journalists, "X researchers") are seasoning, not the dish. They are useful for framing and a contested-claim quote, but a casting list that fills up with meta-commentary has drifted off the story.
+
+Apply this as a working test the whole way through archetype design **and** research:
+
+- **For every archetype, ask: does this lane hold people who *touched the thing*, or people who *talk about the thing*?** Favor operators, insiders, buyers, builders, defectors, regulators-who-decided, and firsthand-affected parties. Inherently-commentary lanes (academics, think-tankers, pundits, beat journalists, "X researchers") are legitimate but secondary.
+- **Name the decision or the action, not the opinion.** "People inside a bank/firm/vendor who had to decide whether to buy this, how fast, and what's real vs. hype" beats "AI-adoption researchers." "Former lab staff who built the thing and now see it differently" beats "AI ethicists."
+- **Reach the principals directly.** Cast the companies, agencies, and labs at the center of the story as org-as-sources (via their press desks) rather than substituting an outside expert who will comment on them. Go to the source, not the sidelines.
+- **Weight the *design* toward the center, not the *volume*.** The centering rule governs which lanes you prioritize and how the finished piece is ultimately weighted — it is **not** a license to under-research any lane. Generate full lead volume everywhere, commentary lanes included (conversion runs ~10% across the board, so leads are always wanted). The journalists cap how many commentators actually make the piece at **interview-selection time** — research stays high-volume. If the *pressure-point lanes* look thin, recast and dig harder there before researching; never thin out a commentary lane to force proportion.
+- **Defectors and disillusioned insiders are gold.** Former operators who bought into a culture and now describe it from the inside are pressure-point sources, not commentators — prioritize them.
+
+This is not a reason to exclude critics or experts — adversarial and analytical voices still make the work defensible (see below). It is a rule about **proportion and altitude in the casting design**: keep the story populated by the people living it, while still surfacing as many qualified leads as possible in every lane.
+
+---
+
 ## PHASE 1 — ARCHETYPE IDENTIFICATION
 
 Read the story pitch or brief in $ARGUMENTS. Based on the story's focus, generate a comprehensive list of source archetypes — each defined by **what a person or organization can authoritatively speak to on the record**, not by a specific job title. An archetype is a lane of knowledge, and it can be filled by anyone who genuinely commands it: former officials, industry figures, analysts, academics, practitioners — **and laypeople whose lived or firsthand experience makes them an authority on the subject without holding a title for it.** An archetype can also be filled by **an organization speaking on the record** — a company, agency, or institution whose official position is itself the story (see *Organizations as sources* in Phase 2); for some stories these org sources are the primary targets, not an afterthought. Someone who lived through the events, did the work, or knows the topic deeply from the inside belongs in a lane right alongside the credentialed experts. Think like a producer: which areas of knowledge and which perspectives — insider, expert, critic, affected party, firsthand witness, institutional, contrarian — make this story complete and defensible?
@@ -64,7 +80,7 @@ Not every source is a person. When the right source for an archetype is an **org
 - `name` → the organization's name (e.g. `SpaceX`, `NASA`, `Rocket Lab`).
 - `role_title` → a **placeholder for the entry point** you'll actually reach: `Press Office` (or `Media Relations` / `Communications`). It's a stand-in — once a real person at the org picks up the story, their name and title replace the placeholder.
 - `organization` → the same organization (or its parent/division if that differs).
-- Contact path follows the normal rules: press email in `notes`, media-inquiry **web form URL** in `source_url` (fold-in rule), org website in `source_url` only if nothing more direct exists.
+- Contact path follows the normal rules: in `notes`, list **the named press / media-relations people you can reach through** (and their emails) — a desk often has several officers, so capture each you find rather than just one; media-inquiry **web form URL** in `source_url` (fold-in rule), org website in `source_url` only if nothing more direct exists.
 - `is_press` → `y` (you're entering through the comms desk). But an org-as-source is still **ranked on alignment** like any other source — it can be Priority A. Do **not** auto-demote it just because it routes through a press office; `is_press` here marks the *contact path*, not the source's value.
 
 Rule of thumb: if you'd reach out to "the company" before you know which human will speak, cast the company. The placeholder gets a face later.
@@ -91,10 +107,10 @@ For each source, populate every field below. Leave a cell blank rather than gues
 The header row must be, verbatim:
 
 ```
-priority,suggested_bucket,name,role_title,organization,email,phone,linkedin,source_url,confidence,why_relevant,is_press,story,location,political_leaning,assigned_to,notes,links
+priority,suggested_bucket,name,role_title,organization,email,phone,linkedin,source_url,confidence,why_relevant,is_press,story,location,political_leaning,assigned_to,bucket_owner,notes,links
 ```
 
-The first sixteen columns are read by Cockpit's importer. `notes` and `links` are also imported (notes → the contact's Notes field; links → the contact's link list). Keep URLs out of `notes` — every URL belongs in `links`.
+Cockpit's importer reads columns **by name** (column order is not load-bearing — it matches header strings, not positions), so emit all nineteen with these exact header names. `assigned_to` sets each contact's owner; `bucket_owner` sets the archetype's owner; `notes` → the contact's Notes field; `links` → the contact's link list. Keep URLs out of `notes` — every URL belongs in `links`.
 
 | # | Column | Instructions |
 |---|--------|-------------|
@@ -113,9 +129,10 @@ The first sixteen columns are read by Cockpit's importer. `notes` and `links` ar
 | 13 | `story` | **Leave blank.** The CRM assigns the story at import time. |
 | 14 | `location` | City and State/Country. |
 | 15 | `political_leaning` | One of: **Left / Center-Left / Non-Partisan / Center-Right / Right / Unknown** — inferred from research. (Cockpit collapses Center-Left→Left, Center-Right→Right, Unknown→Non-Partisan on import; emit the precise value anyway.) |
-| 16 | `assigned_to` | **Nathaniel** or **Johnny** — assigned **per archetype** at the Assignment Checkpoint (whole bucket → one owner). See Assignment Logic. |
-| 17 | `notes` | **Prose only — no URLs.** Sensitivities, known positions, preferred contact channel, and anything needing manual verification. When `is_press = y`, record the press/media-relations contact name and email here. Lands in the contact's Notes field in Cockpit. |
-| 18 | `links` | **All URLs except `linkedin`/`source_url`.** Credibility evidence (media appearances, published work, op-eds, cited research, testimony) and social profiles (X, Instagram, Substack). Format each as `Label: URL`, separated by semicolons — e.g. `Op-ed (Foreign Affairs): https://… ; Senate testimony: https://… ; X: https://… ; Substack: https://…`. Lands in the contact's link list in Cockpit. |
+| 16 | `assigned_to` | **Nathaniel** or **Johnny** — the **per-contact owner** (drives Cockpit's contact `owned_by` and the Pipeline **owner filter**). Assigned **per archetype** at the Assignment Checkpoint, so it normally equals `bucket_owner` on every row. The **one** place it may diverge from `bucket_owner` is a **shared org-as-source override row** (see *Shared org-as-source override* in Assignment Logic), where the contact moves to a randomly chosen owner while the bucket keeps its own. Buckets stay single-owner via `bucket_owner` — do not otherwise split an archetype across owners in the CSV. |
+| 17 | `bucket_owner` | **Nathaniel** or **Johnny** — the archetype's single **designated owner**. Cockpit sets the bucket's owner from this column (it reads `bucket_owner` by name, falling back to `assigned_to` if the column is absent). Equals `assigned_to` on every row **except** shared org-as-source override rows, where the bucket keeps its owner here while the overridden contact's `assigned_to` differs. Every row in a bucket must carry the **same** `bucket_owner`. |
+| 18 | `notes` | **Prose only — no URLs.** Sensitivities, known positions, preferred contact channel, and anything needing manual verification. When `is_press = y`, list the **named press / media-relations people to reach through** (and their emails) — a desk often has several, so capture each rather than just one. Lands in the contact's Notes field in Cockpit. |
+| 19 | `links` | **All URLs except `linkedin`/`source_url`.** Credibility evidence (media appearances, published work, op-eds, cited research, testimony) and social profiles (X, Instagram, Substack). Format each as `Label: URL`, separated by semicolons — e.g. `Op-ed (Foreign Affairs): https://… ; Senate testimony: https://… ; X: https://… ; Substack: https://…`. Lands in the contact's link list in Cockpit. |
 
 ### Confidence Rubric (column 10)
 
@@ -132,15 +149,30 @@ Confidence measures **how sure we are this is a real, reachable person** — it 
 
 Sources are split between **Nathaniel** and **Johnny** **by archetype, not by individual person** — every contact in a given archetype is owned by the same person. This keeps outreach simple: whoever owns an archetype runs one consistent outreach approach across the whole bucket, and either person can take **several archetypes at once** when their outreach looks alike (same channel, same framing, same kind of ask).
 
+**Split by outreach angle first, then balance volume.** The point of the division is *email-writing efficiency*: each owner should hold buckets that share an **outreach motion** so they write one consistent set of emails instead of context-switching. Before proposing owners, cluster the archetypes by their outreach angle — the combination of **channel** (press desk / official form / faculty inbox / personal site / X-DM / LinkedIn), **tone** (formal vs. warm), and **ask** (on-record authority quote / firsthand-experience interview / background). Buckets in the same cluster should go to the same owner. Most stories collapse into ~2 motions, e.g.:
+- **"Institutions & experts" (formal, on-record authority):** reach a named org or credentialed expert through a press desk, official channel, or faculty inbox; the ask is an authoritative on-record interview. (Frontier orgs, agencies, think-tankers, academics — the email shape is the same.)
+- **"Operators & insiders" (direct, firsthand, trust-first):** reach a builder, operator, or disillusioned insider through personal channels (site, Substack, X/LinkedIn DM); the ask is "tell us what you actually did/saw," warm and personal.
+
+Then balance: if one motion holds far more contacts, **split that motion across both owners** (keeping sub-clusters intact) rather than handing one person a wildly heavier load. Aim for a roughly even contact count while never breaking a single archetype across owners. When a bucket could sit in two motions (e.g. academics — *formal ask* but *direct-to-person channel*), surface the judgment call to the journalists rather than silently picking.
+
 Assignment is decided at the **Assignment Checkpoint below, after research is finished** — when the real count of contacts in each archetype is known, so the journalists can see the size and shape of each bucket before claiming it.
 
-You propose a starting lean for them to react to, not a final answer:
-- **Nathaniel** — institutional sources, officials, think-tank voices, on-record named experts.
-- **Johnny** — press contacts, spokespeople, connectors, background sources.
-- (`is_press = y` archetypes almost always go to Johnny.)
-- **Organization-as-source** buckets (a company/agency reached through its press office) can go to **either** owner — assign by whose outreach they resemble, not automatically to Johnny.
+You propose a starting lean for them to react to, not a final answer. Lean on these tendencies *within* the outreach-angle clustering:
+- **Nathaniel** — institutional sources, officials, think-tank voices, on-record named experts (the "institutions & experts" motion).
+- **Johnny** — press contacts, spokespeople, connectors, background sources, operators/insiders (the "operators & insiders" motion).
+- (`is_press = y` archetypes lean Johnny, but follow the outreach-angle cluster first.)
+- **Organization-as-source** buckets (a company/agency reached through its press office) can go to **either** owner — assign by whose outreach motion they resemble, not automatically to Johnny.
 
 The journalists make the final call.
+
+#### Shared org-as-source override (the one CSV-level per-contact exception)
+
+The whole-bucket rule has exactly one exception, and it is handled in the CSV (not deferred to Cockpit): when the **same real organization** is cast as an **org-as-source** (`is_press = y`) row in **two or more buckets**, that organization is split off and assigned by a coin flip.
+
+- **Trigger** — the same entity reached through its press desk appears in 2+ buckets. Match by *entity*, not exact string: `German Federal Ministry of Defence (BMVg) Press Office` and `Bundesministerium der Verteidigung` are the same org; `armasuisse Press Office` and `armasuisse (Federal Office for Defence Procurement)` are the same org.
+- **Action** — flip **one coin per organization** (Nathaniel or Johnny) and write that owner into `assigned_to` for **every** row of that org, overriding the bucket owner. Leave each row's `bucket_owner` = its bucket's designated owner, so the bucket stays single-owner and only the *contact* moves. Use a **fixed seed** so the split is reproducible and auditable, not a fresh coin each run.
+- **Why** — a press desk is a generic, shared channel, and the same desk often shows up across buckets as different story-angle inquiries. Randomly handing each shared org to one person spreads this low-touch press-desk load instead of dumping every duplicate onto whichever bucket happens to own it. Cockpit supports this natively: a contact's `owned_by` (from `assigned_to`) is stored independently of the bucket's `owner` (from `bucket_owner`), so an overridden press contact simply surfaces under the other owner's filter while its bucket keeps its designation.
+- **Scope** — applies **only** to `is_press` org-as-source rows that span 2+ buckets. A single-bucket org-as-source row keeps its bucket owner. Cross-listed **people** (the same individual in several buckets) also keep the whole-bucket owner — this exception is for shared *organizations* only.
 
 ### ASSIGNMENT CHECKPOINT — STOP before writing the CSV
 
@@ -152,9 +184,11 @@ For each archetype, show:
 - a one-line **outreach note** — *how* you reach that bucket and *what* you ask (channel + kind of ask). This is the batching signal: buckets whose notes read alike should be claimed by the same owner so they run one consistent outreach. Keep it short and comparable.
 - the **proposed owner** (Nathaniel or Johnny).
 
-Order the table so archetypes with **similar outreach sit next to each other**, making it easy to claim a group in one go.
+**Group the table by outreach motion** (see Assignment Logic): put all the buckets that share an outreach angle together under their owner, so the journalists see each person's set as one coherent email playbook rather than a scattered topic list. Order archetypes with **similar outreach next to each other** within each owner's group, making it easy to claim or reassign a whole motion in one go. State the shared angle so the consistency is visible at a glance.
 
-Below the table, always print a **volume tally** — the running total of people assigned to each owner — so the split can be balanced by workload, not just by topic:
+**Surface shared org-as-source press desks.** If any organization is cast as an `is_press` row in 2+ buckets (see *Shared org-as-source override*), list those orgs below the table with the coin-flip result (`Lockheed Martin → Johnny`, `BMVg → Nathaniel`, …) so the journalists can see — and override — who each shared desk went to. Their `assigned_to` may differ from their bucket's owner; that is expected.
+
+Below the table, always print a **volume tally** — the running total of contacts owned by each person (counted on `assigned_to`, so shared-org overrides are reflected) — so the split can be balanced by workload, not just by topic:
 
 ```
 Assigned so far —  Nathaniel: 9   ·   Johnny: 11   ·   Unassigned: 0   (20 total)
@@ -178,7 +212,7 @@ Assigned so far —  Nathaniel: 9   ·   Johnny: 10   ·   Unassigned: 0   (19 t
 
 **After every change, re-print the full table AND the updated volume tally, then wait again.** Never apply a reassignment silently and never jump to the CSV off an un-reprinted table — the journalists confirm against the numbers they can see, and the tally is how they manage each person's volume.
 
-Once approved, write that owner into `assigned_to` for **every contact in the archetype** (whole bucket → one owner; no per-person exceptions).
+Once approved, write that owner into both `assigned_to` and `bucket_owner` for **every contact in the archetype** (whole bucket → one owner), with the **single documented exception** of shared org-as-source rows: those carry the coin-flip owner in `assigned_to` while `bucket_owner` stays the bucket's owner (see *Shared org-as-source override*). Any *other* per-person exception is **not** a CSV concern — the journalists make those later inside Cockpit by reassigning an individual contact's owner, and Cockpit handles it (the reassigned contact surfaces under the other owner's filter while the bucket keeps its designated owner). Your job here is the clean whole-bucket assignment plus the automatic shared-org split.
 
 **Only generate the CSV after the archetype assignment is approved.**
 
@@ -250,6 +284,35 @@ Add `--dry-run` to preview the report without writing. (The nickname/normalizati
 **Organization-as-source rows** are handled too: an org name in `name` is deduped like any other and isn't nickname-expanded in the normal case (`SpaceX` stays `SpaceX`). Skim the report for any org name that got unexpectedly rewritten (rare — e.g. an org whose first word is a common nickname) and fix it by hand.
 
 After writing and canonicalizing the file, tell the journalist they can paste its contents (or upload the file) into Cockpit → a story's **Import Sources** modal, where they pick the keepers and file them into buckets.
+
+---
+
+## FINAL STEP — SOURCING GUIDE SPREADSHEET (orientation for outreach, not the emails)
+
+After the CSV is delivered, also produce a **"Sourcing Guide" spreadsheet (`.xlsx`)** — a working, human-readable reference that orients whoever writes the outreach. **You are not writing emails** — you are giving the writer the per-source context they need so their own emails land. Build it **from the delivered CSV** (single source of truth, so the two never drift). **Readability is the whole point** — a journalist should be able to scan it on a laptop without fighting the formatting (see *Make it easily readable* below).
+
+**Sheet 1 — "Overview"** (a one-screen orientation). A title block (story title + one-line thesis), then the key numbers: total sources, bucket count, the two outreach motions and who owns each, and the per-owner tallies (per-contact, counted on `assigned_to`). List the **shared org-as-source press desks** and which owner each coin-flip handed it to. Close with a 2–3 line "how to use this book" note (Sheet 2 = your contact worklist; Sheet 3 = why each bucket matters + what posture to take).
+
+**Sheet 2 — "Sources"** (one row per contact, i.e. per bucket; cross-listed people repeat per bucket, same as the CSV). Columns, in order:
+
+- **Owner** · **Bucket** · **Priority** — grouping/triage columns. *Owner is the per-contact `assigned_to`* (who actually sends the email) — so shared-org press overrides correctly land in that person's list even when the bucket belongs to the other owner.
+- **Name** · **Role/Title** · **Organization**.
+- **Email** · **Phone** · **Profile / best route** — the actionable path(s): email and phone in their own columns; fold LinkedIn/other profile + the best route from notes (e.g. "via press@…", "via Substack/X DM", named press officer) into "Profile / best route".
+- **Topic they can speak on** — the story-specific angle (from `why_relevant`): what only this source can tell the piece.
+- **Notes worth knowing** — sensitivities, "verify" flags, press routing (the named press people for org-as-source rows), vendor-bias caveats, cross-listing.
+
+Sort by Owner → outreach motion → Bucket → Priority (A→C) → Name.
+
+**Sheet 3 — "Bucket angles"** (one row per bucket) — preserves the orientation that drives email-writing: **Owner · Outreach motion · Bucket · Count (priority breakdown) · Story angle · Outreach angle**. Owner here is the bucket's designated owner (`bucket_owner`). Story angle = why the bucket matters to this story; Outreach angle = channel + tone + the specific ask + a one-line way in. This is the posture, not the email text.
+
+**Make it easily readable** (apply to Sheets 2 and 3):
+- **Freeze** the header row (and the Owner/Bucket columns on Sheet 2) so context stays visible while scrolling; add an **autofilter** on the header.
+- **Wrap text** in the wide columns (Topic, Notes, Story/Outreach angle) and set row heights so wrapped cells are fully visible; set deliberate **column widths** (narrow for Priority/Phone, wide for Topic/Notes/angles).
+- **Bold header** with a fill in the R² red and white text; **color-band rows by owner** (a light tint per owner — keep them distinct but easy on the eyes) so each person's block is visually obvious. Optionally tint the Priority cell (A strongest).
+- Insert a **bold separator/sub-header at each bucket change** on Sheet 2 so buckets don't blur together, and **center** the short triage columns (Priority, Owner).
+- Keep fonts/sizes consistent and legible; no merged cells inside the data tables (they break filters/sorting).
+
+Build with `openpyxl` (or the `xlsx` skill). Save next to the CSV as `[Story Title] — Sourcing Guide — [YYYY-MM-DD].xlsx`. Tell the journalist this is the companion to the import CSV: the CSV is *who & how-to-reach* (for Cockpit import); the Sourcing Guide spreadsheet is the *working outreach reference* — the at-a-glance Overview, the per-person contact worklist (Sheet 2), and the per-bucket why-they-matter + what-posture-to-take (Sheet 3).
 
 ---
 
