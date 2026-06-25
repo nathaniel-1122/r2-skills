@@ -1,6 +1,6 @@
 # R² Media — Claude Skills
 
-This repository holds R² Media's custom **Claude Code skills**. There are three:
+This repository holds R² Media's custom **Claude Code skills**:
 
 - **`source-casting`** — researches and ranks interview sources for a story and
   produces a CSV you import straight into Cockpit.
@@ -11,6 +11,11 @@ This repository holds R² Media's custom **Claude Code skills**. There are three
   package: a **Deep-Dive Field Guide** (the "teach-me" main read) and a **Quick Dossier**
   (the fast reference, with a Who-To-Interview list), both with numbered, clickable sources.
   Length flexes to the story.
+- **`llm-council`** — runs any question, idea, or decision through a council of 5 AI
+  advisors (Contrarian, First Principles, Expansionist, Outsider, Executor) who analyze
+  independently, peer-review each other anonymously, then a chairman synthesizes a final
+  verdict. Based on Karpathy's LLM Council methodology. Triggers: "council this",
+  "war room this", "pressure-test this".
 
 A "skill" is just an instruction file that teaches Claude how to do one of our
 workflows the same way every time. You don't run code — you talk to Claude, and
@@ -42,7 +47,7 @@ echo "Checking your r2-skills setup…"; echo
 command -v git >/dev/null 2>&1 && echo "✅ git is installed" || echo "❌ git is NOT installed  → do Step 1's note about git"
 [ -d ~/r2-skills/.git ] && echo "✅ repo is cloned at ~/r2-skills" || echo "❌ repo not cloned  → do Step 1"
 [ -d ~/.claude/skills ] && echo "✅ Claude skills folder exists" || echo "❌ skills folder missing  → do Step 2"
-for s in source-casting live-show-prep story-deep-dive; do
+for s in source-casting live-show-prep story-deep-dive llm-council; do
   L=$(readlink ~/.claude/skills/$s 2>/dev/null)
   if [ "$L" = "$HOME/r2-skills/.claude/skills/$s" ]; then echo "✅ '$s' is linked into Claude"
   elif [ -n "$L" ]; then echo "⚠️  '$s' linked, but to the wrong place ($L)  → message Nathaniel"
@@ -56,7 +61,7 @@ for d in ~/.claude/skills/*/; do
   [ -n "$nm" ] && [ "$nm" != "$fold" ] && echo "⚠️  folder '$fold' actually holds a skill named '$nm' — mixed-up file  → message Nathaniel"
 done
 echo
-ok=1; for s in source-casting live-show-prep story-deep-dive; do [ -f "$(readlink ~/.claude/skills/$s 2>/dev/null)/SKILL.md" ] || ok=0; done
+ok=1; for s in source-casting live-show-prep story-deep-dive llm-council; do [ -f "$(readlink ~/.claude/skills/$s 2>/dev/null)/SKILL.md" ] || ok=0; done
 if [ "$ok" = 1 ]; then
   echo "🎉 ALL SET — all three skills are installed. Nothing to do. (To get the newest versions, run 'cd ~/r2-skills && git pull'.)"
 else
@@ -97,6 +102,7 @@ mkdir -p ~/.claude/skills
 ln -s ~/r2-skills/.claude/skills/source-casting ~/.claude/skills/source-casting
 ln -s ~/r2-skills/.claude/skills/live-show-prep  ~/.claude/skills/live-show-prep
 ln -s ~/r2-skills/.claude/skills/story-deep-dive ~/.claude/skills/story-deep-dive
+ln -s ~/r2-skills/.claude/skills/llm-council     ~/.claude/skills/llm-council
 ```
 
 Those `ln -s` commands each make a **shortcut** (a "symlink"). They tell Claude:
@@ -348,6 +354,7 @@ Two ways:
 .claude/skills/live-show-prep/assets/    ← its design templates (brief + cheat sheet) and render.sh
 .claude/skills/story-deep-dive/SKILL.md  ← the story-deep-dive skill
 .claude/skills/story-deep-dive/assets/   ← its templates (field guide + dossier) and render.sh
+.claude/skills/llm-council/SKILL.md      ← the LLM Council skill (5 advisors + peer review + verdict)
 check-skill-names.py                     ← a guardrail script that checks skill folders are named correctly
 _archive/                                ← older versions, kept for reference only (not active)
 README.md                                ← this file
